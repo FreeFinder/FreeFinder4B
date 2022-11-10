@@ -151,16 +151,12 @@
 		484DC4902919C84600AE095B /* FreeFinders4B */ = {
 			isa = PBXGroup;
 			children = (
+				BDE07B0A291D9E60003324AD /* App */,
 				738572C3291A051400D0F5B5 /* ViewControllers */,
 				734303142919CCB60064974F /* Storyboards */,
 				BDE07B05291D9121003324AD /* Context */,
 				BDE07B02291D9104003324AD /* Utilities */,
 				BD6DF2F9291B1B9400378E42 /* Classes */,
-				484DC4912919C84600AE095B /* AppDelegate.swift */,
-				484DC4932919C84600AE095B /* SceneDelegate.swift */,
-				BD3FBFE9291B6185008268A2 /* main.swift */,
-				484DC49A2919C84700AE095B /* Assets.xcassets */,
-				484DC49F2919C84700AE095B /* Info.plist */,
 			);
 			path = FreeFinders4B;
 			sourceTree = "<group>";
@@ -241,6 +237,18 @@
 				BDE07B06291D9131003324AD /* MongoDB.swift */,
 			);
 			path = Context;
+			sourceTree = "<group>";
+		};
+		BDE07B0A291D9E60003324AD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				484DC4912919C84600AE095B /* AppDelegate.swift */,
+				484DC4932919C84600AE095B /* SceneDelegate.swift */,
+				BD3FBFE9291B6185008268A2 /* main.swift */,
+				484DC49A2919C84700AE095B /* Assets.xcassets */,
+				484DC49F2919C84700AE095B /* Info.plist */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,9 +598,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KAP5HAAY49;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FreeFinders3B/Info.plist;
+				INFOPLIST_FILE = FreeFinders4B/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -619,9 +627,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C5CUS4LXFK;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FreeFinders3B/Info.plist;
+				INFOPLIST_FILE = FreeFinders4B/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
