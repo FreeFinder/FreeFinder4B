@@ -130,9 +130,9 @@
 		484DC4852919C84600AE095B = {
 			isa = PBXGroup;
 			children = (
-				484DC4902919C84600AE095B /* FreeFinders3B */,
-				484DC4A72919C84700AE095B /* FreeFinders3BTests */,
-				484DC4B12919C84700AE095B /* FreeFinders3BUITests */,
+				484DC4902919C84600AE095B /* FreeFinders4B */,
+				484DC4A72919C84700AE095B /* FreeFinders4BTests */,
+				484DC4B12919C84700AE095B /* FreeFinders4BUITests */,
 				484DC48F2919C84600AE095B /* Products */,
 				5A41CE47291B77A000B68AA5 /* Frameworks */,
 			);
@@ -148,7 +148,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		484DC4902919C84600AE095B /* FreeFinders3B */ = {
+		484DC4902919C84600AE095B /* FreeFinders4B */ = {
 			isa = PBXGroup;
 			children = (
 				738572C3291A051400D0F5B5 /* ViewControllers */,
@@ -162,10 +162,10 @@
 				484DC49A2919C84700AE095B /* Assets.xcassets */,
 				484DC49F2919C84700AE095B /* Info.plist */,
 			);
-			path = FreeFinders3B;
+			path = FreeFinders4B;
 			sourceTree = "<group>";
 		};
-		484DC4A72919C84700AE095B /* FreeFinders3BTests */ = {
+		484DC4A72919C84700AE095B /* FreeFinders4BTests */ = {
 			isa = PBXGroup;
 			children = (
 				48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */,
@@ -173,16 +173,16 @@
 				48C191C8291B7196000466F7 /* Map Tests.swift */,
 				484DC4A82919C84700AE095B /* FreeFinders3BTests.swift */,
 			);
-			path = FreeFinders3BTests;
+			path = FreeFinders4BTests;
 			sourceTree = "<group>";
 		};
-		484DC4B12919C84700AE095B /* FreeFinders3BUITests */ = {
+		484DC4B12919C84700AE095B /* FreeFinders4BUITests */ = {
 			isa = PBXGroup;
 			children = (
 				484DC4B22919C84700AE095B /* FreeFinders3BUITests.swift */,
 				484DC4B42919C84700AE095B /* FreeFinders3BUITestsLaunchTests.swift */,
 			);
-			path = FreeFinders3BUITests;
+			path = FreeFinders4BUITests;
 			sourceTree = "<group>";
 		};
 		5A41CE47291B77A000B68AA5 /* Frameworks */ = {
