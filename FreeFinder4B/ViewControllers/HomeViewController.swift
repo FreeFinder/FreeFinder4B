@@ -22,7 +22,8 @@ class HomeViewController: UIViewController {
         }
     }
     func refresh() async -> [Item] {
-        let user = await User(email: "mongodb@gmail.com");
+        let user = User(email: "mongodb@gmail.com");
+        await user.db_add_user()
         let observer = await AppData(user: user);
         mapView!.removeAnnotations(mapView!.annotations)
         let items = await observer.db_get_all_items();

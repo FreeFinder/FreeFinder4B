@@ -55,7 +55,7 @@ class AppData {
                 let creator_email = (db_item["creator_email"]!!).stringValue!;
                 
                 
-                let fetchedItem = await Item(
+                let fetchedItem = Item(
                     name: name,
                     type: type,
                     detail: details,
@@ -92,7 +92,7 @@ class AppData {
             }
             print("Account in the database: \(String(describing: user))")
             let id = ((user?["_id"]!!)?.objectIdValue!)!;
-            let temp_user = await User(email: email, id: id);
+            let temp_user = User(email: email, id: id);
             
             self.user = temp_user;
         } catch {

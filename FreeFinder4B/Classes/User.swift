@@ -39,13 +39,13 @@ class User {
         return users;
     }
     
-    func db_add_user(email: String) async {
+    func db_add_user() async {
         if (self.id != ObjectId()) { return } // if has an ObjectId, it is already in the DB
         
         do {
             let users = await db_get_users_collection()!
             
-            let potentialUser: Document = ["email" : AnyBSON(stringLiteral: email)];
+            let potentialUser: Document = ["email" : AnyBSON(stringLiteral: self.email)];
             let user = try await users.findOneDocument(filter: potentialUser);
             // if the user is in the DB already
             if (user != nil) {
@@ -74,7 +74,6 @@ class User {
         // check field validity
         if !((detail.count > 0) && (detail.count < 280) && (name.count < 100) && (name.count > 0)) { return nil }; // DOUBLE CHECK THAT THIS IS RIGHT CONDITION
         if (quantity <= 0) { return nil };
-        
         
         let item = Item(
                 name: name,
