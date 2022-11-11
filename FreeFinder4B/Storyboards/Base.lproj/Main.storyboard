@@ -43,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcS-uK-Wc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-252.30769230769229" y="-397.39336492890993"/>
+            <point key="canvasLocation" x="34" y="-397"/>
         </scene>
         <!--TabBar-->
         <scene sceneID="cWA-pU-AlQ">
@@ -69,7 +69,7 @@
         <!--CreateItemView-->
         <scene sceneID="7qJ-M2-QtK">
             <objects>
-                <viewController storyboardIdentifier="CreateItemView" title="CreateItemView" id="NWt-fV-141" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateItemView" title="CreateItemView" id="NWt-fV-141" customClass="ViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g92-eL-DhJ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,6 +112,7 @@
                                     <color key="baseBackgroundColor" red="0.75294117650000003" green="0.84705882349999995" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="createItem:" destination="NWt-fV-141" eventType="touchUpInside" id="W80-M9-rML"/>
                                     <action selector="post:" destination="D2g-kk-0l8" eventType="touchUpInside" id="jU7-1a-pet"/>
                                     <segue destination="DWT-a0-23z" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="K7R-1t-o7f"/>
                                 </connections>
@@ -124,11 +125,16 @@
                         <viewLayoutGuide key="safeArea" id="UTM-Lr-Ibg"/>
                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="descriptionInput" destination="5T1-LV-vL9" id="YhC-x8-Nj2"/>
+                        <outlet property="tagInput" destination="LtY-Ly-Kx1" id="4Ti-hb-uku"/>
+                        <outlet property="titleInput" destination="216-zV-hxY" id="wKS-oO-48j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1n-GD-0yb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="D2g-kk-0l8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="556.92307692307691" y="-397.39336492890993"/>
+            <point key="canvasLocation" x="1245" y="-397"/>
         </scene>
         <!--List-->
         <scene sceneID="0IA-Zf-aWL">
@@ -174,7 +180,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rjb-S9-1cZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-252" y="363"/>
+            <point key="canvasLocation" x="35" y="363"/>
         </scene>
         <!--ProfileView-->
         <scene sceneID="cJ7-0U-PAS">

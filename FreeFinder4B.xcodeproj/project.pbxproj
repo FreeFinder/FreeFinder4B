@@ -41,6 +41,7 @@
 		BD6DF302291B1D5500378E42 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = BD6DF301291B1D5500378E42 /* Realm */; };
 		BD6DF304291B1D5500378E42 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BD6DF303291B1D5500378E42 /* RealmSwift */; };
 		BD6DF307291B247400378E42 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6DF306291B247400378E42 /* AppData.swift */; };
+		BD8F7CBB291E958800A451BC /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F7CBA291E958800A451BC /* Items.swift */; };
 		BDE07B04291D911A003324AD /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B03291D911A003324AD /* Auth.swift */; };
 		BDE07B07291D9131003324AD /* MongoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B06291D9131003324AD /* MongoDB.swift */; };
 		BDE07B09291D9146003324AD /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B08291D9146003324AD /* Refresh.swift */; };
@@ -91,6 +92,7 @@
 		BD6DF2FA291B1BA400378E42 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BD6DF2FC291B1BAF00378E42 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BD6DF306291B247400378E42 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		BD8F7CBA291E958800A451BC /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		BDE07B03291D911A003324AD /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BDE07B06291D9131003324AD /* MongoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoDB.swift; sourceTree = "<group>"; };
 		BDE07B08291D9146003324AD /* Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
@@ -154,7 +156,7 @@
 				BDE07B0A291D9E60003324AD /* App */,
 				738572C3291A051400D0F5B5 /* ViewControllers */,
 				734303142919CCB60064974F /* Storyboards */,
-				BDE07B05291D9121003324AD /* Context */,
+				BDE07B05291D9121003324AD /* Constants */,
 				BDE07B02291D9104003324AD /* Utilities */,
 				BD6DF2F9291B1B9400378E42 /* Classes */,
 			);
@@ -231,12 +233,13 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		BDE07B05291D9121003324AD /* Context */ = {
+		BDE07B05291D9121003324AD /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				BDE07B06291D9131003324AD /* MongoDB.swift */,
+				BD8F7CBA291E958800A451BC /* Items.swift */,
 			);
-			path = Context;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		BDE07B0A291D9E60003324AD /* App */ = {
@@ -413,6 +416,7 @@
 				BD6DF307291B247400378E42 /* AppData.swift in Sources */,
 				BD6DF2FB291B1BA400378E42 /* Item.swift in Sources */,
 				BD6DF2FD291B1BAF00378E42 /* User.swift in Sources */,
+				BD8F7CBB291E958800A451BC /* Items.swift in Sources */,
 				BDE07B07291D9131003324AD /* MongoDB.swift in Sources */,
 				BD3FBFEA291B6185008268A2 /* main.swift in Sources */,
 				484DC4922919C84600AE095B /* AppDelegate.swift in Sources */,
