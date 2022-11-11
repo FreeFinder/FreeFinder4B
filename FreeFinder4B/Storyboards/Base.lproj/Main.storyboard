@@ -69,7 +69,7 @@
         <!--CreateItemView-->
         <scene sceneID="7qJ-M2-QtK">
             <objects>
-                <viewController storyboardIdentifier="CreateItemView" title="CreateItemView" id="NWt-fV-141" customClass="ViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateItemView" title="CreateItemView" id="NWt-fV-141" customClass="CreateItemViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g92-eL-DhJ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,9 +126,9 @@
                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="descriptionInput" destination="5T1-LV-vL9" id="YhC-x8-Nj2"/>
-                        <outlet property="tagInput" destination="LtY-Ly-Kx1" id="4Ti-hb-uku"/>
-                        <outlet property="titleInput" destination="216-zV-hxY" id="wKS-oO-48j"/>
+                        <outlet property="descriptionInput" destination="5T1-LV-vL9" id="IYV-dk-R7h"/>
+                        <outlet property="tagInput" destination="LtY-Ly-Kx1" id="jVY-6b-4SA"/>
+                        <outlet property="titleInput" destination="216-zV-hxY" id="Y4o-8F-3xo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1n-GD-0yb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

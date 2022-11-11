@@ -21,8 +21,6 @@ class ViewController: UIViewController {
             }
         }
     }
-
-    
     
     @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var tagInput: UISegmentedControl!
