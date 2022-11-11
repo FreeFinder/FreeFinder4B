@@ -64,7 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		484DC48E2919C84600AE095B /* FreeFinders4B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeFinders4B.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		484DC48E2919C84600AE095B /* FreeFinder4B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeFinder4B.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		484DC4912919C84600AE095B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		484DC4932919C84600AE095B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		484DC4952919C84600AE095B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,9 +72,9 @@
 		484DC49A2919C84700AE095B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		484DC49D2919C84700AE095B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		484DC49F2919C84700AE095B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		484DC4A42919C84700AE095B /* FreeFinders4BTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinders4BTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		484DC4A42919C84700AE095B /* FreeFinder4BTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinder4BTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		484DC4A82919C84700AE095B /* FreeFinders3BTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders3BTests.swift; sourceTree = "<group>"; };
-		484DC4AE2919C84700AE095B /* FreeFinders4BUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinders4BUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		484DC4AE2919C84700AE095B /* FreeFinder4BUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinder4BUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		484DC4B22919C84700AE095B /* FreeFinders3BUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders3BUITests.swift; sourceTree = "<group>"; };
 		484DC4B42919C84700AE095B /* FreeFinders3BUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders3BUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		48C191C8291B7196000466F7 /* Map Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Map Tests.swift"; sourceTree = "<group>"; };
@@ -130,9 +130,9 @@
 		484DC4852919C84600AE095B = {
 			isa = PBXGroup;
 			children = (
-				484DC4902919C84600AE095B /* FreeFinders4B */,
-				484DC4A72919C84700AE095B /* FreeFinders4BTests */,
-				484DC4B12919C84700AE095B /* FreeFinders4BUITests */,
+				484DC4902919C84600AE095B /* FreeFinder4B */,
+				484DC4A72919C84700AE095B /* FreeFinder4BTests */,
+				484DC4B12919C84700AE095B /* FreeFinder4BUITests */,
 				484DC48F2919C84600AE095B /* Products */,
 				5A41CE47291B77A000B68AA5 /* Frameworks */,
 			);
@@ -141,14 +141,14 @@
 		484DC48F2919C84600AE095B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				484DC48E2919C84600AE095B /* FreeFinders4B.app */,
-				484DC4A42919C84700AE095B /* FreeFinders4BTests.xctest */,
-				484DC4AE2919C84700AE095B /* FreeFinders4BUITests.xctest */,
+				484DC48E2919C84600AE095B /* FreeFinder4B.app */,
+				484DC4A42919C84700AE095B /* FreeFinder4BTests.xctest */,
+				484DC4AE2919C84700AE095B /* FreeFinder4BUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		484DC4902919C84600AE095B /* FreeFinders4B */ = {
+		484DC4902919C84600AE095B /* FreeFinder4B */ = {
 			isa = PBXGroup;
 			children = (
 				BDE07B0A291D9E60003324AD /* App */,
@@ -158,10 +158,10 @@
 				BDE07B02291D9104003324AD /* Utilities */,
 				BD6DF2F9291B1B9400378E42 /* Classes */,
 			);
-			path = FreeFinders4B;
+			path = FreeFinder4B;
 			sourceTree = "<group>";
 		};
-		484DC4A72919C84700AE095B /* FreeFinders4BTests */ = {
+		484DC4A72919C84700AE095B /* FreeFinder4BTests */ = {
 			isa = PBXGroup;
 			children = (
 				48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */,
@@ -169,16 +169,16 @@
 				48C191C8291B7196000466F7 /* Map Tests.swift */,
 				484DC4A82919C84700AE095B /* FreeFinders3BTests.swift */,
 			);
-			path = FreeFinders4BTests;
+			path = FreeFinder4BTests;
 			sourceTree = "<group>";
 		};
-		484DC4B12919C84700AE095B /* FreeFinders4BUITests */ = {
+		484DC4B12919C84700AE095B /* FreeFinder4BUITests */ = {
 			isa = PBXGroup;
 			children = (
 				484DC4B22919C84700AE095B /* FreeFinders3BUITests.swift */,
 				484DC4B42919C84700AE095B /* FreeFinders3BUITestsLaunchTests.swift */,
 			);
-			path = FreeFinders4BUITests;
+			path = FreeFinder4BUITests;
 			sourceTree = "<group>";
 		};
 		5A41CE47291B77A000B68AA5 /* Frameworks */ = {
@@ -254,9 +254,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		484DC48D2919C84600AE095B /* FreeFinders4B */ = {
+		484DC48D2919C84600AE095B /* FreeFinder4B */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 484DC4B82919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinders4B" */;
+			buildConfigurationList = 484DC4B82919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinder4B" */;
 			buildPhases = (
 				484DC48A2919C84600AE095B /* Sources */,
 				484DC48B2919C84600AE095B /* Frameworks */,
@@ -266,18 +266,18 @@
 			);
 			dependencies = (
 			);
-			name = FreeFinders4B;
+			name = FreeFinder4B;
 			packageProductDependencies = (
 				BD6DF301291B1D5500378E42 /* Realm */,
 				BD6DF303291B1D5500378E42 /* RealmSwift */,
 			);
 			productName = FreeFinders3B;
-			productReference = 484DC48E2919C84600AE095B /* FreeFinders4B.app */;
+			productReference = 484DC48E2919C84600AE095B /* FreeFinder4B.app */;
 			productType = "com.apple.product-type.application";
 		};
-		484DC4A32919C84700AE095B /* FreeFinders4BTests */ = {
+		484DC4A32919C84700AE095B /* FreeFinder4BTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 484DC4BB2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinders4BTests" */;
+			buildConfigurationList = 484DC4BB2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinder4BTests" */;
 			buildPhases = (
 				484DC4A02919C84700AE095B /* Sources */,
 				484DC4A12919C84700AE095B /* Frameworks */,
@@ -288,18 +288,18 @@
 			dependencies = (
 				484DC4A62919C84700AE095B /* PBXTargetDependency */,
 			);
-			name = FreeFinders4BTests;
+			name = FreeFinder4BTests;
 			packageProductDependencies = (
 				5A41CE48291B77A000B68AA5 /* Realm */,
 				5A41CE4A291B77A000B68AA5 /* RealmSwift */,
 			);
 			productName = FreeFinders3BTests;
-			productReference = 484DC4A42919C84700AE095B /* FreeFinders4BTests.xctest */;
+			productReference = 484DC4A42919C84700AE095B /* FreeFinder4BTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		484DC4AD2919C84700AE095B /* FreeFinders4BUITests */ = {
+		484DC4AD2919C84700AE095B /* FreeFinder4BUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 484DC4BE2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinders4BUITests" */;
+			buildConfigurationList = 484DC4BE2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinder4BUITests" */;
 			buildPhases = (
 				484DC4AA2919C84700AE095B /* Sources */,
 				484DC4AB2919C84700AE095B /* Frameworks */,
@@ -310,13 +310,13 @@
 			dependencies = (
 				484DC4B02919C84700AE095B /* PBXTargetDependency */,
 			);
-			name = FreeFinders4BUITests;
+			name = FreeFinder4BUITests;
 			packageProductDependencies = (
 				48D16F34291BB5FD005CECEF /* Realm */,
 				48D16F36291BB600005CECEF /* RealmSwift */,
 			);
 			productName = FreeFinders3BUITests;
-			productReference = 484DC4AE2919C84700AE095B /* FreeFinders4BUITests.xctest */;
+			productReference = 484DC4AE2919C84700AE095B /* FreeFinder4BUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -342,7 +342,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 484DC4892919C84600AE095B /* Build configuration list for PBXProject "FreeFinders4B" */;
+			buildConfigurationList = 484DC4892919C84600AE095B /* Build configuration list for PBXProject "FreeFinder4B" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -358,9 +358,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				484DC48D2919C84600AE095B /* FreeFinders4B */,
-				484DC4A32919C84700AE095B /* FreeFinders4BTests */,
-				484DC4AD2919C84700AE095B /* FreeFinders4BUITests */,
+				484DC48D2919C84600AE095B /* FreeFinder4B */,
+				484DC4A32919C84700AE095B /* FreeFinder4BTests */,
+				484DC4AD2919C84700AE095B /* FreeFinder4BUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -447,12 +447,12 @@
 /* Begin PBXTargetDependency section */
 		484DC4A62919C84700AE095B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 484DC48D2919C84600AE095B /* FreeFinders4B */;
+			target = 484DC48D2919C84600AE095B /* FreeFinder4B */;
 			targetProxy = 484DC4A52919C84700AE095B /* PBXContainerItemProxy */;
 		};
 		484DC4B02919C84700AE095B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 484DC48D2919C84600AE095B /* FreeFinders4B */;
+			target = 484DC48D2919C84600AE095B /* FreeFinder4B */;
 			targetProxy = 484DC4AF2919C84700AE095B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -600,7 +600,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FreeFinders4B/App/Info.plist;
+				INFOPLIST_FILE = FreeFinder4B/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -612,7 +612,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders3B-UIW";
+				PRODUCT_BUNDLE_IDENTIFIER = "freefinder.FreeFinders4B-UIW";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -629,7 +629,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FreeFinders4B/App/Info.plist;
+				INFOPLIST_FILE = FreeFinder4B/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -641,7 +641,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders3B-UI";
+				PRODUCT_BUNDLE_IDENTIFIER = "freefinder.FreeFinders4B-UI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -665,7 +665,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeFinders4B.app/FreeFinders4B";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeFinder4B.app/FreeFinder4B";
 			};
 			name = Debug;
 		};
@@ -685,7 +685,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeFinders4B.app/FreeFinders4B";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeFinder4B.app/FreeFinder4B";
 			};
 			name = Release;
 		};
@@ -728,7 +728,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		484DC4892919C84600AE095B /* Build configuration list for PBXProject "FreeFinders4B" */ = {
+		484DC4892919C84600AE095B /* Build configuration list for PBXProject "FreeFinder4B" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				484DC4B62919C84700AE095B /* Debug */,
@@ -737,7 +737,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		484DC4B82919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinders4B" */ = {
+		484DC4B82919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinder4B" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				484DC4B92919C84700AE095B /* Debug */,
@@ -746,7 +746,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		484DC4BB2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinders4BTests" */ = {
+		484DC4BB2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinder4BTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				484DC4BC2919C84700AE095B /* Debug */,
@@ -755,7 +755,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		484DC4BE2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinders4BUITests" */ = {
+		484DC4BE2919C84700AE095B /* Build configuration list for PBXNativeTarget "FreeFinder4BUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				484DC4BF2919C84700AE095B /* Debug */,
