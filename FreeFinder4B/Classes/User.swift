@@ -7,32 +7,43 @@
 
 import Foundation
 import SwiftUI
-//import GoogleSignIn
 import MapKit
 import RealmSwift
+import Realm
 
 class User {
     var id : ObjectId
     var email : String
 
-    init(email: String, id: ObjectId = ObjectId()) async {
+    init(
+        email: String,
+        id: ObjectId = ObjectId()
+    ) {
         self.email = email;
         self.id = id;
-        
-        if (id == ObjectId()) {
-            await db_add_user(email: email);
-        }
-        
     }
     
-    func db_add_user(email: String) async {
+    private func db_get_users_collection() async -> RLMMongoCollection? {
+        var users: RLMMongoCollection? = nil;
+        
         do {
             let app = App(id: APP_ID);
-            let mongo_user = try await app.login(credentials: Credentials.anonymous);
+            let user = try await app.login(credentials: Credentials.anonymous);
             // fetch the DB
             let client = app.currentUser!.mongoClient("mongodb-atlas")
             let database = client.database(named: "freeFinder")
-            let users = database.collection(withName: "users")
+            users = database.collection(withName: "users")
+        } catch {
+            print("Could not fetch the items collection");
+        }
+        return users;
+    }
+    
+    func db_add_user(email: String) async {
+        if (self.id != ObjectId()) { return } // if has an ObjectId, it is already in the DB
+        
+        do {
+            let users = await db_get_users_collection()!
             
             let potentialUser: Document = ["email" : AnyBSON(stringLiteral: email)];
             let user = try await users.findOneDocument(filter: potentialUser);
@@ -53,14 +64,27 @@ class User {
         }
     }
     
-    func create_item(name: String, type: String, detail: String, coordinate: CLLocationCoordinate2D,quantity: Int) async -> Item?{
+    func create_item(
+        name: String,
+        type: String,
+        detail: String,
+        coordinate: CLLocationCoordinate2D,
+        quantity: Int
+    ) async -> Item? {
         // check field validity
-        if ((detail.count > 0) && (detail.count < 280) && (name.count < 100) && (name.count > 0)) {
-            let i = await Item(name: name,type: type,detail: detail,coordinate: coordinate,creator_email: self.email)
-            await i.db_add_item(name: name,type: type,coordinates: coordinate, details: detail,creator_email: self.email)
-            return i
-        }
-        return nil
+        if !((detail.count > 0) && (detail.count < 280) && (name.count < 100) && (name.count > 0)) { return nil }; // DOUBLE CHECK THAT THIS IS RIGHT CONDITION
+        if (quantity <= 0) { return nil };
+        
+        
+        let item = Item(
+                name: name,
+                type: type,
+                detail: detail,
+                coordinate: coordinate,
+                creator_email: self.email
+        )
+        let _ = await item.db_add_item();
+        return item;
     }
     
     func comment(i: Item, comment: String) async {

@@ -7,15 +7,13 @@
 
 import Foundation
 import SwiftUI
-//import GoogleSignIn
 import MapKit
 import RealmSwift
-
-
+import Realm
 
 class Item: NSObject, MKAnnotation{
     let name: String
-    let type: String?
+    let type: String
     let coordinate: CLLocationCoordinate2D
     var comments: [String]
     let detail: String
@@ -25,86 +23,83 @@ class Item: NSObject, MKAnnotation{
     
     init(
         name: String,
-        type: String?,
+        type: String,
         detail: String,
         coordinate: CLLocationCoordinate2D,
         creator_email: String,
+        comments: [String] = [],
+        counter: Int = 1,
         id: ObjectId = ObjectId()
-    ) async
+    )
     {
         self.name = name;
         self.type = type;
         self.coordinate = coordinate;
-        self.creator_email = creator_email
-        self.comments = []
-        self.counter = 1
-        self.detail = detail
+        self.creator_email = creator_email;
+        self.comments = comments;
+        self.counter = counter;
+        self.detail = detail;
         self.id = id;
         
         super.init()
-        
-        if (id == ObjectId()) {
-            await db_add_item(
-                name: name,
-                type: type!,
-                coordinates: coordinate,
-                details: detail,
-                creator_email: creator_email
-            )
-        }
     }
     
     var title: String? { return name }
     var subtitle: String? { return type }
     
-    func db_add_item (
-        name: String,
-        type: String,
-        coordinates: CLLocationCoordinate2D,
-        details: String,
-        creator_email: String
-    ) async {
+    private func db_get_items_collection() async -> RLMMongoCollection? {
+        var items: RLMMongoCollection? = nil;
+        
         do {
             let app = App(id: APP_ID);
             let user = try await app.login(credentials: Credentials.anonymous);
             // fetch the DB
             let client = app.currentUser!.mongoClient("mongodb-atlas")
             let database = client.database(named: "freeFinder")
-            let items = database.collection(withName: "items")
+            items = database.collection(withName: "items")
+        } catch {
+            print("Could not fetch the items collection");
+        }
+        return items;
+    }
+    
+    func db_add_item() async -> ObjectId {
+        if (self.id == ObjectId()) { return self.id }; // if the object has an id, its already in the DB
+        
+        var res: ObjectId = ObjectId();
+        do {
+            let items: RLMMongoCollection = await db_get_items_collection()!
             
             // create an item and insert it
             let item: Document = [
-                "name": AnyBSON(stringLiteral: name),
-                "type": AnyBSON(stringLiteral: type),
-                "latitude": AnyBSON(stringLiteral: String(coordinates.latitude)),
-                "longitude": AnyBSON(stringLiteral: String(coordinates.longitude)),
-                "details": AnyBSON(stringLiteral: details),
-                "creator_email": AnyBSON(stringLiteral: creator_email),
+                "name": AnyBSON(stringLiteral: self.name),
+                "type": AnyBSON(stringLiteral: self.type),
+                "latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
+                "longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
+                "details": AnyBSON(stringLiteral: self.detail),
+                "creator_email": AnyBSON(stringLiteral: self.creator_email),
                 "comments": [],
                 "counter": 1
             ]
             
-            let objectId = try await items.insertOne(item)
+            let objectId: AnyBSON = try await items.insertOne(item)
             self.id = objectId.objectIdValue!;
             if (self.id.stringValue != "") {
                 print("Successfully inserted item. The returned id is \(self.id)")
+                res = self.id;
             }
         } catch {
             print("Login and item insertion failed: \(error.localizedDescription)")
         }
+        
+        return res;
     }
     
     func db_item_exists() async -> Bool {
         var res = false;
         
         do {
-            let app = App(id: APP_ID);
-            let user = try await app.login(credentials: Credentials.anonymous);
-            
-            // fetch the DB
-            let client = app.currentUser!.mongoClient("mongodb-atlas")
-            let database = client.database(named: "freeFinder")
-            let items = database.collection(withName: "items")
+            let items: RLMMongoCollection = await db_get_items_collection()!
                 
             let item: Document = [
                 "name": AnyBSON(stringLiteral: self.name),
@@ -130,12 +125,7 @@ class Item: NSObject, MKAnnotation{
         var res = false;
         
         do {
-            let app = App(id: APP_ID);
-            let user = try await app.login(credentials: Credentials.anonymous);
-            // fetch the DB
-            let client = app.currentUser!.mongoClient("mongodb-atlas")
-            let database = client.database(named: "freeFinder")
-            let items = database.collection(withName: "items")
+            let items: RLMMongoCollection = await db_get_items_collection()!
             
             let itemQuery: Document = [
                 "name": AnyBSON(stringLiteral: self.name),

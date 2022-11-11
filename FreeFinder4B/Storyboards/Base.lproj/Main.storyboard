@@ -12,7 +12,7 @@
         <!--HomeView-->
         <scene sceneID="gpi-iu-341">
             <objects>
-                <viewController storyboardIdentifier="Home" title="HomeView" id="pTp-GR-vbi" customClass="ViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" title="HomeView" id="pTp-GR-vbi" customClass="HomeViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WQ7-2N-Wdr">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.75294117650000003" green="0.84705882349999995" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="+" cornerStyle="capsule"/>
+                                <buttonConfiguration key="configuration" style="filled" title="+" cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" systemColor="linkColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <segue destination="NWt-fV-141" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="cNu-SC-ak5"/>
                                 </connections>
