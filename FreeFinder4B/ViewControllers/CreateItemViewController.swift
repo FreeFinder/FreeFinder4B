@@ -21,7 +21,7 @@ class CreateItemViewController: UIViewController {
         let creator_email = "mongodb@gmail.com"; // implement once singing in is implmeneted
         
         Task {
-            let item = await Item(
+            await Item(
                 name: name,
                 type: type,
                 detail: detail,
