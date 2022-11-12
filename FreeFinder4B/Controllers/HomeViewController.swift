@@ -7,32 +7,22 @@ class HomeViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadMap();
-
     }
     
     func addCurrLocation(with location: CLLocation) {
         let currLocation = MKPointAnnotation()
         currLocation.coordinate = location.coordinate
-        mapView.setRegion(MKCoordinateRegion(
-                            center: location.coordinate,
-                            span: MKCoordinateSpan(
-                                latitudeDelta: 0.005,
-                                longitudeDelta: 0.005
-                            )
-        ),
-                          animated: true)
+        mapView.centerToLocation(location)
         mapView.addAnnotation(currLocation)
     }
     
     private func loadMap() {
         if (mapView != nil) {
             view.insetsLayoutMarginsFromSafeArea = false
-            let initialLocation = CLLocation(latitude: 41.7886, longitude: -87.5987)
-            mapView.centerToLocation(initialLocation)
             Task{
                 await refresh()
+                
                 // get location of user
                 LocationManager.shared.getUserLocation { [weak self] location in
                     DispatchQueue.main.async {
