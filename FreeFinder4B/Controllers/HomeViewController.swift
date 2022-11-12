@@ -1,6 +1,7 @@
 import UIKit
 import MapKit
 import RealmSwift
+import CoreLocation
 
 class HomeViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
@@ -11,6 +12,20 @@ class HomeViewController: UIViewController {
 
     }
     
+    func addCurrLocation(with location: CLLocation) {
+        let pin = MKPointAnnotation()
+        pin.coordinate = location.coordinate
+        mapView.setRegion(MKCoordinateRegion(
+                            center: location.coordinate,
+                            span: MKCoordinateSpan(
+                                latitudeDelta: 0.005,
+                                longitudeDelta: 0.005
+                            )
+        ),
+                          animated: true)
+        mapView.addAnnotation(pin)
+    }
+    
     private func loadMap() {
         if (mapView != nil) {
             view.insetsLayoutMarginsFromSafeArea = false
@@ -18,6 +33,15 @@ class HomeViewController: UIViewController {
             mapView.centerToLocation(initialLocation)
             Task{
                 await refresh()
+                // get location of user
+                LocationManager.shared.getUserLocation { [weak self] location in
+                    DispatchQueue.main.async {
+                        guard let strongSelf = self else {
+                            return
+                        }
+                        strongSelf.addCurrLocation(with: location)
+                    }
+                }
             }
         }
     }

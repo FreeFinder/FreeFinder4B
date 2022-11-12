@@ -15,6 +15,7 @@
 		484DC4A92919C84700AE095B /* FreeFinders3BTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4A82919C84700AE095B /* FreeFinders3BTests.swift */; };
 		484DC4B32919C84700AE095B /* FreeFinders4BUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */; };
 		484DC4B52919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */; };
+		48BD948D292047B800C8014E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BD948C292047B800C8014E /* LocationManager.swift */; };
 		48D16F33291BB3D9005CECEF /* Mapkit Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */; };
 		48D16F35291BB5FD005CECEF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F34291BB5FD005CECEF /* Realm */; };
 		48D16F37291BB600005CECEF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F36291BB600005CECEF /* RealmSwift */; };
@@ -83,6 +84,7 @@
 		484DC4AE2919C84700AE095B /* FreeFinder4BUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinder4BUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITests.swift; sourceTree = "<group>"; };
 		484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		48BD948C292047B800C8014E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = FreeFinder4B/Utilities/LocationManager.swift; sourceTree = SOURCE_ROOT; };
 		48C191C8291B7196000466F7 /* Map Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Map Tests.swift"; sourceTree = "<group>"; };
 		48C191CC291B773E000466F7 /* Google Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Google Tests.swift"; sourceTree = "<group>"; };
 		48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Mapkit Tests.swift"; path = "FreeFinders3BUITests/Mapkit Tests.swift"; sourceTree = SOURCE_ROOT; };
@@ -244,6 +246,7 @@
 		BDE07B02291D9104003324AD /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				48BD948C292047B800C8014E /* LocationManager.swift */,
 				BDE07B03291D911A003324AD /* Auth.swift */,
 				BDE07B08291D9146003324AD /* Refresh.swift */,
 			);
@@ -445,6 +448,7 @@
 				5A7713B1291A0F9E00040D8A /* ItemTableViewController.swift in Sources */,
 				BD2F9685292010990047C23C /* SignInViewController.swift in Sources */,
 				484DC4942919C84600AE095B /* SceneDelegate.swift in Sources */,
+				48BD948D292047B800C8014E /* LocationManager.swift in Sources */,
 				BDE07B04291D911A003324AD /* Auth.swift in Sources */,
 				BDE07B09291D9146003324AD /* Refresh.swift in Sources */,
 				BD2F968B29201C500047C23C /* Device.swift in Sources */,
