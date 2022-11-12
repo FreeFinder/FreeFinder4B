@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/stevenarellano/Desktop/stuff/classes/cmsc22001/FreeFinder4B/FreeFinder4B.xcodeproj">
+      location = "group:FreeFinder4B.xcodeproj">
    </FileRef>
 </Workspace>
