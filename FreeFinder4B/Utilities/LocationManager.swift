@@ -17,7 +17,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     public func getUserLocation(completion: @escaping ((CLLocation) -> Void)) {
         self.completion = completion
-        manager.requestWhenInUseAuthorization()
+        manager.requestWhenInUseAuthorization() // requesting permission from user
         manager.delegate = self
         manager.startUpdatingLocation()
     }
@@ -26,7 +26,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         guard let location = locations.first else {
             return
         }
-        completion?(location)
+        completion?(location) // sending back the results
         manager.stopUpdatingLocation()
     }
     
