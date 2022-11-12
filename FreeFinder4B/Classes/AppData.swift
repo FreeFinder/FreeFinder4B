@@ -1,13 +1,12 @@
 import Foundation
-import Foundation
-import SwiftUI
 import CoreLocation
-import MapKit
+import SwiftUI
 import RealmSwift
 
 class AppData {
     var items: [Item] = [];
     var mapItems: [Item] = [];
+    var currentFilter: String = ""; // "" || "distance" || "tag"
     var user: User;
     
     init(user: User) async {
@@ -17,7 +16,23 @@ class AppData {
     }
     
     func refresh() async -> [Item] {
-        return await db_get_all_items();
+        self.items = await db_get_all_items();
+        return self.items;
+    }
+    
+    func filterMapItems(tag: String) {
+        self.currentFilter = "tag"; // set in the case that we can filter after refresh()
+        self.mapItems = items.filter{( $0.type == tag)}
+    };
+    
+    func filterMapItems(distance: Int) { // polymorphism - this one will be used for distance
+        self.currentFilter = "tag";
+        // finish this function
+    }
+    
+    func filterMap() {
+        self.currentFilter = "";
+        self.mapItems = self.items;
     }
     
     func db_get_all_items() async -> [Item] {
