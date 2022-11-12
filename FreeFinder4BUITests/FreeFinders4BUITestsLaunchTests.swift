@@ -1,13 +1,6 @@
-//
-//  FreeFinders3BUITestsLaunchTests.swift
-//  FreeFinders3BUITests
-//
-//  Created by William Zeng on 11/7/22.
-//
-
 import XCTest
 
-final class FreeFinders3BUITestsLaunchTests: XCTestCase {
+final class FreeFinders4BUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

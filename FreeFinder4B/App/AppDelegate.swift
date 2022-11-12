@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  FreeFinders3B
-//
-//  Created by William Zeng on 11/7/22.
-//
-
 import UIKit
 import RealmSwift
 

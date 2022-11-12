@@ -1,13 +1,6 @@
-//
-//  FreeFinders3BUITests.swift
-//  FreeFinders3BUITests
-//
-//  Created by William Zeng on 11/7/22.
-//
-
 import XCTest
 
-final class FreeFinders3BUITests: XCTestCase {
+final class FreeFinders4BUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

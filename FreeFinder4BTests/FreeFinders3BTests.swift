@@ -1,17 +1,10 @@
-//
-//  FreeFinders3BTests.swift
-//  FreeFinders3BTests
-//
-//  Created by William Zeng on 11/7/22.
-//
-
 import XCTest
 import MapKit
 import RealmSwift
 //import Realm.Private
-@testable import FreeFinders3B
+@testable import FreeFinders4B
 
-final class FreeFinders3BTests: XCTestCase {
+final class FreeFinders4BTests: XCTestCase {
     func testCreateItem() async throws {
         // get initial state of the database
         let test_user = await User(email: "mongodb@gmail.com");

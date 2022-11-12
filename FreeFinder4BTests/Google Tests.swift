@@ -9,7 +9,7 @@ import XCTest
 import MapKit
 import RealmSwift
 //import Realm.Private
-@testable import FreeFinders3B
+@testable import FreeFinders4B
 
 final class GoogleTests: XCTestCase {
 
