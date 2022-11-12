@@ -35,6 +35,8 @@
 		738572C5291A052800D0F5B5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738572C4291A052800D0F5B5 /* ItemViewController.swift */; };
 		738572C7291A053600D0F5B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738572C6291A053600D0F5B5 /* ProfileViewController.swift */; };
 		BD2F9683291FFE560047C23C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2F9682291FFE560047C23C /* StartViewController.swift */; };
+		BD2F9685292010990047C23C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2F9684292010990047C23C /* SignInViewController.swift */; };
+		BD2F9689292019ED0047C23C /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2F9688292019ED0047C23C /* MainNavigationController.swift */; };
 		BD3FBFEA291B6185008268A2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FBFE9291B6185008268A2 /* main.swift */; };
 		BD6DF2FB291B1BA400378E42 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6DF2FA291B1BA400378E42 /* Item.swift */; };
 		BD6DF2FD291B1BAF00378E42 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6DF2FC291B1BAF00378E42 /* User.swift */; };
@@ -91,6 +93,8 @@
 		738572C4291A052800D0F5B5 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		738572C6291A053600D0F5B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BD2F9682291FFE560047C23C /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		BD2F9684292010990047C23C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		BD2F9688292019ED0047C23C /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BD3FBFE9291B6185008268A2 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BD6DF2FA291B1BA400378E42 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BD6DF2FC291B1BAF00378E42 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -160,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				BDE07B0A291D9E60003324AD /* App */,
-				738572C3291A051400D0F5B5 /* ViewControllers */,
+				738572C3291A051400D0F5B5 /* Controllers */,
 				734303142919CCB60064974F /* Storyboards */,
 				BDE07B05291D9121003324AD /* Context */,
 				BDE07B02291D9104003324AD /* Utilities */,
@@ -209,7 +213,7 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		738572C3291A051400D0F5B5 /* ViewControllers */ = {
+		738572C3291A051400D0F5B5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				738572C4291A052800D0F5B5 /* ItemViewController.swift */,
@@ -218,8 +222,10 @@
 				BD8F7CBC291E985600A451BC /* CreateItemViewController.swift */,
 				BD8F7CBE291EA3FE00A451BC /* HomeViewController.swift */,
 				BD2F9682291FFE560047C23C /* StartViewController.swift */,
+				BD2F9684292010990047C23C /* SignInViewController.swift */,
+				BD2F9688292019ED0047C23C /* MainNavigationController.swift */,
 			);
-			path = ViewControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		BD6DF2F9291B1B9400378E42 /* Classes */ = {
@@ -428,11 +434,13 @@
 				BD8F7CBB291E958800A451BC /* Items.swift in Sources */,
 				BDE07B07291D9131003324AD /* MongoDB.swift in Sources */,
 				BD3FBFEA291B6185008268A2 /* main.swift in Sources */,
+				BD2F9689292019ED0047C23C /* MainNavigationController.swift in Sources */,
 				484DC4922919C84600AE095B /* AppDelegate.swift in Sources */,
 				BD2F9683291FFE560047C23C /* StartViewController.swift in Sources */,
 				BD8F7CBD291E985600A451BC /* CreateItemViewController.swift in Sources */,
 				BD8F7CBF291EA3FE00A451BC /* HomeViewController.swift in Sources */,
 				5A7713B1291A0F9E00040D8A /* ItemTableViewController.swift in Sources */,
+				BD2F9685292010990047C23C /* SignInViewController.swift in Sources */,
 				484DC4942919C84600AE095B /* SceneDelegate.swift in Sources */,
 				BDE07B04291D911A003324AD /* Auth.swift in Sources */,
 				BDE07B09291D9146003324AD /* Refresh.swift in Sources */,
@@ -618,7 +626,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeFinder4B/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -647,7 +655,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeFinder4B/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
