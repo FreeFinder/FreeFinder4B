@@ -1,10 +1,3 @@
-//
-//  ItemViewController.swift
-//  FreeFinderMilestone3B
-//
-//  Created by Ruxandra Nicolae on 11/6/22.
-//
-
 import UIKit
 import MapKit
 

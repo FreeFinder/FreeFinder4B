@@ -43,6 +43,7 @@
 		BD8F7CBB291E958800A451BC /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F7CBA291E958800A451BC /* Items.swift */; };
 		BD8F7CBD291E985600A451BC /* CreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F7CBC291E985600A451BC /* CreateItemViewController.swift */; };
 		BD8F7CBF291EA3FE00A451BC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F7CBE291EA3FE00A451BC /* HomeViewController.swift */; };
+		BD8F7CC2291EAF3600A451BC /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F7CC1291EAF3600A451BC /* AppConfig.swift */; };
 		BDE07B04291D911A003324AD /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B03291D911A003324AD /* Auth.swift */; };
 		BDE07B07291D9131003324AD /* MongoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B06291D9131003324AD /* MongoDB.swift */; };
 		BDE07B09291D9146003324AD /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B08291D9146003324AD /* Refresh.swift */; };
@@ -95,6 +96,7 @@
 		BD8F7CBA291E958800A451BC /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		BD8F7CBC291E985600A451BC /* CreateItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemViewController.swift; sourceTree = "<group>"; };
 		BD8F7CBE291EA3FE00A451BC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BD8F7CC1291EAF3600A451BC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		BDE07B03291D911A003324AD /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BDE07B06291D9131003324AD /* MongoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoDB.swift; sourceTree = "<group>"; };
 		BDE07B08291D9146003324AD /* Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 				BDE07B0A291D9E60003324AD /* App */,
 				738572C3291A051400D0F5B5 /* ViewControllers */,
 				734303142919CCB60064974F /* Storyboards */,
-				BDE07B05291D9121003324AD /* Constants */,
+				BDE07B05291D9121003324AD /* Context */,
 				BDE07B02291D9104003324AD /* Utilities */,
 				BD6DF2F9291B1B9400378E42 /* Classes */,
 			);
@@ -236,13 +238,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		BDE07B05291D9121003324AD /* Constants */ = {
+		BDE07B05291D9121003324AD /* Context */ = {
 			isa = PBXGroup;
 			children = (
 				BDE07B06291D9131003324AD /* MongoDB.swift */,
 				BD8F7CBA291E958800A451BC /* Items.swift */,
+				BD8F7CC1291EAF3600A451BC /* AppConfig.swift */,
 			);
-			path = Constants;
+			path = Context;
 			sourceTree = "<group>";
 		};
 		BDE07B0A291D9E60003324AD /* App */ = {
@@ -413,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD8F7CC2291EAF3600A451BC /* AppConfig.swift in Sources */,
 				738572C5291A052800D0F5B5 /* ItemViewController.swift in Sources */,
 				738572C7291A053600D0F5B5 /* ProfileViewController.swift in Sources */,
 				BD6DF307291B247400378E42 /* AppData.swift in Sources */,

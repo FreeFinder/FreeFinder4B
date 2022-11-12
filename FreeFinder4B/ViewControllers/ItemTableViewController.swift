@@ -1,10 +1,3 @@
-//
-//  ItemsTableViewController.swift
-//  FreeFinderMilestone3B
-//
-//  Created by Jordan Labuda on 11/6/22.
-//
-
 import UIKit
 import Foundation
 

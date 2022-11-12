@@ -1,10 +1,3 @@
-//
-//  Auth.swift
-//  FreeFinders3B
-//
-//  Created by steven arellano on 11/10/22.
-//
-
 import Foundation
 
 func sign_in(email: String) async -> User?{

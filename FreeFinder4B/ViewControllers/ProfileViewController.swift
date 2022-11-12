@@ -1,10 +1,3 @@
-//
-//  ProfileViewController.swift
-//  FreeFinders3B
-//
-//  Created by Ellen Chen on 11/7/22.
-//
-
 import Foundation
 import UIKit
 

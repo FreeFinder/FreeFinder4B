@@ -1,17 +1,17 @@
-//
-//  HomeViewController.swift
-//  FreeFinder4B
-//
-//  Created by steven arellano on 11/11/22.
-//
-
 import UIKit
 import MapKit
+import RealmSwift
 
 class HomeViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadMap();
+
+    }
+    
+    private func loadMap() {
         if (mapView != nil) {
             view.insetsLayoutMarginsFromSafeArea = false
             let initialLocation = CLLocation(latitude: 41.7886, longitude: -87.5987)
@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
     func refresh() async -> [Item] {
         let user = User(email: "mongodb@gmail.com");
         await user.db_add_user()

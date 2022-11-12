@@ -1,10 +1,3 @@
-//
-//  CreateItemViewController.swift
-//  FreeFinder4B
-//
-//  Created by steven arellano on 11/11/22.
-//
-
 import UIKit
 import MapKit
 

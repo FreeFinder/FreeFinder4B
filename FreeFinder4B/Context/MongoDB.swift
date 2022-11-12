@@ -1,10 +1,3 @@
-//
-//  MongoDB.swift
-//  FreeFinders3B
-//
-//  Created by steven arellano on 11/10/22.
-//
-
 import Foundation
 
 //let user = User(email: "mongodb@gmail.com");

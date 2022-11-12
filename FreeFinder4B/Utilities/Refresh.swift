@@ -1,10 +1,3 @@
-//
-//  Refresh.swift
-//  FreeFinders3B
-//
-//  Created by steven arellano on 11/10/22.
-//
-
 import Foundation
 import UIKit
 
