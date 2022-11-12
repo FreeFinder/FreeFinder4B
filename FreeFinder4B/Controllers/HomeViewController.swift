@@ -13,8 +13,8 @@ class HomeViewController: UIViewController {
     }
     
     func addCurrLocation(with location: CLLocation) {
-        let pin = MKPointAnnotation()
-        pin.coordinate = location.coordinate
+        let currLocation = MKPointAnnotation()
+        currLocation.coordinate = location.coordinate
         mapView.setRegion(MKCoordinateRegion(
                             center: location.coordinate,
                             span: MKCoordinateSpan(
@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
                             )
         ),
                           animated: true)
-        mapView.addAnnotation(pin)
+        mapView.addAnnotation(currLocation)
     }
     
     private func loadMap() {
