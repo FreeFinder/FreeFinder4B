@@ -34,6 +34,7 @@
 		738572BD2919F50000D0F5B5 /* ViewItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738572BA2919F50000D0F5B5 /* ViewItem.storyboard */; };
 		738572C5291A052800D0F5B5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738572C4291A052800D0F5B5 /* ItemViewController.swift */; };
 		738572C7291A053600D0F5B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738572C6291A053600D0F5B5 /* ProfileViewController.swift */; };
+		BD2F9683291FFE560047C23C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2F9682291FFE560047C23C /* StartViewController.swift */; };
 		BD3FBFEA291B6185008268A2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FBFE9291B6185008268A2 /* main.swift */; };
 		BD6DF2FB291B1BA400378E42 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6DF2FA291B1BA400378E42 /* Item.swift */; };
 		BD6DF2FD291B1BAF00378E42 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6DF2FC291B1BAF00378E42 /* User.swift */; };
@@ -89,6 +90,7 @@
 		738572BA2919F50000D0F5B5 /* ViewItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ViewItem.storyboard; sourceTree = "<group>"; };
 		738572C4291A052800D0F5B5 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		738572C6291A053600D0F5B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BD2F9682291FFE560047C23C /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		BD3FBFE9291B6185008268A2 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BD6DF2FA291B1BA400378E42 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BD6DF2FC291B1BAF00378E42 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */,
 				BD8F7CBC291E985600A451BC /* CreateItemViewController.swift */,
 				BD8F7CBE291EA3FE00A451BC /* HomeViewController.swift */,
+				BD2F9682291FFE560047C23C /* StartViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				BDE07B07291D9131003324AD /* MongoDB.swift in Sources */,
 				BD3FBFEA291B6185008268A2 /* main.swift in Sources */,
 				484DC4922919C84600AE095B /* AppDelegate.swift in Sources */,
+				BD2F9683291FFE560047C23C /* StartViewController.swift in Sources */,
 				BD8F7CBD291E985600A451BC /* CreateItemViewController.swift in Sources */,
 				BD8F7CBF291EA3FE00A451BC /* HomeViewController.swift in Sources */,
 				5A7713B1291A0F9E00040D8A /* ItemTableViewController.swift in Sources */,
