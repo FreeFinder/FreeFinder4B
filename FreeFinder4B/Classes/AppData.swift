@@ -7,12 +7,13 @@ import RealmSwift
 
 class AppData {
     var items: [Item] = [];
+    var mapItems: [Item] = [];
     var user: User;
     
-    init(user: User) async{
-        self.user = user
-        
-        await db_get_all_items();
+    init(user: User) async {
+        self.user = user;
+        self.items = await db_get_all_items();
+        self.mapItems = self.items;
     }
     
     func refresh() async -> [Item] {
@@ -33,38 +34,40 @@ class AppData {
             let db_items = try await items.find(filter: [:]);
             var temp_item_array: [Item] = [];
             for db_item in db_items {
-                let id: ObjectId = (db_item["_id"]!!).objectIdValue!;
-                let name = (db_item["name"]!!).stringValue!;
-                let type = (db_item["type"]!!).stringValue!;
-                let details = (db_item["details"]!!).stringValue!;
-                
-                let longitude = (db_item["longitude"]!!).stringValue!;
-                let latitude = (db_item["latitude"]!!).stringValue!;
-                let coordinates = CLLocationCoordinate2D(
-                    latitude: CLLocationDegrees(floatLiteral: Double(latitude)!),
-                    longitude: CLLocationDegrees(floatLiteral: Double(longitude)!)
-                )
-                
-                let creator_email = (db_item["creator_email"]!!).stringValue!;
-                
-                
-                let fetchedItem = Item(
-                    name: name,
-                    type: type,
-                    detail: details,
-                    coordinate: coordinates,
-                    creator_email: creator_email,
-                    id: id
-                )
+                let fetchedItem = parseDbItem(dbItem: db_item);
                 temp_item_array.append(fetchedItem);
             }
-            self.items = temp_item_array;
             res = temp_item_array;
         } catch {
             print("Failed to fetch all the items: \(error.localizedDescription)")
         }
         
         return res;
+    }
+    
+    private func parseDbItem(dbItem: Document) -> Item {
+        let id: ObjectId = (dbItem["_id"]!!).objectIdValue!;
+        let name = (dbItem["name"]!!).stringValue!;
+        let type = (dbItem["type"]!!).stringValue!;
+        let details = (dbItem["details"]!!).stringValue!;
+        
+        let longitude = (dbItem["longitude"]!!).stringValue!;
+        let latitude = (dbItem["latitude"]!!).stringValue!;
+        let coordinates = CLLocationCoordinate2D(
+            latitude: CLLocationDegrees(floatLiteral: Double(latitude)!),
+            longitude: CLLocationDegrees(floatLiteral: Double(longitude)!)
+        )
+        
+        let creator_email = (dbItem["creator_email"]!!).stringValue!;
+        
+        return Item(
+            name: name,
+            type: type,
+            detail: details,
+            coordinate: coordinates,
+            creator_email: creator_email,
+            id: id
+        )
     }
     
     func db_fetch_user(email: String) async -> User? {
