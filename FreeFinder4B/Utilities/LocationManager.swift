@@ -1,10 +1,3 @@
-//
-//  LocationManager.swift
-//  FreeFinder4B
-//
-//  Created by William Zeng on 11/12/22.
-//
-
 import CoreLocation
 import Foundation
 
