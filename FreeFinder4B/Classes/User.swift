@@ -79,9 +79,15 @@ class User {
         return item;
     }
     
-    func comment(i: Item, comment: String) async {
+    func comment(i: Item, comment: String) async -> Bool {
 //        return await i.add_Comment(comment: comment)
+        return false
     }
+    
+    func decrement_quantity(i: Item) -> Bool {
+        return false
+    }
+    
     func sign_out() -> Bool{
 //        GIDSignIn.sharedInstance?.signOut()
 //        return (GIDSignIn.sharedInstance() == nil)

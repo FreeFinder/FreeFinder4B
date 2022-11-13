@@ -202,5 +202,12 @@ class Item: NSObject, MKAnnotation{
 //        }
     }
 
+    func db_decrement_quantity() -> Bool{
+        return false
+    }
+    
+    func db_get_quantity() -> Bool {
+        return false
+    }
                   
 }

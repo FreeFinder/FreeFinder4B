@@ -16,10 +16,10 @@
 		484DC4B32919C84700AE095B /* FreeFinders4BUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */; };
 		484DC4B52919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */; };
 		48BD948D292047B800C8014E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BD948C292047B800C8014E /* LocationManager.swift */; };
-		48D16F33291BB3D9005CECEF /* Mapkit Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */; };
 		48D16F35291BB5FD005CECEF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F34291BB5FD005CECEF /* Realm */; };
 		48D16F37291BB600005CECEF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F36291BB600005CECEF /* RealmSwift */; };
 		48D16F38291BB6CB005CECEF /* Google Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C191CC291B773E000466F7 /* Google Tests.swift */; };
+		5A0A48092920702A00168A6A /* Mapkit Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A48082920702A00168A6A /* Mapkit Tests.swift */; };
 		5A41CE49291B77A000B68AA5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5A41CE48291B77A000B68AA5 /* Realm */; };
 		5A41CE4B291B77A000B68AA5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5A41CE4A291B77A000B68AA5 /* RealmSwift */; };
 		5A7713AB2919F20C00040D8A /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7713AA2919F20C00040D8A /* List.storyboard */; };
@@ -85,9 +85,8 @@
 		484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITests.swift; sourceTree = "<group>"; };
 		484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		48BD948C292047B800C8014E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = FreeFinder4B/Utilities/LocationManager.swift; sourceTree = SOURCE_ROOT; };
-		48C191C8291B7196000466F7 /* Map Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Map Tests.swift"; sourceTree = "<group>"; };
 		48C191CC291B773E000466F7 /* Google Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Google Tests.swift"; sourceTree = "<group>"; };
-		48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Mapkit Tests.swift"; path = "FreeFinders3BUITests/Mapkit Tests.swift"; sourceTree = SOURCE_ROOT; };
+		5A0A48082920702A00168A6A /* Mapkit Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mapkit Tests.swift"; sourceTree = "<group>"; };
 		5A7713AA2919F20C00040D8A /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		734303152919CCC90064974F /* CreateItemView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateItemView.storyboard; sourceTree = "<group>"; };
@@ -180,9 +179,7 @@
 		484DC4A72919C84700AE095B /* FreeFinder4BTests */ = {
 			isa = PBXGroup;
 			children = (
-				48D16F32291BB3D9005CECEF /* Mapkit Tests.swift */,
 				48C191CC291B773E000466F7 /* Google Tests.swift */,
-				48C191C8291B7196000466F7 /* Map Tests.swift */,
 				484DC4A82919C84700AE095B /* FreeFinders3BTests.swift */,
 			);
 			path = FreeFinder4BTests;
@@ -191,6 +188,7 @@
 		484DC4B12919C84700AE095B /* FreeFinder4BUITests */ = {
 			isa = PBXGroup;
 			children = (
+				5A0A48082920702A00168A6A /* Mapkit Tests.swift */,
 				484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */,
 				484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */,
 			);
@@ -470,7 +468,7 @@
 			files = (
 				484DC4B32919C84700AE095B /* FreeFinders4BUITests.swift in Sources */,
 				484DC4B52919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift in Sources */,
-				48D16F33291BB3D9005CECEF /* Mapkit Tests.swift in Sources */,
+				5A0A48092920702A00168A6A /* Mapkit Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +723,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KAP5HAAY49;
@@ -732,10 +731,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = freefinders.FreeFinders4BUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FreeFinders4B;
+				TEST_TARGET_NAME = FreeFinder4B;
 			};
 			name = Debug;
 		};
@@ -743,6 +743,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KAP5HAAY49;
@@ -750,10 +751,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = freefinders.FreeFinders4BUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FreeFinders4B;
+				TEST_TARGET_NAME = FreeFinder4B;
 			};
 			name = Release;
 		};

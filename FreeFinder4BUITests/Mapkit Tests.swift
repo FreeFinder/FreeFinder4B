@@ -9,7 +9,7 @@ import XCTest
 import MapKit
 import RealmSwift
 
-@testable import FreeFinders3B
+@testable import FreeFinder4B
 final class Mapkit_Tests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -35,15 +35,15 @@ final class Mapkit_Tests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testRefreshMap() async {
-        let app = XCUIApplication()
-        app.launch()
-
-        await refresh()
-        let map = app.maps.element(boundBy: 0)
-        XCTAssertNotNil(map, "There is no Map View in unit test")
-
-    }
+//    func testRefreshMap() async {
+//        let app = XCUIApplication()
+//        app.launch()
+//
+//        await refresh()
+//        let map = app.maps.element(boundBy: 0)
+//        XCTAssertNotNil(map, "There is no Map View in unit test")
+//
+//    }
     
 //    func isMapProper() {
 //        XCTAssertNotNil(self.viewControllerUnderTest.mapView.delegate, "MapView violates mapview delegate")
