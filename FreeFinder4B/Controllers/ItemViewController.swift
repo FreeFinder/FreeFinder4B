@@ -78,14 +78,16 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
         //if(comment_out == false){
             //here we can throw an error for a wrong comment
        // }
-        let valid_comment = observer.addComment(i: passed_item, comment: newComment.text ?? "");
-        if(valid_comment == false){
-            let alert = CustomAlertController(title: "Invalid Comment", message: "Please try commenting again. Remember comments must be alphanumeric and under 250 characters.")
-            DispatchQueue.main.async {
-                self.present(alert.showAlert(), animated: true, completion: nil)
+        Task{
+            let valid_comment = await USER?.comment(i: passed_item, comment: newComment?.text ?? "");
+            if(valid_comment == false){
+                let alert = CustomAlertController(title: "Invalid Comment", message: "Please try commenting again. Remember comments must be alphanumeric and under 250 characters.")
+                DispatchQueue.main.async {
+                    self.present(alert.showAlert(), animated: true, completion: nil)
+                }
+            }else{
+                self.dismiss(animated: true);
             }
-        }else{
-            self.dismiss(animated: true);
         }
     }
 

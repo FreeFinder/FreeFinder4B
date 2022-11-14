@@ -35,18 +35,18 @@ class ItemsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        items.append(item_test);
-        items.append(item_test1);
-        items.append(item_test2);
+       items.append(item_test);
+       items.append(item_test1);
+       items.append(item_test2);
         
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: animated)
         }
         
       
-        //Task{
-       // items.append(item_test)//[item_test]//[item]//await refresh()
-        //}
+        Task{
+            items = await refresh();
+        }
     }
     
     override func viewDidLoad() {
@@ -86,7 +86,7 @@ class ItemsTableViewController: UITableViewController {
 
         let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
         
-        itemVC.itemcomments = ["two left", "one left", "all gone"]; //item_fromtable.comments;
+        itemVC.itemcomments = ["two left", "one left", "all gone"]; //here we need to implement getting comments of an item....
         itemVC.passed_item = item_fromtable;
         self.present(itemVC, animated: true, completion: nil)
     }

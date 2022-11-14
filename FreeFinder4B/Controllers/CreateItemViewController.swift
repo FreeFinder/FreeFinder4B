@@ -21,8 +21,6 @@ class CreateItemViewController: UIViewController {
                 creator_email: creator_email
             )
             let _ = await item.db_add_item();
-            let n = await item.db_item_exists();
-            print(n)
         }
     }
 }
