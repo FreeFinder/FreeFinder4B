@@ -24,6 +24,7 @@
 		5A41CE4B291B77A000B68AA5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5A41CE4A291B77A000B68AA5 /* RealmSwift */; };
 		5A7713AB2919F20C00040D8A /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7713AA2919F20C00040D8A /* List.storyboard */; };
 		5A7713B1291A0F9E00040D8A /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */; };
+		5D2EA5E12922B4DF00DDDDC7 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2EA5E02922B4DF00DDDDC7 /* CustomAlertController.swift */; };
 		734303162919CCC90064974F /* CreateItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734303152919CCC90064974F /* CreateItemView.storyboard */; };
 		734303172919CCC90064974F /* CreateItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734303152919CCC90064974F /* CreateItemView.storyboard */; };
 		734303182919CCC90064974F /* CreateItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734303152919CCC90064974F /* CreateItemView.storyboard */; };
@@ -89,6 +90,7 @@
 		5A0A48082920702A00168A6A /* Mapkit Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mapkit Tests.swift"; sourceTree = "<group>"; };
 		5A7713AA2919F20C00040D8A /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
+		5D2EA5E02922B4DF00DDDDC7 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		734303152919CCC90064974F /* CreateItemView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateItemView.storyboard; sourceTree = "<group>"; };
 		734303192919CCD00064974F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		738572BA2919F50000D0F5B5 /* ViewItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ViewItem.storyboard; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				BD8F7CBE291EA3FE00A451BC /* HomeViewController.swift */,
 				BD2F9682291FFE560047C23C /* StartViewController.swift */,
 				BD2F9684292010990047C23C /* SignInViewController.swift */,
+				5D2EA5E02922B4DF00DDDDC7 /* CustomAlertController.swift */,
 				BD2F9688292019ED0047C23C /* MainNavigationController.swift */,
 			);
 			path = Controllers;
@@ -438,6 +441,7 @@
 				BD8F7CBB291E958800A451BC /* Items.swift in Sources */,
 				BDE07B07291D9131003324AD /* MongoDB.swift in Sources */,
 				BD3FBFEA291B6185008268A2 /* main.swift in Sources */,
+				5D2EA5E12922B4DF00DDDDC7 /* CustomAlertController.swift in Sources */,
 				BD2F9689292019ED0047C23C /* MainNavigationController.swift in Sources */,
 				484DC4922919C84600AE095B /* AppDelegate.swift in Sources */,
 				BD2F9683291FFE560047C23C /* StartViewController.swift in Sources */,

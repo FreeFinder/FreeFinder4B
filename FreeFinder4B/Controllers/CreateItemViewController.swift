@@ -12,7 +12,6 @@ class CreateItemViewController: UIViewController {
         let detail = descriptionInput.text ?? "";
         let location = CLLocationCoordinate2D(latitude: 23, longitude: 54); // implement actual location grabbing
         let creator_email = "mongodb@gmail.com"; // implement once singing in is implmeneted
-        
         Task {
             let item = Item(
                 name: name,
@@ -22,6 +21,8 @@ class CreateItemViewController: UIViewController {
                 creator_email: creator_email
             )
             let _ = await item.db_add_item();
+            let n = await item.db_item_exists();
+            print(n)
         }
     }
 }

@@ -1,5 +1,6 @@
 import UIKit
 import MapKit
+import Foundation
 
 class ItemViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -7,14 +8,17 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.dismiss(animated: true);
     }
     
-   // var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), creator_email: "");
+    @IBAction func exitAddCommentPushed(_ sender: UIButton) {
+        self.dismiss(animated: true);
+    }
     
-    var itemname = "";
-    var itemdetail = "";
-    var itemcoor = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0);
+    //var itemname = "";
+    //var itemdetail = "";
+    //var itemcoor = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0);
     var itemcomments = [""];
     
-    @IBOutlet weak var itemImage: UIImageView!
+    var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "");
+    
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var itemLocation: UILabel!
     @IBOutlet weak var itemDescription: UILabel!
@@ -25,22 +29,17 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        itemImage.layer.masksToBounds = true
-        itemImage.layer.cornerRadius = itemImage.bounds.width / 2
-        
         // TODO: connect to data
-        itemDescription.text = itemdetail;
-        itemName.text = itemname;
+        itemDescription?.text = passed_item.detail;
+        itemName?.text = passed_item.name;
                 
                 
-        let lat = String(itemcoor.latitude);
-        let long = String(itemcoor.longitude);
+        let lat = String(passed_item.coordinate.latitude);
+        let long = String(passed_item.coordinate.longitude);
         let latloc = "Latitude: " + lat;
         let longloc = ", Longitude: " + long;
         let location = latloc + longloc;
-            
-        itemLocation.text = location;
+        itemLocation?.text = location;
         
         
         /*
@@ -68,6 +67,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    
     @IBAction func postCommentButtonPressed(_ sender: UIButton) {
         //TODO: in iteration 2 need to be able to add comments
         //let current_user = User//passed_item.creator;
@@ -78,6 +78,15 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
         //if(comment_out == false){
             //here we can throw an error for a wrong comment
        // }
+        let valid_comment = observer.addComment(i: passed_item, comment: newComment.text ?? "");
+        if(valid_comment == false){
+            let alert = CustomAlertController(title: "Invalid Comment", message: "Please try commenting again. Remember comments must be alphanumeric and under 250 characters.")
+            DispatchQueue.main.async {
+                self.present(alert.showAlert(), animated: true, completion: nil)
+            }
+        }else{
+            self.dismiss(animated: true);
+        }
     }
 
 }
