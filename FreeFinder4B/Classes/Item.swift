@@ -145,6 +145,10 @@ class Item: NSObject, MKAnnotation{
         }
     }
     
+    func decrement_quantity(i: Item) async -> Bool {
+        return false
+    }
+    
     
     func db_get_comments() async  {
 //        var rv: [String] = []
@@ -202,7 +206,7 @@ class Item: NSObject, MKAnnotation{
 //        }
     }
 
-    func db_decrement_quantity() -> Bool{
+    func db_decrement_quantity(deviceLocation: CLLocationCoordinate2D) async -> Bool {
         return false
     }
     

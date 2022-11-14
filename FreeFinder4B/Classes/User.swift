@@ -84,10 +84,6 @@ class User {
         return false
     }
     
-    func decrement_quantity(i: Item) -> Bool {
-        return false
-    }
-    
     func sign_out() -> Bool{
 //        GIDSignIn.sharedInstance?.signOut()
 //        return (GIDSignIn.sharedInstance() == nil)
