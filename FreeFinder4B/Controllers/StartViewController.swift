@@ -11,13 +11,17 @@ class StartViewController: UIViewController {
         Task {
             APP_DATA = await AppData(user: USER!);
             
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let TabBarController = storyBoard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
             self.navigationController?.pushViewController(TabBarController, animated: true);
         }
     }
     
+    @IBOutlet weak var emailText: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailText.text = "account: \(DEVICE_DATA.email ?? "")";
     }
 }

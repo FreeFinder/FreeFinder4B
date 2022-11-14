@@ -2,12 +2,11 @@ import Foundation
 import RealmSwift
 import UIKit
 
-class SignInViewController: UIViewController {
+class SignUpViewController: UIViewController {
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
-    
     @IBOutlet weak var emailInput: UITextField!
     
-    @IBAction func signIn(_ sender: Any) {
+    @IBAction func signUp(_ sender: Any) {
         let email: String = emailInput.text ?? "";
         
         let emailIsValid = validEmail(email: email);
@@ -16,14 +15,9 @@ class SignInViewController: UIViewController {
             return;
         };
         Task {
+            USER = User(email: email);
+            await USER?.db_add_user();
             
-            let userInfo = await db_fetch_user(email: email);
-            if (userInfo == nil) { // this user was not in the database
-                // [TODO] Set Error Text
-                return;
-            }
-            
-            USER = userInfo!;
             let id: ObjectId = USER!.id;
             if (id == ObjectId() || id.stringValue == "") { return };
             DEVICE_DATA.saveLocalUser(email: email, id: id.stringValue);
@@ -35,10 +29,10 @@ class SignInViewController: UIViewController {
         }
     }
     
-    @IBAction func navigateToSignUp(_ sender: Any) {
-        let SignUpController = storyBoard.instantiateViewController(withIdentifier: "SignUp") as UIViewController;
+    @IBAction func navigateToSignIn(_ sender: Any) {
+        let SignInController = storyBoard.instantiateViewController(withIdentifier: "SignIn") as UIViewController;
         
-        self.navigationController?.pushViewController(SignUpController, animated: true);
+        self.navigationController?.pushViewController(SignInController, animated: true);
     }
     
     override func viewDidLoad() {
