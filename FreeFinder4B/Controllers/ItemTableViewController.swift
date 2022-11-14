@@ -44,9 +44,9 @@ class ItemsTableViewController: UITableViewController {
         }
         
       
-        Task{
-            items = await refresh();
-        }
+        //Task{
+           // items = await refresh();
+        //}
     }
     
     override func viewDidLoad() {
@@ -86,7 +86,7 @@ class ItemsTableViewController: UITableViewController {
 
         let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
         
-        itemVC.itemcomments = ["two left", "one left", "all gone"]; //here we need to implement getting comments of an item....
+        itemVC.itemcomments = ["two left but they're only tofu or veggie", "one left", "all gone"]; //here we need to implement getting comments of an item....
         itemVC.passed_item = item_fromtable;
         self.present(itemVC, animated: true, completion: nil)
     }
