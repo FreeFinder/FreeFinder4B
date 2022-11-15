@@ -18,7 +18,6 @@
 		48BD948D292047B800C8014E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BD948C292047B800C8014E /* LocationManager.swift */; };
 		48D16F35291BB5FD005CECEF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F34291BB5FD005CECEF /* Realm */; };
 		48D16F37291BB600005CECEF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F36291BB600005CECEF /* RealmSwift */; };
-		48D16F38291BB6CB005CECEF /* Google Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C191CC291B773E000466F7 /* Google Tests.swift */; };
 		5A0A48092920702A00168A6A /* Mapkit Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A48082920702A00168A6A /* Mapkit Tests.swift */; };
 		5A41CE49291B77A000B68AA5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5A41CE48291B77A000B68AA5 /* Realm */; };
 		5A41CE4B291B77A000B68AA5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5A41CE4A291B77A000B68AA5 /* RealmSwift */; };
@@ -88,7 +87,6 @@
 		484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITests.swift; sourceTree = "<group>"; };
 		484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		48BD948C292047B800C8014E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = FreeFinder4B/Utilities/LocationManager.swift; sourceTree = SOURCE_ROOT; };
-		48C191CC291B773E000466F7 /* Google Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Google Tests.swift"; sourceTree = "<group>"; };
 		5A0A48082920702A00168A6A /* Mapkit Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mapkit Tests.swift"; sourceTree = "<group>"; };
 		5A7713AA2919F20C00040D8A /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 		484DC4A72919C84700AE095B /* FreeFinder4BTests */ = {
 			isa = PBXGroup;
 			children = (
-				48C191CC291B773E000466F7 /* Google Tests.swift */,
 				484DC4A82919C84700AE095B /* FreeFinders4BTests.swift */,
 				BD4E5BE62924437200E244BD /* LocalDeviceTests.swift */,
 				BD4E5BE82924453600E244BD /* AppDataTests.swift */,
@@ -467,7 +464,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D16F38291BB6CB005CECEF /* Google Tests.swift in Sources */,
 				BD4E5BE72924437200E244BD /* LocalDeviceTests.swift in Sources */,
 				484DC4A92919C84700AE095B /* FreeFinders4BTests.swift in Sources */,
 				BD4E5BE92924453600E244BD /* AppDataTests.swift in Sources */,
