@@ -5,29 +5,129 @@ import RealmSwift
 @testable import FreeFinder4B
 
 final class FreeFinders4BTests: XCTestCase {
-    /*
-     [TODO] auth.swift test functions
-     1. validEmail
-     2. db_fetch_user
-     
-     
-     [TODO] Device.swift test functions
-     1. userSignedIn
-     2. saveLocalUser
-     
-     */
+	// [TODO] do we still need this?
+	//    func testSignIn() async throws{
+	//        //will create two users, one with valid email one without.
+	//        let goodUser = await sign_in(email: "cbgravitt@uchicago.edu")
+	//        XCTAssertEqual(goodUser!.email, "cbgravitt@uchicago.edu")
+	//
+	//        //invalid users can't sign in, return null
+	//        let badUser = await sign_in(email: "cbgravitt@google.com")
+	//        XCTAssertNil(badUser)
+	//    }
     
-    // [TODO] do we still need this?
-    //    func testSignIn() async throws{
-    //        //will create two users, one with valid email one without.
-    //        let goodUser = await sign_in(email: "cbgravitt@uchicago.edu")
-    //        XCTAssertEqual(goodUser!.email, "cbgravitt@uchicago.edu")
-    //
-    //        //invalid users can't sign in, return null
-    //        let badUser = await sign_in(email: "cbgravitt@google.com")
-    //        XCTAssertNil(badUser)
-    //    }
+	func test_validEmail() throws {
+		/*
+		 CASES:
+		 1. email is valid
+		 2. email is invalid because does not end with "@uchicago.edu"
+		 3. email in invalid because it does not contain a prefix to "@uchicago.edu"	
+		 */
+		
+		// [CASE] valid email
+		let goodEmail = "steven@uchicago.edu";
+		XCTAssertTrue(validEmail(email: goodEmail))
+		
+		// [CASE] doesn't end with "@uchicago.edu
+		let invalidEmail1 = "";
+		XCTAssertFalse(validEmail(email: invalidEmail1))
+		
+		// [CASE] no valid prefix
+		let invalidEmail2 = "@uchicago.edu";
+		XCTAssertFalse(validEmail(email: invalidEmail2))
+	}
+	
+	func test_db_fetch_user() async throws {
+		/*
+		 CASES:
+		 1. email in db
+		 2. email not in db
+		 */
+		
+		let goodEmail = "testUser@uchicago.edu"
+		let testUser = User(email: goodEmail);
+		await testUser.db_add_user();
+		
+		// [CASE] email in db
+		let user = await db_fetch_user(email: goodEmail);
+		XCTAssertEqual(user?.email, goodEmail);
+		
+		// [CASE] email not in db
+		let nilUser = await db_fetch_user(email: "not in db");
+		XCTAssertNil(nilUser);
+	}
+
+	func test_userSignedIn() throws {
+		/*
+		 CASES:
+		 1. user credentials are not on local device
+		 2. user credentials are on local device
+		 */
+		
+		// fetch the current state of the device (should be empty)
+		let emptyDevice = Device();
+		// [CASE] user credentials are not on local device
+		XCTAssertFalse(emptyDevice.userSignedIn());
+		
+		// sign in a user to the device
+		emptyDevice.saveLocalUser(
+			email: "steven@uchicago.edu",
+			id: "636e61f1c4581ef3a7186f5f"
+		);
+		
+		let signedInDevice = Device();
+		// [CASE] user credentials are on local device
+		XCTAssertTrue(emptyDevice.userSignedIn());
+	}
+	
+	
+	func test_saveLocalUser() throws  {
+		/*
+		 CASES:
+		 1. local credential state goes from empty to something
+		 2. local credential state goes from something to something else
+		 */
+		
+		// fetch the current state of the device (should be empty)
+		let device = Device();
+		XCTAssertEqual(nil, device.email)
+		
+		// sign in a user to the device
+		device.saveLocalUser(
+			email: "steven@uchicago.edu",
+			id: "636e61f1c4581ef3a7186f5f"
+		);
+		// [CASE] local credential state goes from empty to something
+		XCTAssertEqual("steven@uchicago.edu", device.email)
+		
+		// save different user credentials to the device
+		device.saveLocalUser(
+			email: "mongo@uchicago.edu",
+			id: "636e61f1c4581ef3a7186f5f"
+		);
+		// [CASE] local credential state goes from something to something else
+		XCTAssertEqual("mongo@uchicago.edu", device.email)
+	}
     
+	func test_removeLocalUser() throws {
+		/*
+		 CASES:
+		 1. local credentials get removed from the device
+		 */
+		
+		// sign in a user to the device
+		let device = Device();
+		device.saveLocalUser(
+			email: "steven@uchicago.edu",
+			id: "636e61f1c4581ef3a7186f5f"
+		);
+		XCTAssertEqual("steven@uchicago.edu", device.email)
+		
+		device.removeLocalUser();
+		// [CASE] local credential state goes from something to something else
+		XCTAssertEqual(nil, device.email);
+	}
+	
     func test_filterMapItems() async throws{
         // filter by type
         
