@@ -103,9 +103,6 @@ final class AppDataTests: XCTestCase {
 		test_app.filterMapItems(tag: "Other")
 		XCTAssertTrue(test_app.mapItems == [other_item1!, other_item2!])
 		
-		
-		// filter by distance
-		
 	}
 
 }
