@@ -4,8 +4,8 @@ import SwiftUI
 import RealmSwift
 
 class AppData {
-    var items: [Item] = [];
-    var mapItems: [Item] = [];
+    var items: [Item] = []; // everything in DB
+    var mapItems: [Item] = []; // what is communicated to UI
     var currentFilter: String = ""; // "" || "distance" || "tag"
     var user: User;
     

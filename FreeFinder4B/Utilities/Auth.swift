@@ -3,7 +3,7 @@ import RealmSwift
 
 
 func validEmail(email: String) -> Bool {
-    return email.hasSuffix("@uchicago.edu");
+	return email.hasSuffix("@uchicago.edu") && email.count > 13;
 }
 
 func db_fetch_user(email: String) async -> User? {

@@ -33,4 +33,9 @@ class Device {
         defaults.set(email, forKey: "email")
         defaults.set(id, forKey: "id");
     }
+	
+	// [TODO] removeLocalUser()
+	func removeLocalUser() {
+		
+	}
 }
