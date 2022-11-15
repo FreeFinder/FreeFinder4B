@@ -243,4 +243,99 @@ final class FreeFinders4BTests: XCTestCase {
         didDecrement = await validItemQ1.db_decrement_quantity(deviceLocation: invalidCoordinates);
         XCTAssertFalse(didDecrement);
     }
+    
+    func test_distance_filter() async throws{
+        //CASES: 4 Items in a list, each with different coordinates.
+        //They will be filtered against the UChicago campus, which is where
+        //anyone testing this will likely be (for now)
+        //2 items will be on campus, one will be on the west coast (~2000 mi), the other will be
+        //on the other side of the world in Australia, ~9000 mi away.
+        
+        let uchicago_center = CLLocationCoordinate2D(latitude: 41.7886, longitude: -87.5987)
+        let ratner = CLLocationCoordinate2D(latitude: 41.7942, longitude: -87.6017)
+        let USC = CLLocationCoordinate2D(latitude: 34.0224, longitude: -118.2851)
+        let SydneyOperaHouse = CLLocationCoordinate2D(latitude: -33.8568, longitude: 151.2153)
+        
+        let test_user = User(email: "mongodb@gmail.com")
+        let app = await AppData(user: test_user)
+        
+        let item1 = Item(name: "test1", type: "food", detail: "test1", coordinate: uchicago_center, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        let item2 = Item(name: "test2", type: "food", detail: "test2", coordinate: ratner, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        let item3 = Item(name: "test3", type: "food", detail: "test3", coordinate: USC, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        let item4 = Item(name: "test4", type: "food", detail: "test4", coordinate: SydneyOperaHouse, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        
+        app.items = [item1, item2, item3, item4]
+        app.mapItems = app.items
+        
+        app.filterMapItems(distance: -100)//impossible, but should return empty list
+        XCTAssertEqual(app.mapItems.count, 0)
+        
+        app.filterMapItems(distance: 50) //assuming miles, may change
+        XCTAssertEqual(app.mapItems.count, 2)
+        XCTAssertEqual(app.mapItems[0].name, "test1")
+        XCTAssertEqual(app.mapItems[1].name, "test2")
+        
+        app.filterMapItems(distance: 3000) //big enough for the US, does not reach AU
+        XCTAssertEqual(app.mapItems.count, 3)
+        XCTAssertEqual(app.mapItems[0].name, "test1")
+        XCTAssertEqual(app.mapItems[1].name, "test2")
+        XCTAssertEqual(app.mapItems[2].name, "test3")
+    }
+    
+    func test_distance_sort() async throws{
+        //sorts the list of map items by distance, ascending. The order from the User's location
+        //assuming they are on/near campus should be item1 item2 item3
+        
+        let uchicago_center = CLLocationCoordinate2D(latitude: 41.7886, longitude: -87.5987)
+        let USC = CLLocationCoordinate2D(latitude: 34.0224, longitude: -118.2851)
+        let SydneyOperaHouse = CLLocationCoordinate2D(latitude: -33.8568, longitude: 151.2153)
+        
+        let test_user = User(email: "mongodb@gmail.com")
+        let app = await AppData(user: test_user)
+        
+        let item1 = Item(name: "test1", type: "food", detail: "test1", coordinate: uchicago_center, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        let item2 = Item(name: "test2", type: "food", detail: "test2", coordinate: USC, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        let item3 = Item(name: "test3", type: "food", detail: "test3", coordinate: SydneyOperaHouse, creator_email: "mongodb@gmail.com", comments: [], counter: 10, id: ObjectId())
+        
+        //sort random order test
+        app.items = [item2, item3, item1]
+        app.mapItems = app.items
+        
+        app.sortMapItemsByDist()
+        XCTAssertEqual(app.mapItems[0].name, "test1")
+        XCTAssertEqual(app.mapItems[1].name, "test2")
+        XCTAssertEqual(app.mapItems[2].name, "test3")
+        
+        //sort reverse order test
+        app.items = [item3, item2, item1]
+        app.mapItems = app.items
+        
+        app.sortMapItemsByDist()
+        XCTAssertEqual(app.mapItems[0].name, "test1")
+        XCTAssertEqual(app.mapItems[1].name, "test2")
+        XCTAssertEqual(app.mapItems[2].name, "test3")
+        
+        //sort correct order test
+        app.items = [item1, item2, item3]
+        app.mapItems = app.items
+        
+        app.sortMapItemsByDist()
+        XCTAssertEqual(app.mapItems[0].name, "test1")
+        XCTAssertEqual(app.mapItems[1].name, "test2")
+        XCTAssertEqual(app.mapItems[2].name, "test3")
+        
+        //sort 1 item list test
+        app.items = [item1]
+        app.mapItems = app.items
+        
+        app.sortMapItemsByDist()
+        XCTAssertEqual(app.mapItems[0].name, "test1")
+        
+        //sort empty list test
+        app.items = []
+        app.mapItems = app.items
+        
+        app.sortMapItemsByDist()
+        XCTAssertEqual(app.mapItems.count, 0)
+    }
 }

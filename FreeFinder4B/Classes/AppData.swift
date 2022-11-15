@@ -30,6 +30,10 @@ class AppData {
         // finish this function
     }
     
+    func sortMapItemsByDist(){
+        //TODO: sort mapItems by distance
+    }
+    
     func filterMap() {
         self.currentFilter = "";
         self.mapItems = self.items;
