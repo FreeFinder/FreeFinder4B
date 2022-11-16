@@ -53,3 +53,12 @@ Within the FreeFinder4B directory, you will find a FreeFinder4B that contains al
 - Controllers contains all view controllers.
 - Storyboards contains all storyboards for the UI. 
 - Utilities contains any miscellaneous function definitions that do not belong in the classes. 
+
+For the unit tests, we have two main folders: FreeFinder4BTests and FreeFinder4BUITests. 
+
+FreeFinder4BTests contains the following files:
+- AppDataTests.swift: tests filtering by type
+- FreeFinders4B.swift: tests user and item related functions as well as filtering by distance from user
+- LocalDeviceTests.swift: tests local user related functions
+
+FreeFinder4BUITests contains our UI unit tests
