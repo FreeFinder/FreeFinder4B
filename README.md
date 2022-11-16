@@ -38,7 +38,8 @@ Our unit testing can be found in the FreeFinder4BTests and FreeFinder4BUITests f
 ### How to compile
 You will need XCode in order to compile our code. Once you've cloned the repo, open it up in XCode. If anything pod related shows up in the folder, delete it. 
 If you experience troubles/errors with the packages, try quitting XCode and reopening it. You might also need to redownload the package dependencies for Realm. To do this go to File then Add packages... in the menu bar and copy and paste this (https://github.com/realm/realm-swift.git
-) into the search bar. Press add packages and add both. 
+) into the search bar. Press add packages and add both. If you are still having issues, under file go to packages and click reset package caches.
+
 ### How to run the code
 Press run in XCode (the play button on the top left). Alternatively, do command R or go to product then run in the menu bar. Make sure the scheme is set to FreeFinders3B. We tested outs on iPhone 14 Pro simulator running iOS 16.1. Have patience, depending on the device (and if you are running a simulator) there might be some lag. We've also run into issues with the M1 chip on mac and xcode. In this case, you cannot run a simulator and need to build on a physical device. To do this connect your phone (if it is an iphone) to your computer and build on it. 
 ### How to run the unit test cases
