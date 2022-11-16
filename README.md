@@ -45,4 +45,10 @@ Press run in XCode (the play button on the top left). Alternatively, do command 
 Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinders3B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above. 
 
 ## (4) Code Directory Structure
-TODO: STEVEN
+Within the FreeFinder4B directory, you will find a FreeFinder4B that contains all of our code building the app, with subfolders as follows.
+- App contains all the project entry points and main files. 
+- Classes contains the app schema and all of our class definitions
+- Context contains general global data (ie constants) and things relevant to the state of the app. 
+- Controllers contains all view controllers.
+- Storyboards contains all storyboards for the UI. 
+- Utilities contains any miscellaneous function definitions that do not belong in the classes. 
