@@ -12,11 +12,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.dismiss(animated: true);
     }
     
-    //var itemname = "";
-    //var itemdetail = "";
-    //var itemcoor = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0);
     var itemcomments = [""];
-    
     var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "");
     
     @IBOutlet weak var itemName: UILabel!
@@ -81,7 +77,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
         Task{
             let valid_comment = await USER?.comment(i: passed_item, comment: newComment?.text ?? "");
             if(valid_comment == false){
-                let alert = CustomAlertController(title: "Invalid Comment", message: "Please try commenting again. Remember comments must be alphanumeric and under 250 characters.")
+                let alert = CustomAlertController(title: "Invalid Comment", message: "Please try again.")
                 DispatchQueue.main.async {
                     self.present(alert.showAlert(), animated: true, completion: nil)
                 }

@@ -42,6 +42,7 @@ class ItemsTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: animated)
         }
+        //TODO: here we need to implement getting all items using refresh, once adding item works.
         
       
         //Task{
@@ -86,7 +87,9 @@ class ItemsTableViewController: UITableViewController {
 
         let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
         
-        itemVC.itemcomments = ["two left but they're only tofu or veggie", "one left", "all gone"]; //here we need to implement getting comments of an item....
+        itemVC.itemcomments = ["two left but they're only tofu or veggie", "one left", "all gone"];
+        //itemVC.itemcomments = await item_fromtable.db_get_comments();
+        //TODO: here we need to implement getting comments of an item using that function...
         itemVC.passed_item = item_fromtable;
         self.present(itemVC, animated: true, completion: nil)
     }
