@@ -211,7 +211,7 @@ final class FreeFinders4BTests: XCTestCase {
         
         //checks not in db
         let res2 = await (v_item!.db_item_exists())
-        XCTAssertTrue(res2)
+        XCTAssertFalse(res2)
         
     }
     
