@@ -2,7 +2,7 @@ import XCTest
 
 @testable import FreeFinder4B
 
-final class LocalDeviceTests: XCTestCase {
+final class LocalDeviceTests: XCTestCase { // EXPECT TO FAIL, AS NOT FULLY IMPL
 	
 	func test_userSignedIn() throws {
 		/*
@@ -10,6 +10,10 @@ final class LocalDeviceTests: XCTestCase {
 		 1. user credentials are not on local device
 		 2. user credentials are on local device
 		 */
+		
+		// clear the device
+		let deviceClearer = Device();
+		deviceClearer.removeLocalUser();
 		
 		// fetch the current state of the device (should be empty)
 		let emptyDevice = Device();
@@ -34,6 +38,10 @@ final class LocalDeviceTests: XCTestCase {
 		 1. local credential state goes from empty to something
 		 2. local credential state goes from something to something else
 		 */
+		
+		// clear the device
+		let deviceClearer = Device();
+		deviceClearer.removeLocalUser();
 		
 		// fetch the current state of the device (should be empty)
 		let device = Device();
@@ -62,6 +70,10 @@ final class LocalDeviceTests: XCTestCase {
 		 1. local credentials get removed from the device
 		 */
 		
+		// clear the device
+		let deviceClearer = Device();
+		deviceClearer.removeLocalUser();
+		
 		// sign in a user to the device
 		let device = Device();
 		device.saveLocalUser(
@@ -74,12 +86,4 @@ final class LocalDeviceTests: XCTestCase {
 		// [CASE] local credential state goes from something to something else
 		XCTAssertEqual(nil, device.email);
 	}
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
