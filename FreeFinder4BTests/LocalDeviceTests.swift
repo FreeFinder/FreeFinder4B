@@ -24,7 +24,7 @@ final class LocalDeviceTests: XCTestCase {
 		
 		let signedInDevice = Device();
 		// [CASE] user credentials are on local device
-		XCTAssertTrue(emptyDevice.userSignedIn());
+		XCTAssertTrue(signedInDevice.userSignedIn());
 	}
 	
 	
