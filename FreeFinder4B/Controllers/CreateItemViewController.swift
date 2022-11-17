@@ -34,14 +34,6 @@ class CreateItemViewController: UIViewController {
                 let n = await created!.db_item_exists();
                 print(n);
             }
-          /*  let item = Item(
-                name: name,
-                type: type,
-                detail: detail,
-                coordinate: location,
-                creator_email: creator_email
-            )*/
-            //let _ = await item.db_add_item();
         }
     }
 }
