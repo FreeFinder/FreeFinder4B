@@ -58,7 +58,6 @@ class Item: NSObject, MKAnnotation{
     
     func db_add_item() async -> ObjectId {
         if (self.id == ObjectId()) { return self.id }; // if the object has an id, its already in the DB
-        
         var res: ObjectId = ObjectId();
         do {
             let items: RLMMongoCollection = await db_get_items_collection()!
@@ -145,9 +144,13 @@ class Item: NSObject, MKAnnotation{
         }
     }
     
+    func decrement_quantity(i: Item) async -> Bool {
+        return false
+    }
     
-    func db_get_comments() async  {
-//        var rv: [String] = []
+    
+    func db_get_comments() async -> [String] {
+        var rv: [String] = []
 //        do {
 //            let app = App(id: APP_ID);
 //            let user = try await app.login(credentials: Credentials.anonymous);
@@ -172,7 +175,7 @@ class Item: NSObject, MKAnnotation{
 //        } catch {
 //            print("Comment retrieval failed: \(error.localizedDescription)")
 //        }
-//        return rv
+       return rv
     }
 
     func db_add_comment(comment: String) async {
@@ -202,7 +205,7 @@ class Item: NSObject, MKAnnotation{
 //        }
     }
 
-    func db_decrement_quantity() -> Bool{
+    func db_decrement_quantity(deviceLocation: CLLocationCoordinate2D) async -> Bool {
         return false
     }
     

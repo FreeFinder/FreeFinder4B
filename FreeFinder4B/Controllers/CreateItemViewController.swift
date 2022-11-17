@@ -11,17 +11,29 @@ class CreateItemViewController: UIViewController {
         let type = ITEM_TAGS[tagInput.selectedSegmentIndex];
         let detail = descriptionInput.text ?? "";
         let location = CLLocationCoordinate2D(latitude: 23, longitude: 54); // implement actual location grabbing
-        let creator_email = "mongodb@gmail.com"; // implement once singing in is implmeneted
-        
+        let creator_email = USER!.email; //"mongodb@gmail.com"; // implement once singing in is implmeneted
         Task {
-            let item = Item(
+            
+            let created = await USER!.create_item(
                 name: name,
                 type: type,
                 detail: detail,
                 coordinate: location,
-                creator_email: creator_email
-            )
-            let _ = await item.db_add_item();
+                quantity: 10
+            );
+            
+            
+            if(created == nil){
+                //throw error
+                let alert = CustomAlertController(title: "Invalid Submission", message: "Please try again. Make sure all necessary fields are filled.")
+                DispatchQueue.main.async {
+                    self.present(alert.showAlert(), animated: true, completion: nil)
+                }
+            }else{
+                self.dismiss(animated: true);
+                let n = await created!.db_item_exists();
+                print(n);
+            }
         }
     }
 }

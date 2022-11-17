@@ -1,44 +1,64 @@
-# FreeFinder Milestone 3B
+# FreeFinder Milestone 4A
 
-### (1) How to compile
+## (1) Brief Description about what you plan to do and not do in the second iteration. 
+For our second iteration, we will be focusing on the following additional things. First note since we were unable to successfully connect our frontend to the backend during iteration one, we will focus on ensuring all UI interactions from the first iteration are functional. Now for the second iteration we will be adding a filtering option for both the map and list view. Users can filter items by each individual type (at the moment we will not allow filtering by multiple type options) or by a given distance radius. We will also now let users decrement the quantity field of items and have items automatically deleted once their quantity reaches zero. We hope to also be able to access and utilize each user's device location. Finally, we will be creating an app icon and stylize our interface. 
+
+We have chosen to omit the following features:
+- Notifications
+- Photos 
+- User's own postings page
+- Editing of profile settings (note this is no longer neccessary due to the removal of notifications)
+- Item reservation
+
+
+## (2) A brief description of how the work will be divided among all pairs of people in your team. 
+The work will be divided as follows: 
+1. Connect UI to existing backend successfully - Ellen/Ruxi
+- Sign in
+- Sign out
+- Delete Item
+2. Filtering by category  
+- API -> Sydney/Jordan
+- UI -> Ellen/Ruxi
+3. Filtering by distance 
+- API -> William/Charlie
+- UI -> Ellen/Ruxi
+4. Decrementing of quantity
+- API -> Sydney/Jordan
+- Database -> Steven/Madhav
+- UI -> Ellen/Ruxi
+5. Styling of UI/UX elements -> Ellen/Ruxi
+6. Accessing/Utilizing User Location -> William/Charlie
+7. App Icon
+- Design + implementation -> Ellen
+
+## (3) Unit Test Cases
+Our unit testing can be found in the FreeFinder4BTests and FreeFinder4BUITests folders. See the following instructions to compile and run them. 
+
+### How to compile
 You will need XCode in order to compile our code. Once you've cloned the repo, open it up in XCode. If anything pod related shows up in the folder, delete it. 
 If you experience troubles/errors with the packages, try quitting XCode and reopening it. You might also need to redownload the package dependencies for Realm. To do this go to File then Add packages... in the menu bar and copy and paste this (https://github.com/realm/realm-swift.git
-) into the search bar. Press add packages and add both. 
-### (2) How to run the code
+) into the search bar. Press add packages and add both. If you are still having issues, under file go to packages and click reset package caches.
+
+### How to run the code
 Press run in XCode (the play button on the top left). Alternatively, do command R or go to product then run in the menu bar. Make sure the scheme is set to FreeFinders3B. We tested outs on iPhone 14 Pro simulator running iOS 16.1. Have patience, depending on the device (and if you are running a simulator) there might be some lag. We've also run into issues with the M1 chip on mac and xcode. In this case, you cannot run a simulator and need to build on a physical device. To do this connect your phone (if it is an iphone) to your computer and build on it. 
-### (3) How to run the unit test cases
+### How to run the unit test cases
 Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinders3B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above. 
-### (4) Some acceptance tests to try 
-We suggest playing around with the different views, as you have the option to find the same items through the map or the list. You can also add your own item and see it appear on the map! Once you add an item, you can comment any thoughts about it on that item's page. Once you add your comment, it will continue to appear any time the item is opened, until you delete it. Once an item is deleted, it is no longer accessible from either view. 
 
-### (5) Text description of what is implemented. You can refer to the use cases and user stories in your design document.
-We've implemented the following use cases:
-* Create item
-* Delete item
-* Comment on post
-* Refresh map
-* Sign in (we've implemented the function for this but have not connected the UI yet, this will come in iteration 2)
-* View map/list
-* View posting
+## (4) Code Directory Structure
+Within the FreeFinder4B directory, you will find a FreeFinder4B that contains all of our code building the app, with subfolders as follows.
+- App contains all the project entry points and main files. 
+- Classes contains the app schema and all of our class definitions
+- Context contains general global data (ie constants) and things relevant to the state of the app. 
+- Controllers contains all view controllers.
+- Storyboards contains all storyboards for the UI. 
+- Utilities contains any miscellaneous function definitions that do not belong in the classes. 
 
-Along with this we've implemented our database using MongoDB. Many of these use cases interact with the database. At this point in time, nothing can be edited. Comments cannot be edited or deleted either. Note: we are allowing two items to have the same name. The indexing in the database is not based off of the name so this should not pose any issues for the code.  
-### (6) Who did what: who paired with who, which part is implemented by which pair
-Main pairs:
-* Charlie and William - Sign In and MapKit
-* Jordan and Sydney - add comment, create item and delete item and testing update
-* Ellen and Ruxi - UI/UX (with help from Jordan) 
-* Steven and Madhav - Backend/Database (this has a lot of overlap with the functionality implemented by the other teams as we isolated the database calls) 
+For the unit tests, we have two main folders: FreeFinder4BTests and FreeFinder4BUITests. 
 
-However, towards the end it became more of a group effort in finishing up the app. 
-### (7) Changes: design changes or unit test changes from earlier milestones
-We are not implementing the ability to upload a photo in this iteration. For this iteration, we've made the counter fixed at one. Incrementing this and chainging it will come in the later iteration. For the classes, in general, for every function that requires database access we have a new function that is db_function that just handles the database side. In addition, we added comment and create_item to the user class. Comment and sign_out now return boolean and create_item (under user) returns the Item if it is successfully added. We were not able to get google sign in to work (we ran into a ton of errors related to this) so we've implemented a simpler sign in feature where the user just enters an email which must be a @uchicago.edu email. We also added a AppData class that contains the data for the app namely the list of items and the user. It also has functions to get all the items from the database, refresh the items list, and fetch user from the database. For the testing, most of the test cases are the same but since we changed databases, the implementation of the testing has changed. 
+FreeFinder4BTests contains the following files:
+- AppDataTests.swift: tests filtering by type
+- FreeFinders4B.swift: tests user and item related functions as well as filtering by distance from user
+- LocalDeviceTests.swift: tests local user related functions
 
-Iteration 2 will (hopefully) include the following features:
-* Notifications (and preferences)
-* Filtering
-* UI/UX Improvements
-* Sign out
-* Sign in UI connection 
-* Counter/quantity functionality
-* Adding photos (?) -- we are unsure if we can get the capability to store images somewhere, so this feature might be dropped
-### (8) Other information 
+FreeFinder4BUITests contains our UI unit tests

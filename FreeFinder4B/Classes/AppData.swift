@@ -4,8 +4,8 @@ import SwiftUI
 import RealmSwift
 
 class AppData {
-    var items: [Item] = [];
-    var mapItems: [Item] = [];
+    var items: [Item] = []; // everything in DB
+    var mapItems: [Item] = []; // what is communicated to UI
     var currentFilter: String = ""; // "" || "distance" || "tag"
     var user: User;
     
@@ -28,6 +28,10 @@ class AppData {
     func filterMapItems(distance: Int) { // polymorphism - this one will be used for distance
         self.currentFilter = "tag";
         // finish this function
+    }
+    
+    func sortMapItemsByDist(){
+        //TODO: sort mapItems by distance
     }
     
     func filterMap() {
