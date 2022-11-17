@@ -4,8 +4,8 @@ import SwiftUI
 import RealmSwift
 
 class AppData {
-    var items: [Item] = [];
-    var mapItems: [Item] = [];
+    var items: [Item] = []; // everything in DB
+    var mapItems: [Item] = []; // what is communicated to UI
     var currentFilter: String = ""; // "" || "distance" || "tag"
     var user: User;
     
@@ -30,6 +30,10 @@ class AppData {
         // finish this function
     }
     
+    func sortMapItemsByDist(){
+        //TODO: sort mapItems by distance
+    }
+    
     func filterMap() {
         self.currentFilter = "";
         self.mapItems = self.items;
@@ -39,7 +43,7 @@ class AppData {
         var res: [Item] = [];
         do {
             let app = App(id: APP_ID);
-            let user = try await app.login(credentials: Credentials.anonymous);
+            let _ = try await app.login(credentials: Credentials.anonymous);
             
             // fetch the DB
             let client = app.currentUser!.mongoClient("mongodb-atlas")
@@ -83,33 +87,5 @@ class AppData {
             creator_email: creator_email,
             id: id
         )
-    }
-    
-    func db_fetch_user(email: String) async -> User? {
-        var res: User? = nil;
-        do {
-            let app = App(id: APP_ID);
-            let mongo_user = try await app.login(credentials: Credentials.anonymous);
-            // fetch the DB
-            let client = app.currentUser!.mongoClient("mongodb-atlas")
-            let database = client.database(named: "freeFinder")
-            let users = database.collection(withName: "users")
-            
-            let potentialUser: Document = ["email" : AnyBSON(stringLiteral: email)];
-            let user = try await users.findOneDocument(filter: potentialUser);
-            if (user == nil) {
-                print("User email is not currently registered in database.")
-                return res;
-            }
-            print("Account in the database: \(String(describing: user))")
-            let id = ((user?["_id"]!!)?.objectIdValue!)!;
-            let temp_user = User(email: email, id: id);
-            
-            self.user = temp_user;
-        } catch {
-            print("Failed to fetch the user: \(error.localizedDescription)")
-        }
-        
-        return res;
     }
 }
