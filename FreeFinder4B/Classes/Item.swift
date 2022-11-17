@@ -58,7 +58,6 @@ class Item: NSObject, MKAnnotation{
     
     func db_add_item() async -> ObjectId {
         if (self.id == ObjectId()) { return self.id }; // if the object has an id, its already in the DB
-        
         var res: ObjectId = ObjectId();
         do {
             let items: RLMMongoCollection = await db_get_items_collection()!
