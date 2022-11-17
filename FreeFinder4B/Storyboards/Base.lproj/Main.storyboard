@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IlL-4V-n3G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IlL-4V-n3G">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -108,7 +108,7 @@
                     <connections>
                         <segue destination="pTp-GR-vbi" kind="relationship" relationship="viewControllers" id="bd5-7f-p1w"/>
                         <segue destination="upD-7k-4Op" kind="relationship" relationship="viewControllers" id="xnJ-ht-Umn"/>
-                        <segue destination="gwB-3i-gSe" kind="relationship" relationship="viewControllers" id="6dx-2R-9Q7"/>
+                        <segue destination="DKb-t0-r9g" kind="relationship" relationship="viewControllers" id="QI5-mc-WVB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPJ-eh-li7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -237,61 +237,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rjb-S9-1cZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2217" y="-1676"/>
-        </scene>
-        <!--ProfileView-->
-        <scene sceneID="cJ7-0U-PAS">
-            <objects>
-                <viewController storyboardIdentifier="ProfileView" title="ProfileView" id="gwB-3i-gSe" customClass="ProfileViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FYQ-RA-6xM">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rW3-dC-aQj">
-                                <rect key="frame" x="36" y="140" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="example@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24T-4g-ypR">
-                                <rect key="frame" x="154" y="187" width="200" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2b7-JG-S6J">
-                                <rect key="frame" x="154" y="150" width="200" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGg-Nn-xIo">
-                                <rect key="frame" x="142" y="205" width="106" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Edit Profile"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vh5-l7-v3y">
-                                <rect key="frame" x="284" y="47" width="90" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Sign Out"/>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="NXQ-cI-HRK"/>
-                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle" catalog="system" id="018-lZ-F3R"/>
-                    <connections>
-                        <outlet property="editProfile" destination="uGg-Nn-xIo" id="rtk-zu-Xui"/>
-                        <outlet property="email" destination="24T-4g-ypR" id="KFi-il-Gix"/>
-                        <outlet property="name" destination="2b7-JG-S6J" id="kzk-Ae-yuP"/>
-                        <outlet property="profileImage" destination="rW3-dC-aQj" id="Iwk-rY-ptO"/>
-                        <outlet property="signOut" destination="Vh5-l7-v3y" id="TH0-Zi-Qs4"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zgc-cO-ivX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2217" y="-866"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="QHS-sM-fga">
@@ -464,9 +409,47 @@
             </objects>
             <point key="canvasLocation" x="-249" y="31"/>
         </scene>
+        <!--ProfileView-->
+        <scene sceneID="XL8-OC-dFg">
+            <objects>
+                <viewController storyboardIdentifier="ProfileView" title="ProfileView" id="DKb-t0-r9g" customClass="ProfileViewController" customModule="FreeFinder4B" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PaH-JR-qa9">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="example@email.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXx-M7-AaG">
+                                <rect key="frame" x="48" y="192" width="295" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9O-N1-fMt">
+                                <rect key="frame" x="150" y="220" width="90" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOut:" destination="DKb-t0-r9g" eventType="touchUpInside" id="U1z-oM-Uuj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WAU-Bh-h3A"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle" catalog="system" id="3WM-4S-Q4X"/>
+                    <connections>
+                        <outlet property="email" destination="TXx-M7-AaG" id="SKk-3g-AYc"/>
+                        <outlet property="signOut" destination="x9O-N1-fMt" id="OiR-yb-9J8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qiU-7g-QBC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2217" y="-786"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BZw-bT-c8u"/>
+        <segue reference="cNu-SC-ak5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGrayColor"/>
     <resources>
