@@ -12,6 +12,15 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         loadMap();
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refresh()
+    }
+    
+    @IBAction func refreshButton(_ sender: Any) {
+        refresh()
+    }
+    
     func addCurrLocation(with location: CLLocation) {
         let currLocation = MKPointAnnotation()
         currLocation.coordinate = location.coordinate
@@ -23,7 +32,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         if (mapView != nil) {
             view.insetsLayoutMarginsFromSafeArea = false
             Task{
-                await refresh();
+                refresh();
                 // get location of user
                 LocationManager.shared.getUserLocation { [weak self] location in
                     DispatchQueue.main.async {
@@ -46,18 +55,14 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         creator_email: "mongodb@gmail.com"
     );
     
-    func refresh() async -> [Item] {
-        let user = User(email: "mongodb@gmail.com");
-        await user.db_add_user()
-        let observer = await AppData(user: user);
+    func refresh(){
         mapView!.removeAnnotations(mapView!.annotations)
-        let items = await observer.db_get_all_items();
+        let items = APP_DATA!.mapItems
         for item in items{
             mapView.addAnnotation(item)
         }
-
         mapView.addAnnotation(item_test);
-        return items
+        return
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)-> MKAnnotationView? {
