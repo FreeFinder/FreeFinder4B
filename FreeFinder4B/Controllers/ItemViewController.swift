@@ -35,6 +35,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             Task{
                 let did_decr = await passed_item.db_decrement_quantity(deviceLocation: item_location)
+
                 
                 if(did_decr){
                     passed_item.counter = passed_item.counter - 1;
@@ -51,6 +52,34 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    func delete_item(alertAction: UIAlertAction) {
+        Task{
+            await passed_item.db_delete_item();
+            let user = User(email: "mongodb@gmail.com");
+            await user.db_add_user()
+            let observer = await AppData(user: user);
+            list_items = await observer.db_get_all_items();
+            
+            
+            presentingViewController?.viewWillAppear(true);
+            self.dismiss(animated: true);
+        }
+    }
+    
+    @IBAction func deletePostPressed(_ sender: Any) {
+        Task{
+            let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this post?", preferredStyle: .alert);
+            
+            let ok = UIAlertAction(title: "Confirm", style: .default, handler: delete_item)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            dialogMessage.addAction(ok)
+            dialogMessage.addAction(cancel)
+            
+            self.present(dialogMessage, animated: true, completion: nil)
+        }
+    }
     
     var itemcomments = [""];
     var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "", counter: 0);
@@ -64,6 +93,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var newComment: UITextField!
     @IBOutlet weak var itemQuantity: UILabel!
     @IBOutlet weak var decrement: UIButton!
+    @IBOutlet weak var deleteItem: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

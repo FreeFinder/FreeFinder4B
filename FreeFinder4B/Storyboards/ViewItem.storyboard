@@ -16,6 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMm-DZ-7jh">
+                                <rect key="frame" x="300" y="360" width="55" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="minus.rectangle" catalog="system">
+                                    <color key="baseForegroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="decrementCounterPushed:" destination="6cx-I7-tio" eventType="touchUpInside" id="kS9-h0-vwf"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkn-fb-bA6">
                                 <rect key="frame" x="19" y="70" width="336" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -120,15 +131,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMm-DZ-7jh">
-                                <rect key="frame" x="300" y="360" width="55" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObJ-Zh-bJL">
+                                <rect key="frame" x="266" y="28" width="112" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="minus.rectangle" catalog="system">
+                                <buttonConfiguration key="configuration" style="tinted" title="Delete Post">
                                     <color key="baseForegroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="decrementCounterPushed:" destination="6cx-I7-tio" eventType="touchUpInside" id="kS9-h0-vwf"/>
+                                    <action selector="deletePostPressed:" destination="6cx-I7-tio" eventType="touchUpInside" id="him-J0-Fr4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -137,6 +148,7 @@
                     </view>
                     <connections>
                         <outlet property="decrement" destination="dMm-DZ-7jh" id="o6f-9J-25p"/>
+                        <outlet property="deleteItem" destination="ObJ-Zh-bJL" id="rqM-Vo-h5E"/>
                         <outlet property="exit" destination="isc-Gg-qas" id="Ogt-no-zih"/>
                         <outlet property="itemDescription" destination="hMq-M7-DPP" id="3Hi-FS-hNS"/>
                         <outlet property="itemLocation" destination="MIM-Ir-NHF" id="NaZ-iW-rZr"/>
@@ -225,6 +237,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
