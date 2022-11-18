@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JtJ-pD-0Wt">
-                                <rect key="frame" x="1" y="768" width="388" height="50"/>
+                                <rect key="frame" x="0.0" y="768" width="389" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
@@ -87,10 +87,10 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="E2c-YW-6eK"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gPR-Ik-zim"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIM-Ir-NHF">
-                                <rect key="frame" x="23" y="166" width="332" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIM-Ir-NHF">
+                                <rect key="frame" x="19" y="365" width="90" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -107,21 +107,41 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description to be inputed" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMq-M7-DPP">
-                                <rect key="frame" x="21" y="215" width="336" height="176"/>
+                                <rect key="frame" x="19" y="150" width="336" height="176"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity to be inputed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyw-3j-cpU">
+                                <rect key="frame" x="92" y="367" width="170" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMm-DZ-7jh">
+                                <rect key="frame" x="300" y="360" width="55" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="minus.rectangle" catalog="system">
+                                    <color key="baseForegroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="decrementCounterPushed:" destination="6cx-I7-tio" eventType="touchUpInside" id="kS9-h0-vwf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pzE-2L-gDZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="decrement" destination="dMm-DZ-7jh" id="o6f-9J-25p"/>
                         <outlet property="exit" destination="isc-Gg-qas" id="Ogt-no-zih"/>
                         <outlet property="itemDescription" destination="hMq-M7-DPP" id="3Hi-FS-hNS"/>
                         <outlet property="itemLocation" destination="MIM-Ir-NHF" id="NaZ-iW-rZr"/>
                         <outlet property="itemName" destination="jkn-fb-bA6" id="qZW-eT-kZO"/>
+                        <outlet property="itemQuantity" destination="Oyw-3j-cpU" id="nWh-Ha-U7p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Gu-Nj-pIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -197,6 +217,7 @@
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
         <image name="map" catalog="system" width="128" height="112"/>
+        <image name="minus.rectangle" catalog="system" width="128" height="93"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">

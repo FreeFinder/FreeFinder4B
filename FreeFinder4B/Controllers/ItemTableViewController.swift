@@ -12,7 +12,8 @@ class ItemsTableViewController: UITableViewController {
         type: "Food",
         detail: "Free Burritos as Reg",
         coordinate: CLLocationCoordinate2D(latitude: 23, longitude: 54),
-        creator_email: "mongodb@gmail.com"
+        creator_email: "mongodb@gmail.com",
+        counter: 2
     );
     
     let item_test1 = Item(
@@ -20,7 +21,8 @@ class ItemsTableViewController: UITableViewController {
         type: "Food",
         detail: "Reg",
         coordinate: CLLocationCoordinate2D(latitude: 23, longitude: 54),
-        creator_email: "mongodb@gmail.com"
+        creator_email: "mongodb@gmail.com",
+        counter: 10
     );
     
     let item_test2 = Item(
@@ -28,16 +30,17 @@ class ItemsTableViewController: UITableViewController {
         type: "Clothes",
         detail: "54th and woodlawn",
         coordinate: CLLocationCoordinate2D(latitude: 23, longitude: 54),
-        creator_email: "mongodb@gmail.com"
+        creator_email: "mongodb@gmail.com",
+        counter: 5
     );
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-       items.append(item_test);
-       items.append(item_test1);
-       items.append(item_test2);
+       //items.append(item_test);
+       //items.append(item_test1);
+       //items.append(item_test2);
         
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: animated)
@@ -45,9 +48,11 @@ class ItemsTableViewController: UITableViewController {
         //TODO: here we need to implement getting all items using refresh, once adding item works.
         
       
-        //Task{
-           // items = await refresh();
-        //}
+        Task{
+            //let list_items = await db_get_all_items();
+            //let list_items = await refresh();
+            //items.append(contentsOf: list_items);
+        }
     }
     
     override func viewDidLoad() {

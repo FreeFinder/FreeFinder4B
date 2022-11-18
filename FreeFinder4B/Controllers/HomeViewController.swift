@@ -8,7 +8,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        //mapView.showsZoomControls = true;
+        loadMap();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        mapView.delegate = self
         loadMap();
     }
     
@@ -43,7 +48,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         type: "Food",
         detail: "Free Burritos as Reg",
         coordinate: CLLocationCoordinate2D(latitude: 37.33, longitude: -122.02),
-        creator_email: "mongodb@gmail.com"
+        creator_email: "mongodb@gmail.com",
+        counter: 4
     );
     
     func refresh() async -> [Item] {

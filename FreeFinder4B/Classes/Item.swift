@@ -10,8 +10,8 @@ class Item: NSObject, MKAnnotation{
 	let coordinate: CLLocationCoordinate2D
 	var comments: [String]
 	let detail: String
-	private let creator_email: String
-	let counter: Int
+    let creator_email: String
+	var counter: Int
 	var id: ObjectId
 	
 	init(
@@ -21,7 +21,7 @@ class Item: NSObject, MKAnnotation{
 		coordinate: CLLocationCoordinate2D,
 		creator_email: String,
 		comments: [String] = [],
-		counter: Int = 1,
+		counter: Int,
 		id: ObjectId = ObjectId()
 	)
 	{
