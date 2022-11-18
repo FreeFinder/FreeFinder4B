@@ -73,7 +73,8 @@ class User {
                 type: type,
                 detail: detail,
                 coordinate: coordinate,
-                creator_email: self.email
+                creator_email: self.email,
+                counter: quantity
         )
         let _ = await item.db_add_item();
         return item;

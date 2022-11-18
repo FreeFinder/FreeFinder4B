@@ -5,15 +5,85 @@ import Foundation
 class ItemViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBAction func exitButtonPushed(_ sender: UIButton) {
+        //self.viewWillDisappear(true);
+        presentingViewController?.viewWillAppear(true);
+        //esentially i want to make sure that when we exit the item view controllers we always update the controller we came from (especially if we've made changes to it).
+        
         self.dismiss(animated: true);
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true);
     }
     
     @IBAction func exitAddCommentPushed(_ sender: UIButton) {
         self.dismiss(animated: true);
     }
     
+    @IBAction func decrementCounterPushed(_ sender: UIButton) {
+        if(passed_item_counter == 0){
+            let alert = CustomAlertController(title: "Cannot Decrement", message: "The quantity of this item is alredy 0, cannot decrement more")
+            DispatchQueue.main.async {
+                self.present(alert.showAlert(), animated: true, completion: nil)
+            }
+        }else{
+            let locManager = CLLocationManager()
+            locManager.requestWhenInUseAuthorization()
+            var currentLocation: CLLocation!
+            currentLocation = locManager.location
+            let item_location = currentLocation.coordinate
+            
+            Task{
+                let did_decr = await passed_item.db_decrement_quantity(deviceLocation: item_location)
+
+                
+                if(did_decr){
+                    passed_item.counter = passed_item.counter - 1;
+                    itemQuantity?.text = String(passed_item_counter);
+                    self.viewDidLoad();
+                    self.viewWillAppear(true);
+                }else{
+                    let alert = CustomAlertController(title: "Cannot Decrement", message: "You are not currently near this item.")
+                    DispatchQueue.main.async {
+                        self.present(alert.showAlert(), animated: true, completion: nil)
+                    }
+                }
+                
+            }
+        }
+    }
+    func delete_item(alertAction: UIAlertAction) {
+        Task{
+            await passed_item.db_delete_item();
+            let user = User(email: "mongodb@gmail.com");
+            await user.db_add_user()
+            let observer = await AppData(user: user);
+            list_items = await observer.db_get_all_items();
+            
+            
+            presentingViewController?.viewWillAppear(true);
+            self.dismiss(animated: true);
+        }
+    }
+    
+    @IBAction func deletePostPressed(_ sender: Any) {
+        Task{
+            let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this post?", preferredStyle: .alert);
+            
+            let ok = UIAlertAction(title: "Confirm", style: .default, handler: delete_item)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            dialogMessage.addAction(ok)
+            dialogMessage.addAction(cancel)
+            
+            self.present(dialogMessage, animated: true, completion: nil)
+        }
+    }
+    
     var itemcomments = [""];
-    var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "");
+    var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "", counter: 0);
+    var passed_item_counter = 0;
     
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var itemLocation: UILabel!
@@ -21,6 +91,9 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var addComment: UIButton!
     @IBOutlet weak var newComment: UITextField!
+    @IBOutlet weak var itemQuantity: UILabel!
+    @IBOutlet weak var decrement: UIButton!
+    @IBOutlet weak var deleteItem: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +101,15 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
         // TODO: connect to data
         itemDescription?.text = passed_item.detail;
         itemName?.text = passed_item.name;
-                
+        itemQuantity?.text = String(passed_item.counter);
+        passed_item_counter = passed_item.counter;
                 
         let lat = String(passed_item.coordinate.latitude);
         let long = String(passed_item.coordinate.longitude);
         let latloc = "Latitude: " + lat;
         let longloc = ", Longitude: " + long;
         let location = latloc + longloc;
-        itemLocation?.text = location;
+       // itemLocation?.text = location;
         
         
         /*
@@ -86,5 +160,4 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-
 }

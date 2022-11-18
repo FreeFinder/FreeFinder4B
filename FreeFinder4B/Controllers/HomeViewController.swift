@@ -8,7 +8,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        //mapView.showsZoomControls = true;
+        loadMap();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        mapView.delegate = self
         loadMap();
     }
     
@@ -38,25 +43,16 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    let item_test = Item(
-        name: "Burrito",
-        type: "Food",
-        detail: "Free Burritos as Reg",
-        coordinate: CLLocationCoordinate2D(latitude: 37.33, longitude: -122.02),
-        creator_email: "mongodb@gmail.com"
-    );
-    
     func refresh() async -> [Item] {
         let user = User(email: "mongodb@gmail.com");
         await user.db_add_user()
         let observer = await AppData(user: user);
         mapView!.removeAnnotations(mapView!.annotations)
         let items = await observer.db_get_all_items();
+        list_items = items;
         for item in items{
             mapView.addAnnotation(item)
         }
-
-        mapView.addAnnotation(item_test);
         return items
     }
     
