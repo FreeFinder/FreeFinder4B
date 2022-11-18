@@ -63,29 +63,4 @@ class AppData {
         
         return res;
     }
-    
-    private func parseDbItem(dbItem: Document) -> Item {
-        let id: ObjectId = (dbItem["_id"]!!).objectIdValue!;
-        let name = (dbItem["name"]!!).stringValue!;
-        let type = (dbItem["type"]!!).stringValue!;
-        let details = (dbItem["details"]!!).stringValue!;
-        
-        let longitude = (dbItem["longitude"]!!).stringValue!;
-        let latitude = (dbItem["latitude"]!!).stringValue!;
-        let coordinates = CLLocationCoordinate2D(
-            latitude: CLLocationDegrees(floatLiteral: Double(latitude)!),
-            longitude: CLLocationDegrees(floatLiteral: Double(longitude)!)
-        )
-        
-        let creator_email = (dbItem["creator_email"]!!).stringValue!;
-        
-        return Item(
-            name: name,
-            type: type,
-            detail: details,
-            coordinate: coordinates,
-            creator_email: creator_email,
-            id: id
-        )
-    }
 }
