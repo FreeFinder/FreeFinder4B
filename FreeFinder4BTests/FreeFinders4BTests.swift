@@ -132,6 +132,8 @@ final class FreeFinders4BTests: XCTestCase {
         
     }
     
+	// [TODO] => fix this for adjusting to removal of db_get_comment
+	
 //    func test_comment() async throws { // EXPECT TO FAIL, AS NOT FULLY IMPL
 //        //test cases are the same but the syntax and coding has changed due to changing our database from firebase to MongoDB and separating the use cases functions and database calls
 //        
