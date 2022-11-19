@@ -21,7 +21,7 @@ class Item: NSObject, MKAnnotation{
 		coordinate: CLLocationCoordinate2D,
 		creator_email: String,
 		comments: [String] = [],
-		counter: Int,
+		counter: Int = 1,
 		id: ObjectId = ObjectId()
 	)
 	{

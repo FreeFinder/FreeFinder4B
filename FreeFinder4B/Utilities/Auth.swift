@@ -1,6 +1,13 @@
 import Foundation
+import UIKit
 import RealmSwift
 
+
+func clearConfig() { // RESET ALL CONTEXTS THEN MOVE TO START SCREEN
+	DEVICE_DATA.removeLocalUser();
+	USER = nil;
+	APP_DATA = nil;
+}
 
 func validEmail(email: String) -> Bool {
 	return email.hasSuffix("@uchicago.edu") && email.count > 13;

@@ -8,13 +8,13 @@ class Device {
     var defaults = UserDefaults.standard;
     
     init() {
-        let local_email: String? = defaults.string(forKey: "email");
-        let local_id: String? = defaults.string(forKey: "id");
+        let localEmail: String? = defaults.string(forKey: "email");
+        let localId: String? = defaults.string(forKey: "id");
         
-        if (local_email == nil) { return }
+        if (localEmail == nil) { return }
         do {
-            self.id = try ObjectId(string: local_id!);
-            self.email = local_email;
+            self.id = try ObjectId(string: localId!);
+            self.email = localEmail;
         }
         catch { print("Could not handle the local user Id"); }
     }
@@ -34,8 +34,11 @@ class Device {
         defaults.set(id, forKey: "id");
     }
 	
-	// [TODO] removeLocalUser()
 	func removeLocalUser() {
+		email = nil;
+		id = ObjectId();
 		
+		defaults.set(nil, forKey: "email");
+		defaults.set(nil, forKey: "id");
 	}
 }
