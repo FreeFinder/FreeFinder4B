@@ -6,7 +6,36 @@ import MapKit
 var list_items: [Item] = [];
 
 class ItemsTableViewController: UITableViewController {
+    @IBOutlet weak var button: UIBarButtonItem!
     var items: [Item] = [];
+    
+    private lazy var food = UIAction(title: "Food",attributes: [], state: .off) { action in
+        APP_DATA!.filterMapItems(tag: "Food");
+        }
+        
+        private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: .off) { action in
+            APP_DATA!.filterMapItems(tag: "Clothing");
+        }
+        
+        private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: .off) { action in
+            APP_DATA!.filterMapItems(tag: "Furniture");
+        }
+        
+        private lazy var other = UIAction(title: "Other", attributes: [], state: .off) { action in
+            APP_DATA!.filterMapItems(tag: "Other");
+        }
+        
+    private lazy var distance = UIAction(title: "Closest to Me"){ _ in
+        APP_DATA!.sortMapItemsByDist();
+    }
+    
+    private lazy var elements: [UIAction] = [food, clothing, furniture, other]
+        private lazy var menu = UIMenu(title: "Category", children: elements)
+    
+    private lazy var deferredMenu = UIDeferredMenuElement { (menuElements) in
+        let menu = UIMenu(title: "Distance", options: .displayInline,  children: [self.distance])
+            menuElements([menu])
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true);
@@ -23,6 +52,9 @@ class ItemsTableViewController: UITableViewController {
         super.viewDidLoad();
         items = list_items;
         tableView.reloadData();
+        
+        menu = menu.replacingChildren([food, clothing, furniture, other, deferredMenu])
+                navigationItem.rightBarButtonItem?.menu = menu
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -30,7 +62,13 @@ class ItemsTableViewController: UITableViewController {
         items = [];
         tableView.reloadData()
     }
-
+    
+    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
+        if(sender.selectedSegmentIndex == 1){
+            
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
