@@ -97,6 +97,7 @@ class Item: NSObject, MKAnnotation{
 				"name": AnyBSON(stringLiteral: self.name),
 				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
 				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
+                //"_id": .objectId(self.id)
 			]
 			
 			let document = try await items.findOneDocument(filter: item);

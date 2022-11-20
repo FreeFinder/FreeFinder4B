@@ -174,19 +174,20 @@ final class FreeFinders4BTests: XCTestCase {
 		
 		
 		let v_item = await test_user3.create_item(
-			name: "t_item",
+			name: "t_item2",
 			type: "Food",
 			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
+			coordinate: CLLocationCoordinate2DMake(41.797, -87.593),
 			quantity: 9
 		)
 		
 		//checks in db
 		let res = await (v_item!.db_item_exists())
 		XCTAssertTrue(res)
-		
+        let validCoordinates = CLLocationCoordinate2DMake(41.797, -87.593);
+
 		//deletes item
-		await v_item!.delete_Item()
+		await v_item!.delete_Item(deviceLocation: validCoordinates)
 		
 		//checks not in db
 		let res2 = await (v_item!.db_item_exists())
@@ -220,7 +221,7 @@ final class FreeFinders4BTests: XCTestCase {
 		
 		// ADD VALID ITEM TO DB
 		let validItem: Item = Item(
-			name: "t_item",
+			name: "t_item3",
 			type: "test_type",
 			detail: "test_detail",
 			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
