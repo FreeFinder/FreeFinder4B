@@ -65,16 +65,30 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 	}
 	func delete_item(alertAction: UIAlertAction) {
+        let locManager = CLLocationManager()
+        locManager.requestWhenInUseAuthorization()
+        var currentLocation: CLLocation!
+        currentLocation = locManager.location
+        let item_location = currentLocation.coordinate
+        
 		Task{
-			await passed_item.delete_Item();
-			let user = User(email: "mongodb@gmail.com");
-			await user.db_add_user()
-			let observer = await AppData(user: user);
-			list_items = await observer.db_get_all_items();
-			
-			
-			presentingViewController?.viewWillAppear(true);
-			self.dismiss(animated: true);
+			let did_del = await passed_item.delete_Item(deviceLocation: item_location);
+            if did_del{
+                let user = User(email: "mongodb@gmail.com");
+                await user.db_add_user()
+                let observer = await AppData(user: user);
+                list_items = await observer.db_get_all_items();
+                
+                
+                presentingViewController?.viewWillAppear(true);
+                self.dismiss(animated: true);
+            }
+            else {
+                let alert = CustomAlertController(title: "Cannot Delete", message: "You are not currently near this item.")
+                DispatchQueue.main.async {
+                    self.present(alert.showAlert(), animated: true, completion: nil)
+                }
+            }
 		}
 	}
 	

@@ -29,7 +29,7 @@ final class MongoDBTests: XCTestCase {
 			coordinates: validItem.coordinate
 		)
 		XCTAssertEqual(beforeDec?.counter, 3);
-		var _ = await validItem.db_decrement_quantity(
+		var _ = await validItem.decrement_quantity(
 			deviceLocation: CLLocationCoordinate2DMake(0.00, 0.00)
 		)
 		let afterDec = await db_fetch_item(

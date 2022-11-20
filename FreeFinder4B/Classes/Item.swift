@@ -89,7 +89,7 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_item_exists() async -> Bool {
 		var res = false;
-		
+		print("running")
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!
 			
@@ -100,11 +100,12 @@ class Item: NSObject, MKAnnotation{
 			]
 			
 			let document = try await items.findOneDocument(filter: item);
+            
 			if (document == nil) {
 				print("Could not find this document in the database!");
 			} else {
-//				print("This item exists in the database: \(String(describing: document))")
-				res = true;
+				print("This item exists in the database: \(String(describing: document))")
+                res = true;
 			}
 		} catch {
 //			print("Checking whether an item existed failed, inconclusive: \(error.localizedDescription)")
@@ -136,11 +137,16 @@ class Item: NSObject, MKAnnotation{
 		return res;
 	}
 	
-	func delete_Item() async { // deletes if item in database
-		if (await self.db_item_exists()){
+	func delete_Item(deviceLocation: CLLocationCoordinate2D) async -> Bool{
+        if (itemTooFar(location: deviceLocation)) {
+            return false // deletes if item in database
+        }
+        else if (await self.db_item_exists()) {
 			await db_delete_item();
 			await refresh()
-		}
+            return true
+        }
+        return true 
 	}
 	
 	private func itemTooFar(location: CLLocationCoordinate2D) -> Bool {
@@ -228,8 +234,9 @@ class Item: NSObject, MKAnnotation{
 		 */
         
         if (itemTooFar(location: deviceLocation)) { return false }; // Too far away to interact
+        if (!(await self.db_item_exists())){ return false }
         if (self.counter == 1){
-            await self.delete_Item()
+            await self.delete_Item(deviceLocation: deviceLocation)
             return true
         }
         else{

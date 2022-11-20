@@ -174,7 +174,7 @@ final class FreeFinders4BTests: XCTestCase {
 		
 		
 		let v_item = await test_user3.create_item(
-			name: "test_item",
+			name: "t_item",
 			type: "Food",
 			detail: "test_detail",
 			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
@@ -214,13 +214,13 @@ final class FreeFinders4BTests: XCTestCase {
 		)
 		let validCoordinates = CLLocationCoordinate2DMake(90.000, 135.000);
 		// [CASE] item does not exist
-		var didDecrement = await nonexistentItem.db_decrement_quantity(deviceLocation: validCoordinates);
+		var didDecrement = await nonexistentItem.decrement_quantity(deviceLocation: validCoordinates);
 		XCTAssertFalse(didDecrement)
 		
 		
 		// ADD VALID ITEM TO DB
 		let validItem: Item = Item(
-			name: "test_item",
+			name: "t_item",
 			type: "test_type",
 			detail: "test_detail",
 			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
@@ -230,11 +230,11 @@ final class FreeFinders4BTests: XCTestCase {
 		let _ = await validItem.db_add_item();
 		
 		// [CASE] item quantity > 1
-		didDecrement = await validItem.db_decrement_quantity(deviceLocation: validCoordinates);
+		didDecrement = await validItem.decrement_quantity(deviceLocation: validCoordinates);
 		XCTAssertTrue(didDecrement)
 		
 		// [CASE] item quantity == 1
-		didDecrement = await validItem.db_decrement_quantity(deviceLocation: validCoordinates);
+		didDecrement = await validItem.decrement_quantity(deviceLocation: validCoordinates);
 		XCTAssertTrue(didDecrement) // will delete item from db
 		let itemInDB = await validItem.db_item_exists()
 		XCTAssertFalse(itemInDB)
@@ -253,7 +253,7 @@ final class FreeFinders4BTests: XCTestCase {
 		let invalidCoordinates = CLLocationCoordinate2DMake(0.000, 0.000);
 		
 		// [CASE] device not in range to delete
-		didDecrement = await validItemQ1.db_decrement_quantity(deviceLocation: invalidCoordinates);
+		didDecrement = await validItemQ1.decrement_quantity(deviceLocation: invalidCoordinates);
 		XCTAssertFalse(didDecrement);
 	}
 	
