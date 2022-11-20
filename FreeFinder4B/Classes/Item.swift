@@ -151,11 +151,9 @@ class Item: NSObject, MKAnnotation{
 		return (dist > DECREMENT_DISTANCE);
 	}
 	
-	func db_decrement_quantity(
-		deviceLocation: CLLocationCoordinate2D // have to pass the location of the current device
-	) async -> Bool {
+	func db_decrement_quantity(	) async -> Bool {
 		var res: Bool = false; // whether or not the item is deleted
-		if (itemTooFar(location: deviceLocation)) { return res };
+		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!;
 			
@@ -222,12 +220,26 @@ class Item: NSObject, MKAnnotation{
 		return res;
 	}
 	
-	func decrement_quantity() async -> Bool {
+	func decrement_quantity(deviceLocation: CLLocationCoordinate2D) async -> Bool {
 		/*
-		 [MISC] move the isTooFar funciton check from the db_decrement quantity to here
+		 [MISC] move the isTooFar function check from the db_decrement quantity to here
 		 => purpose is to make the db functions solely have to cover reading/writing
 		 => all validation handling should be handled on frontend + "api" functions
 		 */
-		return false
-	}
+        
+        if (itemTooFar(location: deviceLocation)) { return false }; // Too far away to interact
+        if (self.counter == 1){
+            await self.delete_Item()
+            return true
+        }
+        else{
+            if (await self.db_decrement_quantity()) {
+                self.counter = self.counter - 1
+                return true
+            }
+            else{
+                return false
+            }
+        }
+    }
 }

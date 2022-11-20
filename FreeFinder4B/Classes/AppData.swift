@@ -30,6 +30,11 @@ class AppData {
         // finish this function
     }
     
+    func filterMapItems(distance: Int, tag: String){ // still needs a test
+        self.filterMapItems(distance: distance)
+        self.mapItems = self.mapItems.filter{( $0.type == tag)}
+    }
+    
     func sortMapItemsByDist(){
         //TODO: sort mapItems by distance
     }

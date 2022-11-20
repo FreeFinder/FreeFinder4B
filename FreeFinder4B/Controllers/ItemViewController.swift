@@ -34,14 +34,26 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 			let item_location = currentLocation.coordinate
 			
 			Task{
-				let did_decr = await passed_item.db_decrement_quantity(deviceLocation: item_location)
+                let og_amount = passed_item.counter
+				let did_decr = await passed_item.decrement_quantity(deviceLocation: item_location)
 				
 				
 				if(did_decr){
-					passed_item.counter = passed_item.counter - 1;
-					itemQuantity?.text = String(passed_item_counter);
-					self.viewDidLoad();
-					self.viewWillAppear(true);
+                    if (og_amount == 1){
+                        let user = User(email: "mongodb@gmail.com");
+                        await user.db_add_user()
+                        let observer = await AppData(user: user);
+                        list_items = await observer.db_get_all_items();
+                        
+                        presentingViewController?.viewWillAppear(true);
+                        self.dismiss(animated: true);
+                    }
+                    else{
+                        itemQuantity?.text = String(passed_item_counter);
+                        self.viewDidLoad();
+                        self.viewWillAppear(true);
+                    }
+
 				}else{
 					let alert = CustomAlertController(title: "Cannot Decrement", message: "You are not currently near this item.")
 					DispatchQueue.main.async {
@@ -54,7 +66,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	func delete_item(alertAction: UIAlertAction) {
 		Task{
-			await passed_item.db_delete_item();
+			await passed_item.delete_Item();
 			let user = User(email: "mongodb@gmail.com");
 			await user.db_add_user()
 			let observer = await AppData(user: user);
