@@ -13,6 +13,10 @@ class SignInViewController: UIViewController {
         let emailIsValid = validEmail(email: email);
         if (!emailIsValid) {
             // [TODO] Set Error Text
+            let alert = CustomAlertController(title: "Invalid Email", message: "Inputed email is not valid. Try again")
+            DispatchQueue.main.async {
+                self.present(alert.showAlert(), animated: true, completion: nil)
+            }
             return;
         };
         Task {
@@ -20,6 +24,10 @@ class SignInViewController: UIViewController {
             let userInfo = await db_fetch_user(email: email);
             if (userInfo == nil) { // this user was not in the database
                 // [TODO] Set Error Text
+                let alert = CustomAlertController(title: "Invalid Email", message: "This email is not associated with a pre-existing account. Try signing up first.")
+                DispatchQueue.main.async {
+                    self.present(alert.showAlert(), animated: true, completion: nil)
+                }
                 return;
             }
             
