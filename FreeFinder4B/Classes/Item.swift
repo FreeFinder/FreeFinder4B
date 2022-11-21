@@ -89,18 +89,14 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_item_exists() async -> Bool {
 		var res = false;
+		if (self.id == ObjectId()) { return res; }
 		print("running")
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!
 			
-			let item: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-                //"_id": .objectId(self.id)
-			]
+			let potentialItem: Document = ["_id": AnyBSON(self.id)]
 			
-			let document = try await items.findOneDocument(filter: item);
+			let document = try await items.findOneDocument(filter: potentialItem);
             
 			if (document == nil) {
 				print("Could not find this document in the database!");
@@ -117,15 +113,12 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_delete_item() async -> Bool {
 		var res = false;
+		if (self.id == ObjectId()) { return res; } // the item is already not in db
 		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!
 			
-			let itemQuery: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			]
+			let itemQuery: Document = ["_id": AnyBSON(self.id)]
 			
 			let _ = try await items.deleteOneDocument(filter: itemQuery)
 //			print("Successfully deleted this item \(self.id) from the database");
@@ -160,15 +153,12 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_decrement_quantity(	) async -> Bool {
 		var res: Bool = false; // whether or not the item is deleted
+		if (self.id == ObjectId()) { return res; }
 		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!;
 			
-			let itemQuery: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			];
+			let itemQuery: Document = ["_id": AnyBSON(self.id)];
 			let itemUpdate: Document = [
 				"$set": [
 					"counter": AnyBSON(integerLiteral: self.counter - 1)
@@ -195,15 +185,14 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_add_comment(comment: String) async -> Bool {
 		var res: Bool = false;
+		
+		if (self.id == ObjectId()) { return res; }
 		let prevLength = self.comments.count;
+		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!;
 			
-			let itemQuery: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			];
+			let itemQuery: Document = ["_id": AnyBSON(self.id)];
 			
 			let itemUpdate: Document = ["$push": [
 				"comments": AnyBSON(stringLiteral: comment)

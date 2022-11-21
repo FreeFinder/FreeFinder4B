@@ -5,16 +5,16 @@ import RealmSwift
 import UIKit
 
 func refresh() async -> [Item] {
-    let user = User(email: "mongodb@gmail.com");
-    await user.db_add_user();
-    let observer = await AppData(user: user);
-    if let mainViewController = await UIApplication.shared.keyWindow?.rootViewController as? HomeViewController {await mainViewController.refresh()}
-    return await observer.db_get_all_items()
+	let user = User(email: "mongodb@gmail.com");
+	await user.db_add_user();
+	let observer = await AppData(user: user);
+	if let mainViewController = await UIApplication.shared.keyWindow?.rootViewController as? HomeViewController {
+		await mainViewController.refresh()}
+	return await observer.db_get_all_items()
 }
 
 func db_fetch_item(
-	name: String,
-	coordinates: CLLocationCoordinate2D
+	id: ObjectId
 ) async -> Item? {
 	var res: Item? = nil;
 	do {
@@ -25,11 +25,7 @@ func db_fetch_item(
 		let database = client.database(named: "freeFinder")
 		let items = database.collection(withName: "items");
 		
-		let potentialItem: Document = [
-			"name": AnyBSON(stringLiteral: name),
-			"longitude": AnyBSON(stringLiteral: String(coordinates.longitude)),
-			"latitude": AnyBSON(stringLiteral: String(coordinates.latitude)),
-		]
+		let potentialItem: Document = [ "_id": AnyBSON(id) ]
 		let item = try await items.findOneDocument(filter: potentialItem);
 		if (item == nil) {
 			print("Item information is not currently registered in database.")
