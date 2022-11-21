@@ -8,29 +8,38 @@ var list_items: [Item] = [];
 class ItemsTableViewController: UITableViewController {
     @IBOutlet weak var button: UIBarButtonItem!
     var items: [Item] = [];
+    var categoryFilter = "";
     
-    private lazy var food = UIAction(title: "Food",attributes: [], state: .off) { action in
-        APP_DATA!.filterMapItems(tag: "Food");
-        }
+    private lazy var food = UIAction(title: "Food", attributes: [], state: categoryFilter == "Food" ? .on : .off) { action in
+            print("Food");
+            self.toggleFilter(actionTitle: "Food");
+            self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Food", menu: self.menu);
+    }
         
-        private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: .off) { action in
-            APP_DATA!.filterMapItems(tag: "Clothing");
-        }
+    private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: categoryFilter == "Clothing" ? .on : .off) { action in
+            print("Clothing");
+            self.toggleFilter(actionTitle: "Clothing");
+            self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Clothing", menu: self.menu);
+    }
         
-        private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: .off) { action in
-            APP_DATA!.filterMapItems(tag: "Furniture");
-        }
+    private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: categoryFilter == "Furniture" ? .on : .off) { action in
+        print("Furniture");
+        self.toggleFilter(actionTitle: "Furniture");
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Furniture", menu: self.menu);
+    }
         
-        private lazy var other = UIAction(title: "Other", attributes: [], state: .off) { action in
-            APP_DATA!.filterMapItems(tag: "Other");
-        }
+    private lazy var other = UIAction(title: "Other", attributes: [], state: categoryFilter == "Other" ? .on : .off) { action in
+        print("Other");
+        self.toggleFilter(actionTitle: "Other");
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Other", menu: self.menu);
+    }
         
     private lazy var distance = UIAction(title: "Closest to Me"){ _ in
         APP_DATA!.sortMapItemsByDist();
     }
     
     private lazy var elements: [UIAction] = [food, clothing, furniture, other]
-        private lazy var menu = UIMenu(title: "Category", children: elements)
+    private lazy var menu = UIMenu(title: "Category", children: elements)
     
     private lazy var deferredMenu = UIDeferredMenuElement { (menuElements) in
         let menu = UIMenu(title: "Distance", options: .displayInline,  children: [self.distance])
@@ -48,13 +57,49 @@ class ItemsTableViewController: UITableViewController {
         
     }
     
+    private func toggleFilter(actionTitle: String? = nil){
+        if(categoryFilter == actionTitle){
+            categoryFilter = "";
+        }
+        else{
+            categoryFilter = actionTitle!;
+        }
+        APP_DATA!.filterMapItems(tag: categoryFilter);
+        self.filterItems(filterType: categoryFilter);
+    }
+    
+    private func updateActionState(actionTitle: String? = nil, menu: UIMenu) -> UIMenu {
+        if let actionTitle = actionTitle {
+            menu.children.forEach { action in
+                guard let action = action as? UIAction else {
+                    return
+                }
+                if action.title == actionTitle {
+                    if(action.state == .on){
+                        action.state = .off
+                    }
+                    else{
+                        action.state = .on
+                    }
+                }
+                else{
+                    action.state = .off
+                }
+            }
+        } else {
+            let action = menu.children.first as? UIAction
+            action?.state = .on
+        }
+        return menu
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         items = list_items;
         tableView.reloadData();
         
         menu = menu.replacingChildren([food, clothing, furniture, other, deferredMenu])
-                navigationItem.rightBarButtonItem?.menu = menu
+        navigationItem.leftBarButtonItem?.menu = menu
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,11 +108,6 @@ class ItemsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-        if(sender.selectedSegmentIndex == 1){
-            
-        }
-    }
     
     // MARK: - Table view data source
 
@@ -95,6 +135,14 @@ class ItemsTableViewController: UITableViewController {
         //TODO: here we need to implement getting comments of an item using that function...
         itemVC.passed_item = item_fromtable;
         self.present(itemVC, animated: true, completion: nil);
+    }
+    
+    private func filterItems(filterType: String){
+        items = list_items;
+        if(filterType != ""){
+            items = items.filter{$0.type == filterType}
+        }
+        tableView.reloadData();
     }
     
     

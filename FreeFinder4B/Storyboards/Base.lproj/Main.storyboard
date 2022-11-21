@@ -283,8 +283,15 @@
                     <tabBarItem key="tabBarItem" title="List" image="list.bullet" catalog="system" id="3zH-X6-FoQ"/>
                     <navigationItem key="navigationItem" id="RTq-p3-Rhr">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="slider.horizontal.3" catalog="system" id="NvL-kD-8AP">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="slider.horizontal.3" catalog="system" id="NvL-kD-8AP">
                             <color key="tintColor" systemColor="systemBlueColor"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="JoH-w1-NxY">
+                            <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" systemColor="systemBlueColor"/>
+                            <connections>
+                                <segue destination="NWt-fV-141" kind="presentation" modalPresentationStyle="fullScreen" id="PF8-Bs-olh"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -515,7 +522,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gTg-fg-ggC"/>
+        <segue reference="BZw-bT-c8u"/>
+        <segue reference="PF8-Bs-olh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGrayColor"/>
     <resources>
