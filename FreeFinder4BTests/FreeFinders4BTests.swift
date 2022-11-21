@@ -131,7 +131,7 @@ final class FreeFinders4BTests: XCTestCase {
 			coordinate: CLLocationCoordinate2DMake(0.00, 0.00),
 			creator_email: "mongodb@gmail.com"
 		)
-		let _ = await testItem.db_add_item();
+		let id: ObjectId = await testItem.db_add_item();
 		
 		// false: empty comment with no previous comments
 		var res = await testUser.comment(item: testItem, comment: "");
@@ -141,10 +141,7 @@ final class FreeFinders4BTests: XCTestCase {
 		res = await testUser.comment(item: testItem, comment: "first comment")
 		XCTAssertTrue(res)
 		
-		let fetchedItem = await db_fetch_item(
-			name: testItem.name,
-			coordinates: testItem.coordinate
-		);
+		let fetchedItem = await db_fetch_item(id: id);
 		XCTAssertEqual(fetchedItem?.comments[0], "first comment");
 		
 		let invalidItem = Item(
