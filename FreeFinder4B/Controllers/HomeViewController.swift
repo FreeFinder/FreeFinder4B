@@ -51,22 +51,13 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-    let item_test = Item(
-        name: "Burrito",
-        type: "Food",
-        detail: "Free Burritos as Reg",
-        coordinate: CLLocationCoordinate2D(latitude: 37.33, longitude: -122.02),
-        creator_email: "mongodb@gmail.com"
-    );
-    
+
     func refresh(){
         mapView!.removeAnnotations(mapView!.annotations)
         let items = APP_DATA!.mapItems
         for item in items{
             mapView.addAnnotation(item)
         }
-        mapView.addAnnotation(item_test);
         return
     }
     
