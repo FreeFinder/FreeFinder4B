@@ -11,25 +11,21 @@ class ItemsTableViewController: UITableViewController {
     var categoryFilter = "";
     
     private lazy var food = UIAction(title: "Food", attributes: [], state: categoryFilter == "Food" ? .on : .off) { action in
-            print("Food");
             self.toggleFilter(actionTitle: "Food");
             self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Food", menu: self.menu);
     }
         
     private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: categoryFilter == "Clothing" ? .on : .off) { action in
-            print("Clothing");
             self.toggleFilter(actionTitle: "Clothing");
             self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Clothing", menu: self.menu);
     }
         
     private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: categoryFilter == "Furniture" ? .on : .off) { action in
-        print("Furniture");
         self.toggleFilter(actionTitle: "Furniture");
         self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Furniture", menu: self.menu);
     }
         
     private lazy var other = UIAction(title: "Other", attributes: [], state: categoryFilter == "Other" ? .on : .off) { action in
-        print("Other");
         self.toggleFilter(actionTitle: "Other");
         self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Other", menu: self.menu);
     }

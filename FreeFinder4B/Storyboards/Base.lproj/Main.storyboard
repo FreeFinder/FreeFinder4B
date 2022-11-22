@@ -104,6 +104,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="Ve4-kL-vY5"/>
                     <navigationItem key="navigationItem" id="nnz-Hb-gOx">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="slider.horizontal.3" catalog="system" id="bte-vB-Hr2">
+                            <color key="tintColor" systemColor="systemBlueColor"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="33N-L0-hN2">
                             <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="9" maxX="0.0" maxY="0.0"/>
@@ -522,7 +525,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BZw-bT-c8u"/>
         <segue reference="PF8-Bs-olh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGrayColor"/>

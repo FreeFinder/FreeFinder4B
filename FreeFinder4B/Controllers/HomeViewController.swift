@@ -5,10 +5,84 @@ import CoreLocation
 
 class HomeViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var mapView: MKMapView!
+    var items: [Item] = [];
+    var categoryFilter = "";
+    
+    private lazy var food = UIAction(title: "Food", attributes: [], state: categoryFilter == "Food" ? .on : .off) { action in
+            self.toggleFilter(actionTitle: "Food");
+            self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Food", menu: self.menu);
+    }
+        
+    private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: categoryFilter == "Clothing" ? .on : .off) { action in
+            self.toggleFilter(actionTitle: "Clothing");
+            self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Clothing", menu: self.menu);
+    }
+        
+    private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: categoryFilter == "Furniture" ? .on : .off) { action in
+        self.toggleFilter(actionTitle: "Furniture");
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Furniture", menu: self.menu);
+    }
+        
+    private lazy var other = UIAction(title: "Other", attributes: [], state: categoryFilter == "Other" ? .on : .off) { action in
+        self.toggleFilter(actionTitle: "Other");
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Other", menu: self.menu);
+    }
+        
+    private lazy var distance = UIAction(title: "Closest to Me"){ _ in
+        APP_DATA!.sortMapItemsByDist();
+    }
+    
+    private lazy var elements: [UIAction] = [food, clothing, furniture, other]
+    private lazy var menu = UIMenu(title: "Category", children: elements)
+    
+    private lazy var deferredMenu = UIDeferredMenuElement { (menuElements) in
+        let menu = UIMenu(title: "Distance", options: .displayInline,  children: [self.distance])
+            menuElements([menu])
+        }
+    
+    private func toggleFilter(actionTitle: String? = nil) {
+        if(categoryFilter == actionTitle){
+            categoryFilter = "";
+        }
+        else{
+            categoryFilter = actionTitle!;
+        }
+        APP_DATA!.filterMapItems(tag: categoryFilter);
+        self.filterItems(filterType: categoryFilter);
+    }
+    
+    private func updateActionState(actionTitle: String? = nil, menu: UIMenu) -> UIMenu {
+        if let actionTitle = actionTitle {
+            menu.children.forEach { action in
+                guard let action = action as? UIAction else {
+                    return
+                }
+                if action.title == actionTitle {
+                    if(action.state == .on){
+                        action.state = .off
+                    }
+                    else{
+                        action.state = .on
+                    }
+                }
+                else{
+                    action.state = .off
+                }
+            }
+        } else {
+            let action = menu.children.first as? UIAction
+            action?.state = .on
+        }
+        return menu
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         loadMap();
+        
+        menu = menu.replacingChildren([food, clothing, furniture, other, deferredMenu])
+        navigationItem.leftBarButtonItem?.menu = menu
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -16,6 +90,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         loadMap();
     }
+    
     
     func addCurrLocation(with location: CLLocation) {
         let currLocation = MKPointAnnotation()
@@ -54,6 +129,24 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(item)
         }
         return items
+    }
+    
+    private func filterItems(filterType: String) -> [Item]{
+        mapView!.removeAnnotations(mapView!.annotations)
+        var filteredItems = list_items;
+        if(filterType != ""){
+            filteredItems = list_items.filter{$0.type == filterType}
+            for item in filteredItems{
+                mapView.addAnnotation(item)
+            }
+        }
+        else{
+            for item in list_items{
+                mapView.addAnnotation(item)
+            }
+        }
+        print(filteredItems)
+        return filteredItems
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)-> MKAnnotationView? {
