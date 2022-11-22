@@ -1,18 +1,7 @@
-# FreeFinder Milestone 4A
+# FreeFinder Milestone 4B
 
-## (1) Brief Description about what you plan to do and not do in the second iteration. 
-For our second iteration, we will be focusing on the following additional things. First note since we were unable to successfully connect our frontend to the backend during iteration one, we will focus on ensuring all UI interactions from the first iteration are functional. Now for the second iteration we will be adding a filtering option for both the map and list view. Users can filter items by each individual type (at the moment we will not allow filtering by multiple type options) or by a given distance radius. We will also now let users decrement the quantity field of items and have items automatically deleted once their quantity reaches zero. We hope to also be able to access and utilize each user's device location. Finally, we will be creating an app icon and stylize our interface. 
-
-We have chosen to omit the following features:
-- Notifications
-- Photos 
-- User's own postings page
-- Editing of profile settings (note this is no longer neccessary due to the removal of notifications)
-- Item reservation
-
-
-## (2) A brief description of how the work will be divided among all pairs of people in your team. 
-The work will be divided as follows: 
+## (1) What we did in this iteration
+The work was be divided as follows: 
 1. Connect UI to existing backend successfully - Ellen/Ruxi
 - Sign in
 - Sign out
@@ -32,7 +21,14 @@ The work will be divided as follows:
 7. App Icon
 - Design + implementation -> Ellen
 
-## (3) Unit Test Cases
+We completed most of what was initially proposed with the exception of the following features:
+1. Notifications
+2. Photos
+3. User's own postings page
+4. Editing of profile settings (note this is no longer neccessary due to the removal of notifications)
+5. Item reservation
+
+## (2) Compiling and Running Unit Tests
 Our unit testing can be found in the FreeFinder4BTests and FreeFinder4BUITests folders. See the following instructions to compile and run them. 
 
 ### How to compile
@@ -45,7 +41,18 @@ Press run in XCode (the play button on the top left). Alternatively, do command 
 ### How to run the unit test cases
 Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinders3B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above. 
 
-## (4) Code Directory Structure
+### UI Unit Testing
+FreeFinder4BUITests contains our UI unit tests
+In addition to the coded tests, here are some more UI tests to be tested manualy when the device is built.
+- Pressing create item button should take user to create item page. 
+- Pressing delete item should cause a pop up to appear checking if the user is sure they want to delete the item, pressing confirm will delete the item and the user will be returned to their previous screen while pressing cancel will return the user back to the view item screen. 
+- On the map, the user should be aple to click on an item and press the info button to be taken to the view item screen. 
+- User should be able to move the map around (as one would on google maps or apple maps)
+- Clicking the fliter button on the top left should allow the user to chose how to filter the items which will be reflected in the users view. 
+- If the user is already signed in, upon opening the app they should have a screen saying welcome back. Upon pressing start they should be taken to the map view. 
+- One the bottom of the screen, the user should be able to toggle between different views: map, list and profile. 
+
+## (3) Code Directory Structure
 Within the FreeFinder4B directory, you will find a FreeFinder4B that contains all of our code building the app, with subfolders as follows.
 - App contains all the project entry points and main files. 
 - Classes contains the app schema and all of our class definitions
@@ -60,5 +67,7 @@ FreeFinder4BTests contains the following files:
 - AppDataTests.swift: tests filtering by type
 - FreeFinders4B.swift: tests user and item related functions as well as filtering by distance from user
 - LocalDeviceTests.swift: tests local user related functions
+- MongoDBTests.swift: tests database functions
 
-FreeFinder4BUITests contains our UI unit tests
+## (4) Acceptance Tests
+Try signing in (assuming you are not already signed in). Try creating an item. Try deleting an item (you have to be physically close to the item to delete it). Try decrementing the quantity of an item (you have to be physically close to the item to decrement the quantity). If there is an item whose location is far from you, try deleting the item and an error message should pop up. If the quantity of an item is one and you decrement it, the item will be deleted (as the quantity will be zero). If items have been created, try filtering by type and by distance. Try commenting on an item. Try signing out. Try creating items with invalid fields (for example no title). This should cause a pop up with an error message. Try clicking on an item on the map, this should lead you to the item page. 
