@@ -14,6 +14,8 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true);
+        //items = list_items;
+        //tableView.reloadData();
 	}
 	
 	@IBAction func exitAddCommentPushed(_ sender: UIButton) {
@@ -64,6 +66,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 			}
 		}
 	}
+    
 	func delete_item(alertAction: UIAlertAction) {
         let locManager = CLLocationManager()
         locManager.requestWhenInUseAuthorization()
@@ -129,7 +132,8 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		itemName?.text = passed_item.name;
 		itemQuantity?.text = String(passed_item.counter);
 		passed_item_counter = passed_item.counter;
-		
+        itemcomments = passed_item.comments;
+        
 		let lat = String(passed_item.coordinate.latitude);
 		let long = String(passed_item.coordinate.longitude);
 		let latloc = "Latitude: " + lat;
@@ -166,14 +170,6 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	@IBAction func postCommentButtonPressed(_ sender: UIButton) {
 		//TODO: in iteration 2 need to be able to add comments
-		//let current_user = User//passed_item.creator;
-		//let comment_out = current_user.comment(i: passed_item, comment: newComment.text ?? " ");
-		
-		//currently commenting directly not through user need to figure out how to get user
-		//let comment_out = passed_item.add_Comment(comment: newComment.text ?? "");
-		//if(comment_out == false){
-		//here we can throw an error for a wrong comment
-		// }
 		Task{
 			let valid_comment = await USER?.comment(
 				item: passed_item,
@@ -185,6 +181,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 					self.present(alert.showAlert(), animated: true, completion: nil)
 				}
 			}else{
+                itemcomments.append(newComment?.text ?? "");
 				self.dismiss(animated: true);
 			}
 		}

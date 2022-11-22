@@ -186,7 +186,7 @@ class Item: NSObject, MKAnnotation{
 	func db_add_comment(comment: String) async -> Bool {
 		var res: Bool = false;
 		
-		if (self.id == ObjectId()) { return res; }
+		//if (self.id == ObjectId()) { return res; }
 		let prevLength = self.comments.count;
 		
 		do {
@@ -204,7 +204,7 @@ class Item: NSObject, MKAnnotation{
 			)
 			if (updateResult.matchedCount != 1
 				&& updateResult.modifiedCount != 1) {
-				return res;
+                return res;
 			}
 //			print("Successfully added the comment on \(self.id) from the database");
 			self.comments.append(comment); // add the comment locally to reflect db changes

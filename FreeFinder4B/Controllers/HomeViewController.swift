@@ -18,12 +18,17 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        refresh()
+        Task{
+            super.viewDidAppear(animated)
+            await refresh()
+            
+        }
     }
     
     @IBAction func refreshButton(_ sender: Any) {
-        refresh()
+        Task{
+            await refresh()
+        }
     }
     
     func addCurrLocation(with location: CLLocation) {
@@ -37,7 +42,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         if (mapView != nil) {
             view.insetsLayoutMarginsFromSafeArea = false
             Task{
-                refresh();
+                await refresh();
                 // get location of user
                 LocationManager.shared.getUserLocation { [weak self] location in
                     DispatchQueue.main.async {
@@ -52,9 +57,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         }
     }
 
-    func refresh(){
+    func refresh() async{
         mapView!.removeAnnotations(mapView!.annotations)
-        let items = APP_DATA!.mapItems
+        let items = await APP_DATA!.refresh()
+        //let items = APP_DATA!.mapItems
+        list_items = items
         for item in items{
             mapView.addAnnotation(item)
         }
@@ -89,9 +96,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
        // let item_frommap = view.annotation
 
         let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
-        
-        itemVC.itemcomments = ["two left but they're only tofu or veggie", "one left", "all gone"];
-        //itemVC.itemcomments = await item_fromtable.db_get_comments();
+
         //TODO: here we need to implement getting comments of an item using that function...
         itemVC.passed_item = item;
         self.present(itemVC, animated: true, completion: nil)
