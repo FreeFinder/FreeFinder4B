@@ -91,6 +91,19 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         loadMap();
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        Task{
+            super.viewDidAppear(animated)
+            await refresh()
+            
+        }
+    }
+    
+    @IBAction func refreshButton(_ sender: Any) {
+        Task{
+            await refresh()
+        }
+    }
     
     func addCurrLocation(with location: CLLocation) {
         let currLocation = MKPointAnnotation()
@@ -117,18 +130,16 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-    func refresh() async -> [Item] {
-        let user = User(email: "mongodb@gmail.com");
-        await user.db_add_user()
-        let observer = await AppData(user: user);
+
+    func refresh() async{
         mapView!.removeAnnotations(mapView!.annotations)
-        let items = await observer.db_get_all_items();
-        list_items = items;
+        let items = await APP_DATA!.refresh()
+        //let items = APP_DATA!.mapItems
+        list_items = items
         for item in items{
             mapView.addAnnotation(item)
         }
-        return items
+        return
     }
     
     private func filterItems(filterType: String) -> [Item]{
@@ -177,9 +188,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
        // let item_frommap = view.annotation
 
         let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
-        
-        itemVC.itemcomments = ["two left but they're only tofu or veggie", "one left", "all gone"];
-        //itemVC.itemcomments = await item_fromtable.db_get_comments();
+
         //TODO: here we need to implement getting comments of an item using that function...
         itemVC.passed_item = item;
         self.present(itemVC, animated: true, completion: nil)

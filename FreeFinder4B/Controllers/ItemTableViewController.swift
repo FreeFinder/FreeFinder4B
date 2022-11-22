@@ -3,7 +3,8 @@ import SwiftUI
 import Foundation
 import MapKit
 
-var list_items: [Item] = [];
+
+var list_items : [Item] = []
 
 class ItemsTableViewController: UITableViewController {
     @IBOutlet weak var button: UIBarButtonItem!
@@ -90,8 +91,7 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad();
-        items = list_items;
+        items = list_items
         tableView.reloadData();
         
         menu = menu.replacingChildren([food, clothing, furniture, other, deferredMenu])
@@ -125,9 +125,7 @@ class ItemsTableViewController: UITableViewController {
         let item_fromtable = items[indexPath.row];
 
         let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
-        
-        itemVC.itemcomments = ["two left but they're only tofu or veggie", "one left", "all gone"];
-        //itemVC.itemcomments = await item_fromtable.db_get_comments();
+
         //TODO: here we need to implement getting comments of an item using that function...
         itemVC.passed_item = item_fromtable;
         self.present(itemVC, animated: true, completion: nil);

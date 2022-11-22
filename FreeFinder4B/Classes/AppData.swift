@@ -25,9 +25,31 @@ class AppData {
         self.mapItems = items.filter{( $0.type == tag)}
     };
     
+    func getDistanceFromUser(loc: CLLocation) -> CLLocationDistance{
+        var dist = CLLocationDistance()
+        LocationManager.shared.getUserLocation { [weak self] location in
+            DispatchQueue.main.async {}
+            dist = loc.distance(from: location)
+        }
+        return dist
+    }
+    
     func filterMapItems(distance: Int) { // polymorphism - this one will be used for distance
-        self.currentFilter = "tag";
         // finish this function
+        let d = Double(distance) * 1609.34
+        self.mapItems = []
+        for i in self.items{
+            var temp = CLLocation(latitude: i.coordinate.latitude, longitude: i.coordinate.longitude)
+            if getDistanceFromUser(loc: temp) <= d{
+                self.mapItems.append(i)
+            }
+        }
+        
+    }
+    
+    func filterMapItems(distance: Int, tag: String){ // still needs a test
+        self.filterMapItems(distance: distance)
+        self.mapItems = self.mapItems.filter{( $0.type == tag)}
     }
     
     func sortMapItemsByDist(){

@@ -16,92 +16,53 @@ final class AppDataTests: XCTestCase {
 		let test_app = await AppData(user: test_user)
 		test_app.items = []
 		test_app.mapItems = []
-		
+        var test_results: [[Item]]
+		test_results = []
 		// now have blank slate to test filtering on empty list
 		test_app.filterMapItems(tag: "Food")
 		XCTAssertTrue(test_app.mapItems.isEmpty)
-		
-		// no items of chosen input
-		let food_item1 = await test_user.create_item(
-			name: "test_item",
-			type: "Food",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		let food_item2 = await test_user.create_item(
-			name: "test_item1",
-			type: "Food",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		test_app.items = [food_item1!,food_item2!]
-		test_app.filterMapItems(tag: "Clothing")
-		XCTAssertTrue(test_app.mapItems.isEmpty)
+        
+        let test_details = "Test_Details"
+        let test_coords = CLLocationCoordinate2DMake(41.797, -87.593)
+        let test_quantity = 2
+                
+        for item_type in ITEM_TAGS{
+            let i_1 = await test_user.create_item(name: item_type+"1", type: item_type, detail: test_details, coordinate: test_coords, quantity: test_quantity)
+            let i_2 = await test_user.create_item(name: item_type+"2", type: item_type, detail: test_details, coordinate: test_coords, quantity: test_quantity)
+            test_app.items.append(contentsOf: [i_1!, i_2!])
+            test_results.append([i_1!,i_2!])
+            if (item_type == "Food"){   // no items of chosen input
+                test_app.filterMapItems(tag: "Clothing")
+                XCTAssertTrue(test_app.mapItems.isEmpty)
+            }
 
+        }
+		print(test_results)
+		
 		// test correct filtering of each category
-		let cloth_item1 = await test_user.create_item(
-			name: "clothing1",
-			type: "Clothing",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		let cloth_item2 = await test_user.create_item(
-			name: "clothing2",
-			type: "Clothing",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		
-		let furn_item1 = await test_user.create_item(
-			name: "furn1",
-			type: "Furniture",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		let furn_item2 = await test_user.create_item(
-			name: "furn2",
-			type: "Furniture",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		
-		let other_item1 = await test_user.create_item(
-			name: "other1",
-			type: "Other",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		let other_item2 = await test_user.create_item(
-			name: "other2",
-			type: "Other",
-			detail: "test_detail",
-			coordinate: CLLocationCoordinate2DMake(90.000, 135.000),
-			quantity: 1
-		)
-		test_app.items = [food_item1!,food_item2!, cloth_item1!, cloth_item2!, furn_item1!, furn_item2!, other_item1!, other_item2!]
 		
 		// food
 		test_app.filterMapItems(tag: "Food")
-		XCTAssertTrue(test_app.mapItems == [food_item1!, food_item2!])
+		XCTAssertTrue(test_app.mapItems == test_results[0])
 		
 		// clothing
 		test_app.filterMapItems(tag: "Clothing")
-		XCTAssertTrue(test_app.mapItems == [cloth_item1!, cloth_item2!])
+		XCTAssertTrue(test_app.mapItems == test_results[1])
 		
 		// furniture
 		test_app.filterMapItems(tag: "Furniture")
-		XCTAssertTrue(test_app.mapItems == [furn_item1!, furn_item2!])
+		XCTAssertTrue(test_app.mapItems == test_results[2])
 		
 		// other
 		test_app.filterMapItems(tag: "Other")
-		XCTAssertTrue(test_app.mapItems == [other_item1!, other_item2!])
+		XCTAssertTrue(test_app.mapItems == test_results[3])
+        
+        
+        for row in test_results{
+            for item in row{
+                let _ = await item.delete_Item(deviceLocation: test_coords)
+            }
+        }
 		
 	}
 

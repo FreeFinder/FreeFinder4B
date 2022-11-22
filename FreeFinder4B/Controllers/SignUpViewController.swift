@@ -11,32 +11,36 @@ class SignUpViewController: UIViewController {
         
         let emailIsValid = validEmail(email: email);
         if (!emailIsValid) {
-            // [TODO] Set Error Text
-            return;
-        };
-        Task {
-            USER = User(email: email);
-            await USER?.db_add_user();
+            let alert = CustomAlertController(title: "Cannot Sign Up", message: "Not a valid email address. Either account already exists or not a @uchicago.edu email.")
+            DispatchQueue.main.async {
+                self.present(alert.showAlert(), animated: true, completion: nil)
+            }
+                // [TODO] Set Error Text
+                return;
+            };
+            Task {
+                USER = User(email: email);
+                await USER?.db_add_user();
+                
+                let id: ObjectId = USER!.id;
+                if (id == ObjectId() || id.stringValue == "") { return };
+                DEVICE_DATA.saveLocalUser(email: email, id: id.stringValue);
+                
+                APP_DATA = await AppData(user: USER!);
+                
+                let TabBarController = storyBoard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController;
+                self.navigationController?.pushViewController(TabBarController, animated: true);
+            }
+        }
+        
+        @IBAction func navigateToSignIn(_ sender: Any) {
+            let SignInController = storyBoard.instantiateViewController(withIdentifier: "SignIn") as UIViewController;
             
-            let id: ObjectId = USER!.id;
-            if (id == ObjectId() || id.stringValue == "") { return };
-            DEVICE_DATA.saveLocalUser(email: email, id: id.stringValue);
+            self.navigationController?.pushViewController(SignInController, animated: true);
+        }
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
             
-            APP_DATA = await AppData(user: USER!);
-            
-            let TabBarController = storyBoard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController;
-            self.navigationController?.pushViewController(TabBarController, animated: true);
         }
     }
-    
-    @IBAction func navigateToSignIn(_ sender: Any) {
-        let SignInController = storyBoard.instantiateViewController(withIdentifier: "SignIn") as UIViewController;
-        
-        self.navigationController?.pushViewController(SignInController, animated: true);
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-}

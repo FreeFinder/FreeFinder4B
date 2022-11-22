@@ -14,6 +14,8 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true);
+        //items = list_items;
+        //tableView.reloadData();
 	}
 	
 	@IBAction func exitAddCommentPushed(_ sender: UIButton) {
@@ -34,14 +36,26 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 			let item_location = currentLocation.coordinate
 			
 			Task{
-				let did_decr = await passed_item.db_decrement_quantity(deviceLocation: item_location)
+                let og_amount = passed_item.counter
+				let did_decr = await passed_item.decrement_quantity(deviceLocation: item_location)
 				
 				
 				if(did_decr){
-					passed_item.counter = passed_item.counter - 1;
-					itemQuantity?.text = String(passed_item_counter);
-					self.viewDidLoad();
-					self.viewWillAppear(true);
+                    if (og_amount == 1){
+                        let user = User(email: "mongodb@gmail.com");
+                        await user.db_add_user()
+                        let observer = await AppData(user: user);
+                        list_items = await observer.db_get_all_items();
+                        
+                        presentingViewController?.viewWillAppear(true);
+                        self.dismiss(animated: true);
+                    }
+                    else{
+                        itemQuantity?.text = String(passed_item_counter);
+                        self.viewDidLoad();
+                        self.viewWillAppear(true);
+                    }
+
 				}else{
 					let alert = CustomAlertController(title: "Cannot Decrement", message: "You are not currently near this item.")
 					DispatchQueue.main.async {
@@ -52,17 +66,32 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 			}
 		}
 	}
+    
 	func delete_item(alertAction: UIAlertAction) {
+        let locManager = CLLocationManager()
+        locManager.requestWhenInUseAuthorization()
+        var currentLocation: CLLocation!
+        currentLocation = locManager.location
+        let item_location = currentLocation.coordinate
+        
 		Task{
-			await passed_item.db_delete_item();
-			let user = User(email: "mongodb@gmail.com");
-			await user.db_add_user()
-			let observer = await AppData(user: user);
-			list_items = await observer.db_get_all_items();
-			
-			
-			presentingViewController?.viewWillAppear(true);
-			self.dismiss(animated: true);
+			let did_del = await passed_item.delete_Item(deviceLocation: item_location);
+            if did_del{
+                let user = User(email: "mongodb@gmail.com");
+                await user.db_add_user()
+                let observer = await AppData(user: user);
+                list_items = await observer.db_get_all_items();
+                
+                
+                presentingViewController?.viewWillAppear(true);
+                self.dismiss(animated: true);
+            }
+            else {
+                let alert = CustomAlertController(title: "Cannot Delete", message: "You are not currently near this item.")
+                DispatchQueue.main.async {
+                    self.present(alert.showAlert(), animated: true, completion: nil)
+                }
+            }
 		}
 	}
 	
@@ -103,7 +132,8 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		itemName?.text = passed_item.name;
 		itemQuantity?.text = String(passed_item.counter);
 		passed_item_counter = passed_item.counter;
-		
+        itemcomments = passed_item.comments;
+        
 		let lat = String(passed_item.coordinate.latitude);
 		let long = String(passed_item.coordinate.longitude);
 		let latloc = "Latitude: " + lat;
@@ -140,14 +170,6 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	@IBAction func postCommentButtonPressed(_ sender: UIButton) {
 		//TODO: in iteration 2 need to be able to add comments
-		//let current_user = User//passed_item.creator;
-		//let comment_out = current_user.comment(i: passed_item, comment: newComment.text ?? " ");
-		
-		//currently commenting directly not through user need to figure out how to get user
-		//let comment_out = passed_item.add_Comment(comment: newComment.text ?? "");
-		//if(comment_out == false){
-		//here we can throw an error for a wrong comment
-		// }
 		Task{
 			let valid_comment = await USER?.comment(
 				item: passed_item,
@@ -159,6 +181,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 					self.present(alert.showAlert(), animated: true, completion: nil)
 				}
 			}else{
+                itemcomments.append(newComment?.text ?? "");
 				self.dismiss(animated: true);
 			}
 		}

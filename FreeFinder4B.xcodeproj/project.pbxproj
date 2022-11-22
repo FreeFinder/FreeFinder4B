@@ -13,8 +13,6 @@
 		484DC49B2919C84700AE095B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 484DC49A2919C84700AE095B /* Assets.xcassets */; };
 		484DC49E2919C84700AE095B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484DC49C2919C84700AE095B /* LaunchScreen.storyboard */; };
 		484DC4A92919C84700AE095B /* FreeFinders4BTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4A82919C84700AE095B /* FreeFinders4BTests.swift */; };
-		484DC4B32919C84700AE095B /* FreeFinders4BUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */; };
-		484DC4B52919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */; };
 		48BD948D292047B800C8014E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BD948C292047B800C8014E /* LocationManager.swift */; };
 		48D16F35291BB5FD005CECEF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F34291BB5FD005CECEF /* Realm */; };
 		48D16F37291BB600005CECEF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48D16F36291BB600005CECEF /* RealmSwift */; };
@@ -87,8 +85,6 @@
 		484DC4A42919C84700AE095B /* FreeFinder4BTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinder4BTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		484DC4A82919C84700AE095B /* FreeFinders4BTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BTests.swift; sourceTree = "<group>"; };
 		484DC4AE2919C84700AE095B /* FreeFinder4BUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeFinder4BUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITests.swift; sourceTree = "<group>"; };
-		484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFinders4BUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		48BD948C292047B800C8014E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = FreeFinder4B/Utilities/LocationManager.swift; sourceTree = SOURCE_ROOT; };
 		5A0A48082920702A00168A6A /* Mapkit Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mapkit Tests.swift"; sourceTree = "<group>"; };
 		5A7713AA2919F20C00040D8A /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
@@ -201,8 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				5A0A48082920702A00168A6A /* Mapkit Tests.swift */,
-				484DC4B22919C84700AE095B /* FreeFinders4BUITests.swift */,
-				484DC4B42919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift */,
 			);
 			path = FreeFinder4BUITests;
 			sourceTree = "<group>";
@@ -486,8 +480,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				484DC4B32919C84700AE095B /* FreeFinders4BUITests.swift in Sources */,
-				484DC4B52919C84700AE095B /* FreeFinders4BUITestsLaunchTests.swift in Sources */,
 				5A0A48092920702A00168A6A /* Mapkit Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,7 +655,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders3B-UIE";
+				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders4B-UIE";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -693,7 +685,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders3B-UIE";
+				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders4B-UIE";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -708,7 +700,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KAP5HAAY49;
+				DEVELOPMENT_TEAM = F76R8439D2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
@@ -748,7 +740,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KAP5HAAY49;
+				DEVELOPMENT_TEAM = F76R8439D2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = freefinders.FreeFinders4BUITests;
@@ -768,7 +760,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KAP5HAAY49;
+				DEVELOPMENT_TEAM = F76R8439D2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = freefinders.FreeFinders4BUITests;
