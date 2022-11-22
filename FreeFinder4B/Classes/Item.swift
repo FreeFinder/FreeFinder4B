@@ -10,8 +10,8 @@ class Item: NSObject, MKAnnotation{
 	let coordinate: CLLocationCoordinate2D
 	var comments: [String]
 	let detail: String
-	private let creator_email: String
-	let counter: Int
+    let creator_email: String
+	var counter: Int
 	var id: ObjectId
 	
 	init(
@@ -89,22 +89,20 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_item_exists() async -> Bool {
 		var res = false;
-		
+		if (self.id == ObjectId()) { return res; }
+		print("running")
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!
 			
-			let item: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			]
+			let potentialItem: Document = ["_id": AnyBSON(self.id)]
 			
-			let document = try await items.findOneDocument(filter: item);
+			let document = try await items.findOneDocument(filter: potentialItem);
+            
 			if (document == nil) {
 				print("Could not find this document in the database!");
 			} else {
-//				print("This item exists in the database: \(String(describing: document))")
-				res = true;
+				print("This item exists in the database: \(String(describing: document))")
+                res = true;
 			}
 		} catch {
 //			print("Checking whether an item existed failed, inconclusive: \(error.localizedDescription)")
@@ -115,15 +113,12 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_delete_item() async -> Bool {
 		var res = false;
+		if (self.id == ObjectId()) { return res; } // the item is already not in db
 		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!
 			
-			let itemQuery: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			]
+			let itemQuery: Document = ["_id": AnyBSON(self.id)]
 			
 			let _ = try await items.deleteOneDocument(filter: itemQuery)
 //			print("Successfully deleted this item \(self.id) from the database");
@@ -136,11 +131,16 @@ class Item: NSObject, MKAnnotation{
 		return res;
 	}
 	
-	func delete_Item() async { // deletes if item in database
-		if (await self.db_item_exists()){
+	func delete_Item(deviceLocation: CLLocationCoordinate2D) async -> Bool{
+        if (itemTooFar(location: deviceLocation)) {
+            return false // deletes if item in database
+        }
+        else if (await self.db_item_exists()) {
 			await db_delete_item();
 			await refresh()
-		}
+            return true
+        }
+        return true 
 	}
 	
 	private func itemTooFar(location: CLLocationCoordinate2D) -> Bool {
@@ -151,19 +151,14 @@ class Item: NSObject, MKAnnotation{
 		return (dist > DECREMENT_DISTANCE);
 	}
 	
-	func db_decrement_quantity(
-		deviceLocation: CLLocationCoordinate2D // have to pass the location of the current device
-	) async -> Bool {
+	func db_decrement_quantity(	) async -> Bool {
 		var res: Bool = false; // whether or not the item is deleted
-		if (itemTooFar(location: deviceLocation)) { return res };
+		if (self.id == ObjectId()) { return res; }
+		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!;
 			
-			let itemQuery: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			];
+			let itemQuery: Document = ["_id": AnyBSON(self.id)];
 			let itemUpdate: Document = [
 				"$set": [
 					"counter": AnyBSON(integerLiteral: self.counter - 1)
@@ -190,15 +185,14 @@ class Item: NSObject, MKAnnotation{
 	
 	func db_add_comment(comment: String) async -> Bool {
 		var res: Bool = false;
+		
+		if (self.id == ObjectId()) { return res; }
 		let prevLength = self.comments.count;
+		
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!;
 			
-			let itemQuery: Document = [
-				"name": AnyBSON(stringLiteral: self.name),
-				"longitude": AnyBSON(stringLiteral: String(self.coordinate.longitude)),
-				"latitude": AnyBSON(stringLiteral: String(self.coordinate.latitude)),
-			];
+			let itemQuery: Document = ["_id": AnyBSON(self.id)];
 			
 			let itemUpdate: Document = ["$push": [
 				"comments": AnyBSON(stringLiteral: comment)
@@ -222,12 +216,27 @@ class Item: NSObject, MKAnnotation{
 		return res;
 	}
 	
-	func decrement_quantity() async -> Bool {
+	func decrement_quantity(deviceLocation: CLLocationCoordinate2D) async -> Bool {
 		/*
-		 [MISC] move the isTooFar funciton check from the db_decrement quantity to here
+		 [MISC] move the isTooFar function check from the db_decrement quantity to here
 		 => purpose is to make the db functions solely have to cover reading/writing
 		 => all validation handling should be handled on frontend + "api" functions
 		 */
-		return false
-	}
+        
+        if (itemTooFar(location: deviceLocation)) { return false }; // Too far away to interact
+        if (!(await self.db_item_exists())){ return false }
+        if (self.counter == 1){
+            await self.delete_Item(deviceLocation: deviceLocation)
+            return true
+        }
+        else{
+            if (await self.db_decrement_quantity()) {
+                self.counter = self.counter - 1
+                return true
+            }
+            else{
+                return false
+            }
+        }
+    }
 }

@@ -8,7 +8,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        //mapView.showsZoomControls = true;
+        loadMap();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        mapView.delegate = self
         loadMap();
     }
     

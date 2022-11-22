@@ -2,7 +2,7 @@ import XCTest
 
 @testable import FreeFinder4B
 
-final class LocalDeviceTests: XCTestCase { // EXPECT TO FAIL, AS NOT FULLY IMPL
+final class LocalDeviceTests: XCTestCase {
 	
 	func test_userSignedIn() throws {
 		/*
