@@ -1,11 +1,34 @@
 import UIKit
 import MapKit
 
-class CreateItemViewController: UIViewController {
+class CreateItemViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var tagInput: UISegmentedControl!
-    @IBOutlet weak var descriptionInput: UITextField!
+    @IBOutlet weak var descriptionInput: UITextView!
     @IBOutlet weak var quantityInput: UITextField!
+    
+    override func viewDidLoad() {
+        descriptionInput.layer.borderWidth = 1
+        descriptionInput.layer.borderColor = UIColor.label.cgColor
+        descriptionInput.textColor = UIColor.lightGray
+        descriptionInput.delegate = self
+        self.textViewDidBeginEditing(descriptionInput)
+        self.textViewDidEndEditing(descriptionInput)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Description"
+            textView.textColor = UIColor.lightGray
+        }
+    }
     
     
     
