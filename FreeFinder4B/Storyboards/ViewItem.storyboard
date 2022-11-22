@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JtJ-pD-0Wt">
-                                <rect key="frame" x="0.0" y="768" width="389" height="49"/>
+                                <rect key="frame" x="0.0" y="767" width="388" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
@@ -113,7 +113,6 @@
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="postCommentButtonPressed:" destination="6cx-I7-tio" eventType="touchUpInside" id="FhQ-pY-XK9"/>
                                     <segue destination="t63-ae-Mtm" kind="presentation" id="9Dj-uG-iNw"/>
                                 </connections>
                             </button>
