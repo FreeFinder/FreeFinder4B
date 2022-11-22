@@ -1,7 +1,7 @@
 # FreeFinder Milestone 4B
 
 ## (1) What we did in this iteration
-The work was be divided as follows: 
+The work was divided as follows: 
 1. Connect UI to existing backend successfully - Ellen/Ruxi
 - Sign in
 - Sign out
