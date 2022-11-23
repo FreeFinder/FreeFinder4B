@@ -14,8 +14,6 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true);
-        //items = list_items;
-        //tableView.reloadData();
 	}
 	
 	@IBAction func exitAddCommentPushed(_ sender: UIButton) {
@@ -113,13 +111,14 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	var itemcomments = [""];
 	var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "", counter: 0);
 	var passed_item_counter = 0;
+    var new_comment = "";
 	
 	@IBOutlet weak var itemName: UILabel!
 	@IBOutlet weak var itemLocation: UILabel!
 	@IBOutlet weak var itemDescription: UILabel!
 	@IBOutlet weak var exit: UIButton!
-	@IBOutlet weak var addComment: UIButton!
-	@IBOutlet weak var newComment: UITextField!
+	//@IBOutlet weak var addComment: UIButton!
+	//@IBOutlet weak var newComment: UITextField!
 	@IBOutlet weak var itemQuantity: UILabel!
 	@IBOutlet weak var decrement: UIButton!
 	@IBOutlet weak var deleteItem: UIButton!
@@ -134,11 +133,6 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		passed_item_counter = passed_item.counter;
         itemcomments = passed_item.comments;
         
-		let lat = String(passed_item.coordinate.latitude);
-		let long = String(passed_item.coordinate.longitude);
-		let latloc = "Latitude: " + lat;
-		let longloc = ", Longitude: " + long;
-		let location = latloc + longloc;
 		// itemLocation?.text = location;
 		
 		
@@ -152,6 +146,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		 }
 		 */
 	}
+        
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return itemcomments.count;
@@ -167,23 +162,12 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	
 	
-	
-	@IBAction func postCommentButtonPressed(_ sender: UIButton) {
-		//TODO: in iteration 2 need to be able to add comments
-		Task{
-			let valid_comment = await USER?.comment(
-				item: passed_item,
-				comment: newComment?.text ?? ""
-			);
-			if(valid_comment == false){
-				let alert = CustomAlertController(title: "Invalid Comment", message: "Please try again.")
-				DispatchQueue.main.async {
-					self.present(alert.showAlert(), animated: true, completion: nil)
-				}
-			}else{
-                itemcomments.append(newComment?.text ?? "");
-				self.dismiss(animated: true);
-			}
-		}
-	}
+    @IBAction func addCommentPressed(_ sender: UIButton) {
+        let addCVC : AddCommentViewController = UIStoryboard(name: "AddComment", bundle: nil).instantiateViewController(withIdentifier: "AddComment") as! AddCommentViewController
+
+        //TODO: here we need to implement getting comments of an item using that function...
+        addCVC.comment_passed_item = passed_item;
+        self.present(addCVC, animated: true, completion: nil);
+    }
+    
 }

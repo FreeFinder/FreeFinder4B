@@ -22,6 +22,8 @@
 		5A7713AB2919F20C00040D8A /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7713AA2919F20C00040D8A /* List.storyboard */; };
 		5A7713B1291A0F9E00040D8A /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */; };
 		5D2EA5E12922B4DF00DDDDC7 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2EA5E02922B4DF00DDDDC7 /* CustomAlertController.swift */; };
+		5D52EE6F292DCA2200EE5022 /* AddComment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D52EE6E292DCA2200EE5022 /* AddComment.storyboard */; };
+		5D52EE71292DCAAE00EE5022 /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D52EE70292DCAAE00EE5022 /* AddCommentViewController.swift */; };
 		734303162919CCC90064974F /* CreateItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734303152919CCC90064974F /* CreateItemView.storyboard */; };
 		734303172919CCC90064974F /* CreateItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734303152919CCC90064974F /* CreateItemView.storyboard */; };
 		734303182919CCC90064974F /* CreateItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734303152919CCC90064974F /* CreateItemView.storyboard */; };
@@ -90,6 +92,8 @@
 		5A7713AA2919F20C00040D8A /* List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		5D2EA5E02922B4DF00DDDDC7 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
+		5D52EE6E292DCA2200EE5022 /* AddComment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddComment.storyboard; sourceTree = "<group>"; };
+		5D52EE70292DCAAE00EE5022 /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
 		734303152919CCC90064974F /* CreateItemView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateItemView.storyboard; sourceTree = "<group>"; };
 		734303192919CCD00064974F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		738572BA2919F50000D0F5B5 /* ViewItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ViewItem.storyboard; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				484DC49C2919C84700AE095B /* LaunchScreen.storyboard */,
 				484DC4972919C84600AE095B /* Main.storyboard */,
 				5A7713AA2919F20C00040D8A /* List.storyboard */,
+				5D52EE6E292DCA2200EE5022 /* AddComment.storyboard */,
 				734303152919CCC90064974F /* CreateItemView.storyboard */,
 				734303192919CCD00064974F /* Profile.storyboard */,
 				738572BA2919F50000D0F5B5 /* ViewItem.storyboard */,
@@ -229,6 +234,7 @@
 				5A7713B0291A0F9E00040D8A /* ItemTableViewController.swift */,
 				BD8F7CBC291E985600A451BC /* CreateItemViewController.swift */,
 				BD8F7CBE291EA3FE00A451BC /* HomeViewController.swift */,
+				5D52EE70292DCAAE00EE5022 /* AddCommentViewController.swift */,
 				BD2F9682291FFE560047C23C /* StartViewController.swift */,
 				BD2F9684292010990047C23C /* SignInViewController.swift */,
 				5D2EA5E02922B4DF00DDDDC7 /* CustomAlertController.swift */,
@@ -401,6 +407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D52EE6F292DCA2200EE5022 /* AddComment.storyboard in Resources */,
 				484DC49E2919C84700AE095B /* LaunchScreen.storyboard in Resources */,
 				484DC49B2919C84700AE095B /* Assets.xcassets in Resources */,
 				738572BB2919F50000D0F5B5 /* ViewItem.storyboard in Resources */,
@@ -456,6 +463,7 @@
 				BD8F7CBD291E985600A451BC /* CreateItemViewController.swift in Sources */,
 				BD8F7CBF291EA3FE00A451BC /* HomeViewController.swift in Sources */,
 				5A7713B1291A0F9E00040D8A /* ItemTableViewController.swift in Sources */,
+				5D52EE71292DCAAE00EE5022 /* AddCommentViewController.swift in Sources */,
 				BD2F9685292010990047C23C /* SignInViewController.swift in Sources */,
 				484DC4942919C84600AE095B /* SceneDelegate.swift in Sources */,
 				48BD948D292047B800C8014E /* LocationManager.swift in Sources */,

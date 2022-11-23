@@ -59,6 +59,59 @@ class AppData {
     
     func sortMapItemsByDist(){
         //TODO: sort mapItems by distance
+//        for i in 0 ... self.mapItems.count{
+//            for j in (i + 1) ... self.mapItems.count{
+//                var temp1 = CLLocation(latitude: self.mapItems[i].coordinate.latitude, longitude: self.mapItems[i].coordinate.longitude)
+//                var temp2 = CLLocation(latitude: self.mapItems[j].coordinate.latitude, longitude: self.mapItems[j].coordinate.longitude)
+//                if getDistanceFromUser(loc: temp1) > getDistanceFromUser(loc: temp2) {
+//                    var temp = self.mapItems[i]
+//                    self.mapItems[i] = self.mapItems[j]
+//                    self.mapItems[j] = temp
+//                }
+//            }
+//        }
+        self.mapItems = mergeSortMapItems(items: mapItems)
+    }
+    
+    func mergeSortMapItems(items: [Item]) -> [Item] {
+        var tempItems = items
+        if items.count > 1{
+            var mid = floor(Double(items.count / 2))
+            var left = Array(items[0...Int(mid)])
+            var right = Array(items[Int(mid)...items.count])
+            
+            left = mergeSortMapItems(items: left)
+            right = mergeSortMapItems(items: right)
+            
+            var i = 0
+            var j = 0
+            
+            var k = 0
+            
+            while i < left.count && j < right.count{
+                var leftLoc = CLLocation(latitude: left[i].coordinate.latitude, longitude: left[i].coordinate.longitude)
+                var rightLoc = CLLocation(latitude: right[j].coordinate.latitude, longitude: right[j].coordinate.longitude)
+                if getDistanceFromUser(loc: leftLoc) <= getDistanceFromUser(loc: rightLoc) {
+                    tempItems[k] = left[i]
+                    i += 1
+                } else {
+                    tempItems[k] = right[j]
+                    j += 1
+                }
+                k += 1
+            }
+            while i < left.count {
+                tempItems[k] = left[i]
+                i += 1
+                k += 1
+            }
+            while j < right.count {
+                tempItems[k] = right[j]
+                j += 1
+                k += 1
+            }
+        }
+        return tempItems
     }
     
     func filterMap() {
