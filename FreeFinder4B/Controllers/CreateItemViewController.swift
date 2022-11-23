@@ -1,22 +1,24 @@
 import UIKit
 import MapKit
 
-class CreateItemViewController: UIViewController, UITextViewDelegate {
+class CreateItemViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var tagInput: UISegmentedControl!
     @IBOutlet weak var descriptionInput: UITextView!
     @IBOutlet weak var quantityInput: UITextField!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         descriptionInput.layer.borderWidth = 1
         descriptionInput.layer.borderColor = UIColor.label.cgColor
         descriptionInput.textColor = UIColor.lightGray
         descriptionInput.delegate = self
         self.textViewDidBeginEditing(descriptionInput)
         self.textViewDidEndEditing(descriptionInput)
-        self.textFieldShouldReturn(titleInput)
-        self.textFieldShouldReturn(quantityInput)
-        self.textViewShouldReturn(descriptionInput)
+        titleInput.delegate = self
+        quantityInput.delegate = self
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -35,11 +37,6 @@ class CreateItemViewController: UIViewController, UITextViewDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true
-    }
-    
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
-        textView.resignFirstResponder()
         return true
     }
     

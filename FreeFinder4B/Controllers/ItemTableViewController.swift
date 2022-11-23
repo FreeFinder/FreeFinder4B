@@ -49,7 +49,6 @@ class ItemsTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (action) -> Void in
             let textField = (alert?.textFields![0])! as UITextField
             radius = Int(textField.text!) ?? 0
-            print(radius)
             self.toggleFilter(actionTitle: "Within Radius", radius: radius)
         }))
 
