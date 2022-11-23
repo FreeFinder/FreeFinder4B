@@ -16,9 +16,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
+        guard let location = locations.last else {
             return
         }
+//        location = locations.last! as CLLocation
+        let userLocation:CLLocation = locations[0] as CLLocation
+        
+        UserDefaults.standard.set(userLocation.coordinate.latitude, forKey: "LAT")
+        UserDefaults.standard.set(userLocation.coordinate.longitude, forKey: "LON")
+        UserDefaults().synchronize()
         completion?(location) // sending back the results
         manager.stopUpdatingLocation()
     }
