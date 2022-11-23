@@ -39,10 +39,10 @@ If you experience troubles/errors with the packages, try quitting XCode and reop
 ### How to run the code
 Press run in XCode (the play button on the top left). Alternatively, do command R or go to product then run in the menu bar. Make sure the scheme is set to FreeFinders3B. We tested outs on iPhone 14 Pro simulator running iOS 16.1. Have patience, depending on the device (and if you are running a simulator) there might be some lag. We've also run into issues with the M1 chip on mac and xcode. In this case, you cannot run a simulator and need to build on a physical device. To do this connect your phone (if it is an iphone) to your computer and build on it. 
 ### How to run the unit test cases
-Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinders3B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above. 
+Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinder4B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above. 
 
 ### UI Unit Testing
-FreeFinder4BUITests contains our UI unit tests
+FreeFinder4BUITests contains our UI unit tests for the map.
 In addition to the coded tests, here are some more UI tests to be tested manualy when the device is built.
 - Pressing create item button should take user to create item page. 
 - Pressing delete item should cause a pop up to appear checking if the user is sure they want to delete the item, pressing confirm will delete the item and the user will be returned to their previous screen while pressing cancel will return the user back to the view item screen. 
