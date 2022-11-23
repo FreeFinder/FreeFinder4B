@@ -26,12 +26,13 @@ class AppData {
     };
     
     func getDistanceFromUser(loc: CLLocation) -> CLLocationDistance{
-        var dist = CLLocationDistance()
-        LocationManager.shared.getUserLocation { [weak self] location in
-            DispatchQueue.main.async {}
-            print(location)
-            dist = loc.distance(from: location)
-        }
+        let coordinate =  CLLocation(latitude: UserDefaults.standard.value(forKey: "LAT") as! CLLocationDegrees, longitude: UserDefaults.standard.value(forKey: "LON") as! CLLocationDegrees)
+        var dist = loc.distance(from: coordinate)
+//        LocationManager.shared.getUserLocation { [weak self] location in
+//            DispatchQueue.main.async {}
+//            print(location)
+//            dist = loc.distance(from: location)
+//        }
         return dist
     }
     
