@@ -29,6 +29,7 @@ class AppData {
         var dist = CLLocationDistance()
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {}
+            print(location)
             dist = loc.distance(from: location)
         }
         return dist
@@ -54,59 +55,48 @@ class AppData {
     
     func sortMapItemsByDist(){
         //TODO: sort mapItems by distance
-//        for i in 0 ... self.mapItems.count{
-//            for j in (i + 1) ... self.mapItems.count{
-//                var temp1 = CLLocation(latitude: self.mapItems[i].coordinate.latitude, longitude: self.mapItems[i].coordinate.longitude)
-//                var temp2 = CLLocation(latitude: self.mapItems[j].coordinate.latitude, longitude: self.mapItems[j].coordinate.longitude)
-//                if getDistanceFromUser(loc: temp1) > getDistanceFromUser(loc: temp2) {
-//                    var temp = self.mapItems[i]
-//                    self.mapItems[i] = self.mapItems[j]
-//                    self.mapItems[j] = temp
-//                }
-//            }
-//        }
-        self.mapItems = mergeSortMapItems(items: mapItems)
+        self.mergeSortMapItems(itemlst: &mapItems, startIndex: 0, endIndex: self.mapItems.count)
     }
     
-    func mergeSortMapItems(items: [Item]) -> [Item] {
-        var tempItems = items
-        if items.count > 1{
-            var mid = floor(Double(items.count / 2))
-            var left = Array(items[0...Int(mid)])
-            var right = Array(items[Int(mid)...items.count])
+    func mergeSortMapItems(itemlst: inout [Item], startIndex: Int, endIndex: Int){
+//        var tempItems = itemlst
+        if itemlst.count > 1 {
+            let middleIndex = endIndex / 2
+            var left = Array(itemlst[startIndex..<middleIndex])
+            var right = Array(itemlst[middleIndex..<endIndex])
             
-            left = mergeSortMapItems(items: left)
-            right = mergeSortMapItems(items: right)
+            self.mergeSortMapItems(itemlst: &left, startIndex: 0, endIndex: left.count)
+            self.mergeSortMapItems(itemlst: &right, startIndex: 0, endIndex: right.count)
             
-            var i = 0
-            var j = 0
+            var l = 0
+            var r = 0
             
-            var k = 0
+            var k = startIndex
             
-            while i < left.count && j < right.count{
-                var leftLoc = CLLocation(latitude: left[i].coordinate.latitude, longitude: left[i].coordinate.longitude)
-                var rightLoc = CLLocation(latitude: right[j].coordinate.latitude, longitude: right[j].coordinate.longitude)
-                if getDistanceFromUser(loc: leftLoc) <= getDistanceFromUser(loc: rightLoc) {
-                    tempItems[k] = left[i]
-                    i += 1
+            while l < left.count && r < right.count{
+                let leftLoc = CLLocation(latitude: left[l].coordinate.latitude, longitude: left[l].coordinate.longitude)
+                let rightLoc = CLLocation(latitude: right[r].coordinate.latitude, longitude: right[r].coordinate.longitude)
+                print(getDistanceFromUser(loc: leftLoc) )
+                if getDistanceFromUser(loc: leftLoc) < getDistanceFromUser(loc: rightLoc) {
+                    itemlst[k] = left[l]
+                    l += 1
                 } else {
-                    tempItems[k] = right[j]
-                    j += 1
+                    itemlst[k] = right[r]
+                    r += 1
                 }
                 k += 1
             }
-            while i < left.count {
-                tempItems[k] = left[i]
-                i += 1
+            while l < left.count {
+                itemlst[k] = left[l]
+                l += 1
                 k += 1
             }
-            while j < right.count {
-                tempItems[k] = right[j]
-                j += 1
+            while r < right.count {
+                itemlst[k] = right[r]
+                r += 1
                 k += 1
             }
         }
-        return tempItems
     }
     
     func filterMap() {
