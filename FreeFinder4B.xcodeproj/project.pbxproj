@@ -648,7 +648,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F76R8439D2;
+				DEVELOPMENT_TEAM = C5CUS4LXFK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeFinder4B/App/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location access to use our app!";
@@ -663,7 +663,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = freefinders.FreeFinders4B;
+				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders4B-UIE";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -678,7 +678,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F76R8439D2;
+				DEVELOPMENT_TEAM = C5CUS4LXFK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeFinder4B/App/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location access to use our app!";
@@ -693,7 +693,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = freefinders.FreeFinders4B;
+				PRODUCT_BUNDLE_IDENTIFIER = "freefinders.FreeFinders4B-UIE";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

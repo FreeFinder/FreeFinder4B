@@ -45,7 +45,12 @@ class AppData {
                 self.mapItems.append(i)
             }
         }
+        print (self.mapItems.count)
         
+    }
+    
+    func getMapItems() -> [Item]{
+        return self.mapItems;
     }
     
     func filterMapItems(distance: Int, tag: String){ // still needs a test
