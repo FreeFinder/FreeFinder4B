@@ -27,6 +27,7 @@ We completed what we intended to at the start of iteration 2 (see milestone 4a r
 3. User's own postings page
 4. Editing of profile settings (note this is no longer neccessary due to the removal of notifications)
 5. Item reservation
+6. User specifying location of an item (location is defaulted to user's current location)
 
 ## (2) Compiling and Running Unit Tests
 Our unit testing can be found in the FreeFinder4BTests and FreeFinder4BUITests folders. See the following instructions to compile and run them. 
@@ -72,7 +73,7 @@ FreeFinder4BTests contains the following files:
 ## (4) Acceptance Tests
 Try signing in (assuming you are not already signed in). Try creating an item (by pressing the blue + button at the top right of the screen). Try viewing an item by clicking on it (either in map view or list view). Try deleting an item (you have to be physically close to the item to delete it and in the view item page). Try decrementing the quantity of an item (you have to be physically close to the item to decrement the quantity and in the view item page). If there is an item with a location that is far from you, try deleting the item and an error message should pop up. If the quantity of an item is one and you decrement it, the item will be deleted (as the quantity will be zero). If items have been created, try filtering by type and by distance (by pressing the filtering button at the top left hand corner). Try commenting on an item (you need to be on the view item page). Try signing out (this is under the profile page, to get to this press the rightmost bottom button). Try creating items with invalid fields (for example no title). This should cause a pop up with an error message. Try clicking on an item on the map, this should lead you to the item page. 
 
-Inputs that are not allowed:
+Inputs that are not allowed (error messages should pop up if these are inputted):
 - Empty strings for create item and comment fields
 - comments that are longer than 200 characters
 - quantity <= 0 
