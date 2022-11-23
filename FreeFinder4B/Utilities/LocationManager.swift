@@ -23,7 +23,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.stopUpdatingLocation()
     }
     
-    public func checkLocationPrefs(_ manager: CLLocationManager) -> Bool {
+    public func checkLocationPrefs() -> Bool {
+        
+        let manager = CLLocationManager()
 
         if CLLocationManager.locationServicesEnabled() {
             switch manager.authorizationStatus {
