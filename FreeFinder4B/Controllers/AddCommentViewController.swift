@@ -36,13 +36,13 @@ class AddCommentViewController: UIViewController {
                 }
             }else{
                 //comment_passed_item.comments.append();
-                if let presenter = self.presentingViewController as? ItemViewController {
+               /* if let presenter = self.presentingViewController as? ItemViewController {
                     presenter.new_comment = newComment?.text ?? "";
                     presenter.itemDescription?.text = "Got you"
                     presenter.viewWillAppear(true);
                     presenter.viewDidLoad();
                     print("is item")
-                    }
+                }*/
                
                 self.dismiss(animated: true);
                 
