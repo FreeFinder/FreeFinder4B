@@ -21,9 +21,9 @@ The work was divided as follows:
 7. App Icon
 - Design + implementation -> Ellen
 
-We completed most of what was initially proposed with the exception of the following features:
+We completed what we intended to at the start of iteration 2 (see milestone 4a readme). But over the course of the entire project, we completed most of what was initially proposed with the exception of the following features:
 1. Notifications
-2. Photos
+2. Photos (our database is not equipped to store photos)
 3. User's own postings page
 4. Editing of profile settings (note this is no longer neccessary due to the removal of notifications)
 5. Item reservation
