@@ -14,6 +14,9 @@ class CreateItemViewController: UIViewController, UITextViewDelegate {
         descriptionInput.delegate = self
         self.textViewDidBeginEditing(descriptionInput)
         self.textViewDidEndEditing(descriptionInput)
+        self.textFieldShouldReturn(titleInput)
+        self.textFieldShouldReturn(quantityInput)
+        self.textViewShouldReturn(descriptionInput)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -30,6 +33,15 @@ class CreateItemViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        return true
+    }
     
     
     @IBAction func createItem(_ sender: Any) {

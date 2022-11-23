@@ -6,49 +6,85 @@ import CoreLocation
 class HomeViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var mapView: MKMapView!
     var items: [Item] = [];
-    var categoryFilter = "";
+    var currFilter = "";
     
-    private lazy var food = UIAction(title: "Food", attributes: [], state: categoryFilter == "Food" ? .on : .off) { action in
+    private lazy var food = UIAction(title: "Food", attributes: [], state: currFilter == "Food" ? .on : .off) { action in
             self.toggleFilter(actionTitle: "Food");
             self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Food", menu: self.menu);
     }
         
-    private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: categoryFilter == "Clothing" ? .on : .off) { action in
+    private lazy var clothing = UIAction(title: "Clothing", attributes: [], state: currFilter == "Clothing" ? .on : .off) { action in
             self.toggleFilter(actionTitle: "Clothing");
             self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Clothing", menu: self.menu);
     }
         
-    private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: categoryFilter == "Furniture" ? .on : .off) { action in
+    private lazy var furniture = UIAction(title: "Furniture", attributes: [], state: currFilter == "Furniture" ? .on : .off) { action in
         self.toggleFilter(actionTitle: "Furniture");
         self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Furniture", menu: self.menu);
     }
         
-    private lazy var other = UIAction(title: "Other", attributes: [], state: categoryFilter == "Other" ? .on : .off) { action in
+    private lazy var other = UIAction(title: "Other", attributes: [], state: currFilter == "Other" ? .on : .off) { action in
         self.toggleFilter(actionTitle: "Other");
         self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Other", menu: self.menu);
     }
         
-    private lazy var distance = UIAction(title: "Closest to Me"){ _ in
-        APP_DATA!.sortMapItemsByDist();
+    private lazy var distance = UIAction(title: "Closest to Me", attributes: [], state: currFilter == "Closest to Me" ? .on : .off){ action in
+        self.toggleFilter(actionTitle: "Closest to Me");
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Closest to Me", menu: self.menu);
+    }
+    
+    private lazy var distanceRadius = UIAction(title: "Within Radius", attributes: [], state: currFilter == "Within Radius" ? .on : .off){action in
+        var alert = UIAlertController(title: "Radius", message: "Filter within a radius (in miles)", preferredStyle: .alert)
+
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField(configurationHandler: { (textField) -> Void in
+            textField.text = ""
+        })
+
+        //3. Grab the value from the text field, and print it when the user clicks OK.
+        var radius = 0
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (action) -> Void in
+            let textField = (alert?.textFields![0])! as UITextField
+            radius = Int(textField.text!) ?? 0
+            print(radius)
+            self.toggleFilter(actionTitle: "Within Radius", radius: radius)
+        }))
+
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+        
+        self.updateActionState(actionTitle: "Within Radius", menu: self.menu);
     }
     
     private lazy var elements: [UIAction] = [food, clothing, furniture, other]
     private lazy var menu = UIMenu(title: "Category", children: elements)
     
-    private lazy var deferredMenu = UIDeferredMenuElement { (menuElements) in
-        let menu = UIMenu(title: "Distance", options: .displayInline,  children: [self.distance])
-            menuElements([menu])
-        }
+    private lazy var deferredMenu = UIMenu(title: "Distance", options: .displayInline, children: [self.distance, self.distanceRadius])
+//    UIDeferredMenuElement { (menuElements) in
+//        let menu = UIMenu(title: "Distance", options: .displayInline,  children: [self.distance, self.distanceRadius])
+//            menuElements([menu])
+//        }
     
-    private func toggleFilter(actionTitle: String? = nil) {
-        if(categoryFilter == actionTitle){
-            categoryFilter = "";
+    private func toggleFilter(actionTitle: String? = nil, radius: Int? = nil) {
+        if(currFilter == actionTitle){
+            currFilter = "";
         }
         else{
-            categoryFilter = actionTitle!;
+            currFilter = actionTitle!;
         }
-        APP_DATA!.filterMapItems(tag: categoryFilter);
-        self.filterItems(filterType: categoryFilter);
+        
+        switch currFilter {
+        case "Within Radius":
+            self.filterItems(distance: radius!);
+        case "Closest to Me":
+            APP_DATA!.sortMapItemsByDist()
+        case "":
+            for item in list_items{
+                mapView.addAnnotation(item)
+            }
+        default:
+            self.filterItems(filterType: currFilter);
+        }
     }
     
     private func updateActionState(actionTitle: String? = nil, menu: UIMenu) -> UIMenu {
@@ -142,22 +178,22 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         return
     }
     
-    private func filterItems(filterType: String) -> [Item]{
+    private func filterItems(filterType: String){
         mapView!.removeAnnotations(mapView!.annotations)
-        var filteredItems = list_items;
-        if(filterType != ""){
-            filteredItems = list_items.filter{$0.type == filterType}
-            for item in filteredItems{
-                mapView.addAnnotation(item)
-            }
+        APP_DATA!.filterMapItems(tag: filterType)
+        items = APP_DATA!.getMapItems()
+        for item in items{
+            mapView.addAnnotation(item)
         }
-        else{
-            for item in list_items{
-                mapView.addAnnotation(item)
-            }
+    }
+    
+    private func filterItems(distance: Int){
+        mapView!.removeAnnotations(mapView!.annotations)
+        APP_DATA!.filterMapItems(distance: distance)
+        items = APP_DATA!.getMapItems()
+        for item in items{
+            mapView.addAnnotation(item)
         }
-        print(filteredItems)
-        return filteredItems
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)-> MKAnnotationView? {
