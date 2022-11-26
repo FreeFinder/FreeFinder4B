@@ -89,7 +89,7 @@ class ItemsTableViewController: UITableViewController {
         case "Within Radius":
             self.filterItems(distance: radius!);
         case "Closest to Me":
-            APP_DATA!.sortMapItemsByDist()
+            self.sortItemsByDistance();
         default:
             self.filterItems(filterType: currFilter);
         }
@@ -175,6 +175,12 @@ class ItemsTableViewController: UITableViewController {
     private func filterItems(distance: Int){
         APP_DATA!.filterMapItems(distance: distance)
         items = APP_DATA!.getMapItems();
+        tableView.reloadData();
+    }
+    
+    private func sortItemsByDistance(){
+        APP_DATA!.sortMapItemsByDist()
+        items = APP_DATA!.getMapItems()
         tableView.reloadData();
     }
     
