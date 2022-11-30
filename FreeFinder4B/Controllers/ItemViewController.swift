@@ -8,7 +8,6 @@ var new_comment = "";
 class ItemViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBAction func exitButtonPushed(_ sender: UIButton) {
-		//self.viewWillDisappear(true);
 		presentingViewController?.viewWillAppear(true);
 		self.dismiss(animated: true);
 	}
@@ -20,7 +19,7 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
             itemcomments.append(new_comment);
             print(new_comment)
         }
-        //itemcomments = item_view_commment_list;
+        new_comment = "";
        myTableView.reloadData();
 	}
 	
