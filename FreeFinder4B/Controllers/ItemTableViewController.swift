@@ -8,6 +8,7 @@ var list_items : [Item] = []
 
 class ItemsTableViewController: UITableViewController {
     @IBOutlet weak var button: UIBarButtonItem!
+    //@IBOutlet weak var tableView: UITableView!
     var items: [Item] = [];
     var currFilter = "";
     
@@ -73,8 +74,6 @@ class ItemsTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: animated)
         }
-        //TODO: here we need to implement getting all items using refresh, once adding item works.
-        
     }
     
     private func toggleFilter(actionTitle: String? = nil, radius: Int? = nil) {
@@ -158,6 +157,7 @@ class ItemsTableViewController: UITableViewController {
 
         //TODO: here we need to implement getting comments of an item using that function...
         itemVC.passed_item = item_fromtable;
+        //item_view_commment_list = item_fromtable.comments;
         self.present(itemVC, animated: true, completion: nil);
     }
     

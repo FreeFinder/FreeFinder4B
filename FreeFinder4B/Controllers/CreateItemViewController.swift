@@ -87,6 +87,11 @@ class CreateItemViewController: UIViewController, UITextViewDelegate, UITextFiel
                     self.present(alert.showAlert(), animated: true, completion: nil)
                 }
             }else{
+                let user = User(email: "mongodb@gmail.com");
+                await user.db_add_user()
+                let observer = await AppData(user: user);
+                list_items = await observer.db_get_all_items();
+                
                 presentingViewController?.viewWillAppear(true);
                 self.dismiss(animated: true);
             }
