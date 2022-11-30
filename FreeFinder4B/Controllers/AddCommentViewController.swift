@@ -10,17 +10,44 @@ import SwiftUI
 import Foundation
 import MapKit
 
-class AddCommentViewController: UIViewController {
+class AddCommentViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var addComment: UIButton!
-    @IBOutlet weak var newComment: UITextField!
+    @IBOutlet weak var newComment: UITextView!
     
     var comment_passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "", counter: 0);
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        newComment.layer.borderWidth = 1
+        newComment.layer.borderColor = UIColor.label.cgColor
+        newComment.textColor = UIColor.lightGray
+        newComment.delegate = self
+        self.textViewDidBeginEditing(newComment)
+        self.textViewDidEndEditing(newComment)
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Description"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func postCommentButtonPressed(_ sender: UIButton) {
@@ -35,18 +62,9 @@ class AddCommentViewController: UIViewController {
                     self.present(alert.showAlert(), animated: true, completion: nil)
                 }
             }else{
-                //comment_passed_item.comments.append();
-               /* if let presenter = self.presentingViewController as? ItemViewController {
-                    presenter.new_comment = newComment?.text ?? "";
-                    presenter.itemDescription?.text = "Got you"
-                    presenter.viewWillAppear(true);
-                    presenter.viewDidLoad();
-                    print("is item")
-                }*/
-               
+                new_comment = newComment.text
+                presentingViewController?.viewWillAppear(true);
                 self.dismiss(animated: true);
-                
-                //self.dismiss(animated: true);
             }
         }
     }
