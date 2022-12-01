@@ -53,7 +53,6 @@
 		BD8F7CC2291EAF3600A451BC /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F7CC1291EAF3600A451BC /* AppConfig.swift */; };
 		BD99E8D32921D31C0000A5DD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD99E8D22921D31C0000A5DD /* SignUpViewController.swift */; };
 		BDA6F1862927B88E00113CF0 /* MongoDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA6F1852927B88E00113CF0 /* MongoDBTests.swift */; };
-		BDA6F1882927CF0700113CF0 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA6F1872927CF0700113CF0 /* Debug.swift */; };
 		BDE07B04291D911A003324AD /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B03291D911A003324AD /* Auth.swift */; };
 		BDE07B07291D9131003324AD /* MongoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B06291D9131003324AD /* MongoDB.swift */; };
 		BDE07B09291D9146003324AD /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE07B08291D9146003324AD /* Refresh.swift */; };
@@ -115,7 +114,6 @@
 		BD8F7CC1291EAF3600A451BC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		BD99E8D22921D31C0000A5DD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BDA6F1852927B88E00113CF0 /* MongoDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoDBTests.swift; sourceTree = "<group>"; };
-		BDA6F1872927CF0700113CF0 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		BDE07B03291D911A003324AD /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BDE07B06291D9131003324AD /* MongoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoDB.swift; sourceTree = "<group>"; };
 		BDE07B08291D9146003324AD /* Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 				48BD948C292047B800C8014E /* LocationManager.swift */,
 				BDE07B03291D911A003324AD /* Auth.swift */,
 				BDE07B08291D9146003324AD /* Refresh.swift */,
-				BDA6F1872927CF0700113CF0 /* Debug.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -458,7 +455,6 @@
 				5D2EA5E12922B4DF00DDDDC7 /* CustomAlertController.swift in Sources */,
 				BD2F9689292019ED0047C23C /* MainNavigationController.swift in Sources */,
 				484DC4922919C84600AE095B /* AppDelegate.swift in Sources */,
-				BDA6F1882927CF0700113CF0 /* Debug.swift in Sources */,
 				BD2F9683291FFE560047C23C /* StartViewController.swift in Sources */,
 				BD8F7CBD291E985600A451BC /* CreateItemViewController.swift in Sources */,
 				BD8F7CBF291EA3FE00A451BC /* HomeViewController.swift in Sources */,

@@ -4,6 +4,8 @@ import SwiftUI
 import RealmSwift
 import UIKit
 
+/// [TODO]: actually not sure what this does
+/// - Returns: ditto
 func refresh() async -> [Item] {
 	let user = User(email: "mongodb@gmail.com");
 	await user.db_add_user();
@@ -13,6 +15,9 @@ func refresh() async -> [Item] {
 	return await observer.db_get_all_items()
 }
 
+/// Fetches an item from the database by its objectId
+/// - Parameter id: an items unique database objectId
+/// - Returns: an item if found, else, a nil value
 func db_fetch_item(
 	id: ObjectId
 ) async -> Item? {
@@ -31,7 +36,6 @@ func db_fetch_item(
 			print("Item information is not currently registered in database.")
 			return res;
 		}
-		print("Item in the database: \(String(describing: item))")
 		
 		let tempItem = parseDbItem(dbItem: item!)
 		
@@ -44,6 +48,9 @@ func db_fetch_item(
 }
 
 
+/// Parses the item data from the database and parses it into an Item object
+/// - Parameter dbItem: item data from the database
+/// - Returns: an Item object of the database item data
 func parseDbItem(dbItem: Document) -> Item {
 	let id: ObjectId = (dbItem["_id"]!!).objectIdValue!;
 	let name = (dbItem["name"]!!).stringValue!;
@@ -60,7 +67,6 @@ func parseDbItem(dbItem: Document) -> Item {
 	
 	let commentsRaw: [AnyBSON?] = (dbItem["comments"]!!).arrayValue!;
 	let comments: [String] = commentsRaw.map{ ($0?.stringValue)! };
-	
 	
 	let creator_email = (dbItem["creator_email"]!!).stringValue!;
 	

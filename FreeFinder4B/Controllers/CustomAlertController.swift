@@ -1,10 +1,3 @@
-//
-//  CustomAlertController.swift
-//  FreeFinder4B
-//
-//  Created by Ruxandra Nicolae on 11/14/22.
-//
-
 import Foundation
 import UIKit
 
@@ -21,7 +14,7 @@ class CustomAlertController: NSObject {
 
     func showAlert()->UIAlertController {
         let alertController = UIAlertController(title: self.title, message: self.message, preferredStyle: .alert)
-        // you can further customize your buttons, buttons' title etc
+        
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
         }))
         return alertController
