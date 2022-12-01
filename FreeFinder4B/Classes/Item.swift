@@ -10,10 +10,23 @@ class Item: NSObject, MKAnnotation{
 	let coordinate: CLLocationCoordinate2D
 	var comments: [String]
 	let detail: String
-    let creator_email: String
+	let creator_email: String
 	var counter: Int
 	var id: ObjectId
 	
+	var title: String? { return name }
+	var subtitle: String? { return type }
+	
+	/// Ititializes an Item object
+	/// - Parameters:
+	///   - name: the name of the item
+	///   - type: the type of the item
+	///   - detail: details about the item
+	///   - coordinate: the coordinates of where the item is located
+	///   - creator_email: the email address of the user who uploaded the item
+	///   - comments: an array of comments on this item
+	///   - counter: the quantity of the item
+	///   - id: the unique database id of the item
 	init(
 		name: String,
 		type: String,
@@ -37,9 +50,9 @@ class Item: NSObject, MKAnnotation{
 		super.init()
 	}
 	
-	var title: String? { return name }
-	var subtitle: String? { return type }
 	
+	/// Fetches the collection of items from the database
+	/// - Returns: a MongoDB Collection object if found, else, a nil value
 	private func db_get_items_collection() async -> RLMMongoCollection? {
 		var items: RLMMongoCollection? = nil;
 		
@@ -51,18 +64,19 @@ class Item: NSObject, MKAnnotation{
 			let database = client.database(named: "freeFinder")
 			items = database.collection(withName: "items")
 		} catch {
-//			print("Could not fetch the items collection");
+			print("Could not fetch the items collection");
 		}
 		return items;
 	}
 	
+	/// Adds this item obejct's information to the database
+	/// - Returns: the unique database objectId of the item
 	func db_add_item() async -> ObjectId {
-		if (self.id != ObjectId()) { return self.id }; // if the object has an id, its already in the DB
+		if (self.id != ObjectId()) { return self.id }; // check if already in db
 		var res: ObjectId = ObjectId();
 		do {
 			let items: RLMMongoCollection = await db_get_items_collection()!
 			
-			// create an item and insert it
 			let item: Document = [
 				"name": AnyBSON(stringLiteral: self.name),
 				"type": AnyBSON(stringLiteral: self.type),
@@ -76,17 +90,16 @@ class Item: NSObject, MKAnnotation{
 			
 			let objectId: AnyBSON = try await items.insertOne(item)
 			self.id = objectId.objectIdValue!;
-			if (self.id.stringValue != "") {
-//				print("Successfully inserted item. The returned id is \(self.id)")
-				res = self.id;
-			}
+			if (self.id.stringValue != "") { res = self.id; }
 		} catch {
-//			print("Login and item insertion failed: \(error.localizedDescription)")
+			print("Login and item insertion failed: \(error.localizedDescription)")
 		}
 		
 		return res;
 	}
 	
+	/// Checks if this item currently exists in the database
+	/// - Returns: A boolean of whether its found in the database
 	func db_item_exists() async -> Bool {
 		var res = false;
 		if (self.id == ObjectId()) { return res; }
@@ -97,20 +110,21 @@ class Item: NSObject, MKAnnotation{
 			let potentialItem: Document = ["_id": AnyBSON(self.id)]
 			
 			let document = try await items.findOneDocument(filter: potentialItem);
-            
+			
 			if (document == nil) {
 				print("Could not find this document in the database!");
 			} else {
-				print("This item exists in the database: \(String(describing: document))")
-                res = true;
+				res = true;
 			}
 		} catch {
-//			print("Checking whether an item existed failed, inconclusive: \(error.localizedDescription)")
+			print("Checking whether an item existed failed, inconclusive: \(error.localizedDescription)")
 		}
 		
 		return res;
 	}
 	
+	/// Deletes this item from the database
+	/// - Returns: a boolean on whether or not the object was successfully deleted from the database
 	func db_delete_item() async -> Bool {
 		var res = false;
 		if (self.id == ObjectId()) { return res; } // the item is already not in db
@@ -121,28 +135,32 @@ class Item: NSObject, MKAnnotation{
 			let itemQuery: Document = ["_id": AnyBSON(self.id)]
 			
 			let _ = try await items.deleteOneDocument(filter: itemQuery)
-//			print("Successfully deleted this item \(self.id) from the database");
 			res = true;
-			
 		} catch {
-//			print("Login and item deletion failed: \(error.localizedDescription)")
+			print("Login and item deletion failed: \(error.localizedDescription)")
 		}
 		
 		return res;
 	}
 	
+	/// Deletes this item from the app & database
+	/// - Parameter deviceLocation: the current location of the device
+	/// - Returns: a boolean on whether or not the object was successfully deleted from the app & db
 	func delete_Item(deviceLocation: CLLocationCoordinate2D) async -> Bool{
-        if (itemTooFar(location: deviceLocation)) {
-            return false // deletes if item in database
-        }
-        else if (await self.db_item_exists()) {
-			await db_delete_item();
-			await refresh()
-            return true
-        }
-        return true 
+		if (itemTooFar(location: deviceLocation)) {
+			return false // deletes if item in database
+		}
+		else if (await self.db_item_exists()) {
+			let _ = await db_delete_item();
+			_ = await refresh();
+			return true
+		}
+		return true
 	}
 	
+	/// Returns whether this item is too far to decrement
+	/// - Parameter location: coordinates of the current device
+	/// - Returns: a boolean on whether this item is too far to decrement
 	private func itemTooFar(location: CLLocationCoordinate2D) -> Bool {
 		let dist = sqrt((
 			pow((self.coordinate.latitude - location.latitude), 2) +
@@ -151,6 +169,8 @@ class Item: NSObject, MKAnnotation{
 		return (dist > DECREMENT_DISTANCE);
 	}
 	
+	/// Decrements the quantity of this item in the database
+	/// - Returns: a boolean on whether this item's quantity was successfully decremented
 	func db_decrement_quantity(	) async -> Bool {
 		var res: Bool = false; // whether or not the item is deleted
 		if (self.id == ObjectId()) { return res; }
@@ -174,19 +194,22 @@ class Item: NSObject, MKAnnotation{
 				return res;
 				
 			}
-//			print("Successfully decremented the quantity on \(self.id) from the database");
 			res = true;
 		} catch {
-//			print("Login and counter decrement failed: \(error.localizedDescription)")
+			print("Login and counter decrement failed: \(error.localizedDescription)")
 		}
 		
 		return res;
 	}
 	
+	
+	/// Adds a comment to this item in the database
+	/// - Parameter comment: the comment to add to this item
+	/// - Returns: a boolean on whether the comment was successfully added to this db item
 	func db_add_comment(comment: String) async -> Bool {
 		var res: Bool = false;
 		
-		//if (self.id == ObjectId()) { return res; }
+		if (self.id == ObjectId()) { return res; }
 		let prevLength = self.comments.count;
 		
 		do {
@@ -204,39 +227,35 @@ class Item: NSObject, MKAnnotation{
 			)
 			if (updateResult.matchedCount != 1
 				&& updateResult.modifiedCount != 1) {
-                return res;
+				return res;
 			}
-//			print("Successfully added the comment on \(self.id) from the database");
 			self.comments.append(comment); // add the comment locally to reflect db changes
 			res = true;
 		} catch {
 			if (prevLength < self.comments.count) { self.comments.removeLast() }
-//			print("Login and add comment failed: \(error.localizedDescription)")
+			print("Login and add comment failed: \(error.localizedDescription)")
 		}
 		return res;
 	}
 	
+	/// Decrements the quantity of this item on the app and in the db
+	/// - Parameter deviceLocation: the current location of this device
+	/// - Returns: a boolean of whether or not the item's quantity was successfully decremented
 	func decrement_quantity(deviceLocation: CLLocationCoordinate2D) async -> Bool {
-		/*
-		 [MISC] move the isTooFar function check from the db_decrement quantity to here
-		 => purpose is to make the db functions solely have to cover reading/writing
-		 => all validation handling should be handled on frontend + "api" functions
-		 */
-        
-        if (itemTooFar(location: deviceLocation)) { return false }; // Too far away to interact
-        if (!(await self.db_item_exists())){ return false }
-        if (self.counter == 1){
-            await self.delete_Item(deviceLocation: deviceLocation)
-            return true
-        }
-        else{
-            if (await self.db_decrement_quantity()) {
-                self.counter = self.counter - 1
-                return true
-            }
-            else{
-                return false
-            }
-        }
-    }
+		if (itemTooFar(location: deviceLocation)) { return false }; // too far away to interact
+		if (!(await self.db_item_exists())){ return false }
+		if (self.counter == 1){
+			let _ = await self.delete_Item(deviceLocation: deviceLocation)
+			return true
+		}
+		else{
+			if (await self.db_decrement_quantity()) {
+				self.counter = self.counter - 1
+				return true
+			}
+			else{
+				return false
+			}
+		}
+	}
 }
