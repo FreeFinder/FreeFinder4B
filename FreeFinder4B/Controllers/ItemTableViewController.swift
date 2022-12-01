@@ -150,13 +150,26 @@ class ItemsTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
-		let item_fromtable = items[indexPath.row];
-		
-		let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
-		
-		//TODO: here we need to implement getting comments of an item using that function...
-		itemVC.passed_item = item_fromtable;
-		self.present(itemVC, animated: true, completion: nil);
+        Task{
+            let item_fromtable = items[indexPath.row];
+            let exists = await item_fromtable.db_item_exists();
+            if(exists == false){
+                let alert = CustomAlertController(title: "Cannot View Listing", message: "This item has just been deleted, cannot access anymore")
+                DispatchQueue.main.async {
+                    self.present(alert.showAlert(), animated: true, completion: nil)
+                }
+                list_items = await APP_DATA!.refresh()
+                //list_items = await db_get_all_items();
+                tableView.reloadData();
+                return;
+            }
+            let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
+            
+            //TODO: here we need to implement getting comments of an item using that function...
+            itemVC.passed_item = item_fromtable;
+            self.present(itemVC, animated: true, completion: nil);
+            
+        }
 	}
 	
 	private func filterItems(filterType: String){

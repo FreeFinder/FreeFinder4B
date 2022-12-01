@@ -14,10 +14,8 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true);
-		print("view will appear has been called")
 		if(new_comment != ""){
 			itemcomments.append(new_comment);
-			print(new_comment)
 		}
 		new_comment = "";
 		myTableView.reloadData();
@@ -47,11 +45,13 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 				
 				if(did_decr){
 					if (og_amount == 1){
+                        let v = self.view;
+                        self.showSpinner(onView: v!)
 						let user = User(email: "mongodb@gmail.com");
 						await user.db_add_user()
 						let observer = await AppData(user: user);
 						list_items = await observer.db_get_all_items();
-						
+                        self.removeSpinner();
 						presentingViewController?.viewWillAppear(true);
 						self.dismiss(animated: true);
 					}
@@ -79,8 +79,12 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		currentLocation = locManager.location
 		let item_location = currentLocation.coordinate
 		
+        
+
 		Task{
-			let did_del = await passed_item.delete_Item(deviceLocation: item_location);
+            let v = self.view;
+            self.showSpinner(onView: v!)
+            let did_del = await passed_item.delete_Item(deviceLocation: item_location);
 			if did_del{
 				let user = User(email: "mongodb@gmail.com");
 				await user.db_add_user()
@@ -89,9 +93,11 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 				
 				
 				presentingViewController?.viewWillAppear(true);
+                self.removeSpinner();
 				self.dismiss(animated: true);
 			}
 			else {
+                self.removeSpinner();
 				let alert = CustomAlertController(title: "Cannot Delete", message: "You are not currently near this item.")
 				DispatchQueue.main.async {
 					self.present(alert.showAlert(), animated: true, completion: nil)
@@ -190,4 +196,31 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		self.present(addCVC, animated: true, completion: nil);
 	}
 	
+}
+
+
+var vSpinner : UIView?
+
+extension UIViewController {
+    func showSpinner(onView : UIView) {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let ai = UIActivityIndicatorView.init(style: .large)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            onView.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
+    }
+    
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            vSpinner?.removeFromSuperview()
+            vSpinner = nil
+        }
+    }
 }
