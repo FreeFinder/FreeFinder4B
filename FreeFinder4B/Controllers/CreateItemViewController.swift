@@ -68,6 +68,14 @@ class CreateItemViewController: UIViewController, UITextViewDelegate, UITextFiel
 		}else{
 			quantity = Int(quantity_string) ?? 0
 		}
+        
+        if(descriptionInput.text == "Description"){
+            let alert = CustomAlertController(title: "Invalid Description", message: "No description and 'Description' are not valid inputs")
+            DispatchQueue.main.async {
+                self.present(alert.showAlert(), animated: true, completion: nil)
+            }
+            return;
+        }
 		
 		Task {
 			

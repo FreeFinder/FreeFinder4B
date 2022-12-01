@@ -158,8 +158,7 @@ class ItemsTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     self.present(alert.showAlert(), animated: true, completion: nil)
                 }
-                list_items = await APP_DATA!.refresh()
-                //list_items = await db_get_all_items();
+                items = await APP_DATA!.refresh()
                 tableView.reloadData();
                 return;
             }

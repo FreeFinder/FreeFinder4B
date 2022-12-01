@@ -17,7 +17,7 @@ class AddCommentViewController: UIViewController, UITextViewDelegate {
 		newComment.textColor = UIColor.lightGray
 		newComment.delegate = self
 		self.textViewDidBeginEditing(newComment)
-		self.textViewDidEndEditing(newComment)
+		//self.textViewDidEndEditing(newComment)
 		let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
 		view.addGestureRecognizer(tap)
 	}
@@ -26,13 +26,6 @@ class AddCommentViewController: UIViewController, UITextViewDelegate {
 		if textView.textColor == UIColor.lightGray {
 			textView.text = nil
 			textView.textColor = UIColor.black
-		}
-	}
-	
-	func textViewDidEndEditing(_ textView: UITextView) {
-		if textView.text.isEmpty {
-			textView.text = "Description"
-			textView.textColor = UIColor.lightGray
 		}
 	}
 	
@@ -47,7 +40,7 @@ class AddCommentViewController: UIViewController, UITextViewDelegate {
 				item: comment_passed_item,
 				comment: newComment?.text ?? ""
 			);
-			if(valid_comment == false){
+            if(valid_comment == false){
 				let alert = CustomAlertController(title: "Invalid Comment", message: "Please try again.")
 				DispatchQueue.main.async {
 					self.present(alert.showAlert(), animated: true, completion: nil)
