@@ -28,11 +28,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Other", menu: self.menu);
     }
     
-    private lazy var distance = UIAction(title: "Closest to Me", attributes: [], state: currFilter == "Closest to Me" ? .on : .off){ action in
-        self.toggleFilter(actionTitle: "Closest to Me");
-        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Closest to Me", menu: self.menu);
+    private lazy var nearMe = UIAction(title: "Near Me", attributes: [], state: currFilter == "Near Me" ? .on : .off){ action in
+        self.toggleFilter(actionTitle: "Near Me");
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Near Me", menu: self.menu);
     }
-    
+
     private lazy var distanceRadius = UIAction(title: "Within Radius", attributes: [], state: currFilter == "Within Radius" ? .on : .off){action in
         var alert = UIAlertController(title: "Radius", message: "Filter within a radius (in miles)", preferredStyle: .alert)
         
@@ -52,16 +52,15 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
         
-        self.updateActionState(actionTitle: "Within Radius", menu: self.menu);
+        self.navigationItem.leftBarButtonItem?.menu = self.updateActionState(actionTitle: "Within Radius", menu: self.menu);
     }
     
-    private lazy var elements: [UIAction] = [food, clothing, furniture, other]
-    private lazy var menu = UIMenu(title: "Category", children: elements)
-    
-    private lazy var deferredMenu = UIMenu(title: "Distance", options: .displayInline, children: [self.distance, self.distanceRadius])
+
+    private lazy var elements: [UIAction] = [food, clothing, furniture, other, nearMe, distanceRadius]
+    private lazy var menu = UIMenu(title: "Filter by", children: elements)
     
     private func toggleFilter(actionTitle: String? = nil, radius: Int? = nil) {
-        if(currFilter == actionTitle){
+        if(currFilter == actionTitle && actionTitle != "Within Radius"){
             currFilter = "";
         }
         else{
@@ -69,16 +68,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         }
         
         switch currFilter {
-        case "Within Radius":
-            self.filterItems(distance: radius!);
-        case "Closest to Me":
-            APP_DATA!.sortMapItemsByDist()
-        case "":
-            for item in list_items{
-                mapView.addAnnotation(item)
-            }
-        default:
-            self.filterItems(filterType: currFilter);
+            case "Within Radius":
+                self.filterItems(distance: radius!);
+            case "Near Me":
+            self.filterItems(distance: 1);
+            default:
+                self.filterItems(filterType: currFilter);
         }
     }
     
@@ -89,7 +84,10 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
                     return
                 }
                 if action.title == actionTitle {
-                    if(action.state == .on){
+                    if(actionTitle == "Within Radius"){
+                        action.state = .on
+                    }
+                    else if(action.state == .on){
                         action.state = .off
                     }
                     else{
@@ -112,7 +110,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         loadMap();
         
-        menu = menu.replacingChildren([food, clothing, furniture, other, deferredMenu])
+        menu = menu.replacingChildren([food, clothing, furniture, other, nearMe, distanceRadius])
         navigationItem.leftBarButtonItem?.menu = menu
     }
     
@@ -176,6 +174,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     private func filterItems(filterType: String){
         mapView!.removeAnnotations(mapView!.annotations)
         APP_DATA!.filterMapItems(tag: filterType)
+        APP_DATA!.sortMapItemsByDist()
         items = APP_DATA!.getMapItems()
         for item in items{
             mapView.addAnnotation(item)
@@ -185,6 +184,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     private func filterItems(distance: Int){
         mapView!.removeAnnotations(mapView!.annotations)
         APP_DATA!.filterMapItems(distance: distance)
+        APP_DATA!.sortMapItemsByDist()
         items = APP_DATA!.getMapItems()
         for item in items{
             mapView.addAnnotation(item)
