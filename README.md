@@ -13,6 +13,38 @@ To run the code, press run in Xcode (the play button on the top left). Alternati
 Our app aims to address the issue of waste, by allowing users to post and find free things. Users can create an account and sign into our app. Then they are able to view listings of free items across the following categories: food, clothing, furniture and misc. They can view items both on a map view as well as a list view and are able to toggle between the two views. After clicking on an item, they are brought to the item listing page where they are able to see the information on the item. They can comment on the item from this page as well as decrement the quantity of an item if they have gone to take one. They can also delete an item. If there is only one item left and the decrement the quantity, the item will be deleted (as there are no more left). Both decrementing and deleting an item require the user to be somewhat close to the location of the item (which is defined to be within 0.01 degrees in longitude and latitude). Users can also create items, indicating the title, quantity, type and description of an item. The location for the new item is set to be the users current location. Finally, users can also sign out of the app which brings them back to the initial sign in screen. 
 
 ## How to Use
+### Create Account
+
+### Sign In
+
+### Create Item
+
+Inputs that are not allowed when creating a message (error messages should pop up if these are inputted):
+- Empty strings for create item and comment fields
+- comments that are longer than 200 characters
+- quantity <= 0 
+- description length >= 280 characters
+- name length >= 100 characters
+- deleting or decrementing an item from a location greater than 0.01 degrees (in longitude and latitude) away from an item
+- emails that are not @uchicago.edu emails
+
+### Toggle Between Views
+
+### View Item on Map 
+
+### View Item on List
+
+### Comment on Item
+
+### Decrement Quantity of an Item
+
+### Delete Item 
+
+### Filter by Type
+
+### Filter by Distance
+
+### Sign Out
 
 
 ## (1) What we did in this iteration
