@@ -4,8 +4,8 @@
 First clone and download our repository to your local machine. You will need Xcode in order to run our program. If you don't have Xcode downloaded on your computer, you can use the CSIL computers. 
 
 Once you've cloned the repo, open it up in Xcode. If anything pod related shows up in the folder, delete it. 
-If you experience troubles/errors with the packages, try quitting XCode and reopening it. You might also need to redownload the package dependencies for Realm. To do this go to File then Add packages... in the menu bar and copy and paste this (https://github.com/realm/realm-swift.git
-) into the search bar. Press add packages and add both. If you are still having issues, under file go to packages and click reset package caches. 
+If when trying to build, you experience troubles/errors with the packages, try quitting XCode and reopening it. You might also need to redownload the package dependencies for Realm. To do this go to File then Add packages... in the menu bar and copy and paste this (https://github.com/realm/realm-swift.git
+) into the search bar. Press add packages and add both. If you are still having issues, under file go to packages and click reset package caches (wait until Xcode finishes restting the package caches) and try building again. If you are still getting error, under file fo back to packages and then press resolve package versions. 
 
 To run the code, press run in Xcode (the play button on the top left). Alternatively, do command R or go to product then run in the menu bar. Make sure the scheme is set to FreeFinders3B. We tested ours on iPhone 14 Pro simulator running iOS 16.1. Have patience, depending on the device (and if you are running a simulator) there might be some lag. We've also run into issues with the M1 chip on mac and xcode. In this case, you cannot run a simulator and need to build on a physical device. To do this connect your phone (if it is an iphone) to your computer and build on it. You might need to allow developer settings in the settings on your phone (https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device). 
 
