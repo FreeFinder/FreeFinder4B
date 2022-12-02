@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController {
 			return;
 		};
 		Task {
+            self.showSpinner(onView: self.view)
 			USER = User(email: email);
 			await USER?.db_add_user();
 			
@@ -26,7 +27,7 @@ class SignUpViewController: UIViewController {
 			DEVICE_DATA.saveLocalUser(email: email, id: id.stringValue);
 			
 			APP_DATA = await AppData(user: USER!);
-			
+            self.removeSpinner();
 			let TabBarController = storyBoard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController;
 			self.navigationController?.pushViewController(TabBarController, animated: true);
 		}

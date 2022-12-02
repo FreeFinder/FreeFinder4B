@@ -19,9 +19,10 @@ class SignInViewController: UIViewController {
 			return;
 		};
 		Task {
-			
+            self.showSpinner(onView: self.view)
 			let userInfo = await db_fetch_user(email: email);
 			if (userInfo == nil) { // this user was not in the database
+                self.removeSpinner();
 				let alert = CustomAlertController(title: "Invalid Email", message: "This email is not associated with a pre-existing account. Try signing up first.")
 				DispatchQueue.main.async {
 					self.present(alert.showAlert(), animated: true, completion: nil)
@@ -36,7 +37,7 @@ class SignInViewController: UIViewController {
 			
 			APP_DATA = await AppData(user: USER!);
 			
-			
+            self.removeSpinner();
 			let TabBarController = storyBoard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController;
 			self.navigationController?.pushViewController(TabBarController, animated: true);
 		}
@@ -53,3 +54,4 @@ class SignInViewController: UIViewController {
 		
 	}
 }
+
