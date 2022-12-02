@@ -4,8 +4,8 @@ import SwiftUI
 import RealmSwift
 import UIKit
 
-/// [TODO]: actually not sure what this does
-/// - Returns: ditto
+/// refreshes the main view controller
+/// - Returns: a list of all the items in the mongodb backend
 func refresh() async -> [Item] {
 	let user = User(email: "mongodb@gmail.com");
 	await user.db_add_user();

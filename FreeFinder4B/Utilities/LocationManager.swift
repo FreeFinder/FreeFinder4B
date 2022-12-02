@@ -16,10 +16,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 		manager.startUpdatingLocation()
 	}
 	
-	/// [TODO] this
+	/// Sets the users current location to local storage
 	/// - Parameters:
-	///   - manager: TODO
-	///   - locations: TODO
+	///   - manager: a phone location manager object
+	///   - locations: list of locations
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let location = locations.last else {
 			return

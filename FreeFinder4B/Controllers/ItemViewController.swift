@@ -138,7 +138,6 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		// TODO: connect to data
 		itemDescription?.text = passed_item.detail;
 		itemName?.text = passed_item.name;
 		itemQuantity?.text = String(passed_item.counter);
@@ -191,7 +190,6 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBAction func addCommentPressed(_ sender: UIButton) {
 		let addCVC : AddCommentViewController = UIStoryboard(name: "AddComment", bundle: nil).instantiateViewController(withIdentifier: "AddComment") as! AddCommentViewController
 		
-		//TODO: here we need to implement getting comments of an item using that function...
 		addCVC.comment_passed_item = passed_item;
 		self.present(addCVC, animated: true, completion: nil);
 	}

@@ -64,13 +64,13 @@ class AppData {
 	/// - Parameters:
 	///   - distance:number of miles setting the boundary around the item
 	///   - tag: the tag to filter the items by
-	func filterMapItems(distance: Int, tag: String) { // TODO: still needs a test
+	func filterMapItems(distance: Int, tag: String) {
 		self.filterMapItems(distance: distance)
 		self.mapItems = self.mapItems.filter{( $0.type == tag)}
 	}
 	
-	/// TODO: figure out which direction these sorts are (this and the function below)
-	func sortMapItemsByDist() { // TODO: sort mapItems by distance
+	/// Sorts the map items by distance
+	func sortMapItemsByDist() {
 		self.mergeSortMapItems(itemlst: &mapItems, startIndex: 0, endIndex: self.mapItems.count)
 	}
 	
@@ -114,7 +114,7 @@ class AppData {
 		}
 	}
 	
-	/// TODO: idek what this does
+	/// Resets the current filter and mapItems
 	func filterMap() {
 		self.currentFilter = "";
 		self.mapItems = self.items;

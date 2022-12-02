@@ -231,7 +231,6 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
             }else{
                 let itemVC : ItemViewController = UIStoryboard(name: "ViewItem", bundle: nil).instantiateViewController(withIdentifier: "ViewItem") as! ItemViewController
                 
-                //TODO: here we need to implement getting comments of an item using that function...
                 itemVC.passed_item = item;
                 self.present(itemVC, animated: true, completion: nil)
             }
