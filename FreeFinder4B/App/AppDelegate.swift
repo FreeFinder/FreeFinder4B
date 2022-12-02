@@ -24,7 +24,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 //    func applicationWillEnterForeground(_ application: UIApplication) {
-//        var locationBool = LocationManager.checkLocationPrefs()
+//        var locationBool = LocationManager.shared.checkLocationPrefs()
+//        if locationBool == false {
+//            var alertController = UIAlertController(title: "Location Preferences Disabled", message: "Turn on location preferences for FreeFinder in Settings before continuing.", preferredStyle: .actionSheet)
+//            var okAction = UIAlertAction(title: "Done!", style: UIAlertAction.Style.default) {
+//                                    UIAlertAction in
+//                                    NSLog("Please restart the app before continuing.")
+//                                }
+//            var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
+//                                    UIAlertAction in
+//                                    NSLog("Some app functionality will be unavailable.")
+//                                }
+//                alertController.addAction(okAction)
+//                alertController.addAction(cancelAction)
+//                self.window.rootViewController?.presentViewController(alertController, animated: true)
+//        }
 //        return
 //    }
 

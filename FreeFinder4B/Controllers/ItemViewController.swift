@@ -2,18 +2,23 @@ import UIKit
 import MapKit
 import Foundation
 
+var item_view_commment_list : [String] = []
+var new_comment = "";
+
 class ItemViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBAction func exitButtonPushed(_ sender: UIButton) {
-		//self.viewWillDisappear(true);
 		presentingViewController?.viewWillAppear(true);
-		//esentially i want to make sure that when we exit the item view controllers we always update the controller we came from (especially if we've made changes to it).
-		
 		self.dismiss(animated: true);
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true);
+		if(new_comment != ""){
+			itemcomments.append(new_comment);
+		}
+		new_comment = "";
+		myTableView.reloadData();
 	}
 	
 	@IBAction func exitAddCommentPushed(_ sender: UIButton) {
@@ -34,26 +39,28 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 			let item_location = currentLocation.coordinate
 			
 			Task{
-                let og_amount = passed_item.counter
+				let og_amount = passed_item.counter
 				let did_decr = await passed_item.decrement_quantity(deviceLocation: item_location)
 				
 				
 				if(did_decr){
-                    if (og_amount == 1){
-                        let user = User(email: "mongodb@gmail.com");
-                        await user.db_add_user()
-                        let observer = await AppData(user: user);
-                        list_items = await observer.db_get_all_items();
-                        
-                        presentingViewController?.viewWillAppear(true);
-                        self.dismiss(animated: true);
-                    }
-                    else{
-                        itemQuantity?.text = String(passed_item_counter);
-                        self.viewDidLoad();
-                        self.viewWillAppear(true);
-                    }
-
+					if (og_amount == 1){
+                        let v = self.view;
+                        self.showSpinner(onView: v!)
+						let user = User(email: "mongodb@gmail.com");
+						await user.db_add_user()
+						let observer = await AppData(user: user);
+						list_items = await observer.db_get_all_items();
+                        self.removeSpinner();
+						presentingViewController?.viewWillAppear(true);
+						self.dismiss(animated: true);
+					}
+					else{
+						itemQuantity?.text = String(passed_item_counter);
+						self.viewDidLoad();
+						self.viewWillAppear(true);
+					}
+					
 				}else{
 					let alert = CustomAlertController(title: "Cannot Decrement", message: "You are not currently near this item.")
 					DispatchQueue.main.async {
@@ -64,32 +71,38 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 			}
 		}
 	}
-    
+	
 	func delete_item(alertAction: UIAlertAction) {
-        let locManager = CLLocationManager()
-        locManager.requestWhenInUseAuthorization()
-        var currentLocation: CLLocation!
-        currentLocation = locManager.location
-        let item_location = currentLocation.coordinate
+		let locManager = CLLocationManager()
+		locManager.requestWhenInUseAuthorization()
+		var currentLocation: CLLocation!
+		currentLocation = locManager.location
+		let item_location = currentLocation.coordinate
+		
         
+
 		Task{
-			let did_del = await passed_item.delete_Item(deviceLocation: item_location);
-            if did_del{
-                let user = User(email: "mongodb@gmail.com");
-                await user.db_add_user()
-                let observer = await AppData(user: user);
-                list_items = await observer.db_get_all_items();
-                
-                
-                presentingViewController?.viewWillAppear(true);
-                self.dismiss(animated: true);
-            }
-            else {
-                let alert = CustomAlertController(title: "Cannot Delete", message: "You are not currently near this item.")
-                DispatchQueue.main.async {
-                    self.present(alert.showAlert(), animated: true, completion: nil)
-                }
-            }
+            let v = self.view;
+            self.showSpinner(onView: v!)
+            let did_del = await passed_item.delete_Item(deviceLocation: item_location);
+			if did_del{
+				let user = User(email: "mongodb@gmail.com");
+				await user.db_add_user()
+				let observer = await AppData(user: user);
+				list_items = await observer.db_get_all_items();
+				
+				
+				presentingViewController?.viewWillAppear(true);
+                self.removeSpinner();
+				self.dismiss(animated: true);
+			}
+			else {
+                self.removeSpinner();
+				let alert = CustomAlertController(title: "Cannot Delete", message: "You are not currently near this item.")
+				DispatchQueue.main.async {
+					self.present(alert.showAlert(), animated: true, completion: nil)
+				}
+			}
 		}
 	}
 	
@@ -111,42 +124,49 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 	var itemcomments = [""];
 	var passed_item = Item(name: "", type: "", detail: "", coordinate: CLLocationCoordinate2D(latitude: 20.0, longitude: 150.0), creator_email: "", counter: 0);
 	var passed_item_counter = 0;
-    var new_comment = "";
 	
 	@IBOutlet weak var itemName: UILabel!
 	@IBOutlet weak var itemLocation: UILabel!
 	@IBOutlet weak var itemDescription: UILabel!
 	@IBOutlet weak var exit: UIButton!
-	//@IBOutlet weak var addComment: UIButton!
-	//@IBOutlet weak var newComment: UITextField!
 	@IBOutlet weak var itemQuantity: UILabel!
 	@IBOutlet weak var decrement: UIButton!
 	@IBOutlet weak var deleteItem: UIButton!
+	@IBOutlet weak var scroller: UIScrollView!
+	@IBOutlet weak var myTableView: UITableView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		// TODO: connect to data
 		itemDescription?.text = passed_item.detail;
 		itemName?.text = passed_item.name;
 		itemQuantity?.text = String(passed_item.counter);
 		passed_item_counter = passed_item.counter;
-        itemcomments = passed_item.comments;
-        
-		// itemLocation?.text = location;
+		itemcomments = passed_item.comments;
+		if(new_comment != ""){
+			itemcomments.append(new_comment);
+		}
 		
-		
-		/*
-		 // MARK: - Navigation
-		 
-		 // In a storyboard-based application, you will often want to do a little preparation before navigation
-		 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		 // Get the new view controller using segue.destination.
-		 // Pass the selected object to the new view controller.
-		 }
-		 */
+		myTableView.reloadData();
 	}
-        
+	
+	override func viewDidLayoutSubviews() {
+		scroller.isScrollEnabled = true
+	}
+	
+	
+	func calculateHeight(inString:String) -> CGFloat{
+		let messageString = inString
+		let attributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16.0)]
+		
+		let attributedString : NSAttributedString = NSAttributedString(string: messageString, attributes: attributes)
+		
+		let rect : CGRect = attributedString.boundingRect(with: CGSize(width: 222.0, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
+		
+		let requredSize:CGRect = rect
+		return requredSize.height
+	}
+	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return itemcomments.count;
@@ -157,17 +177,48 @@ class ItemViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 		let writing_comment = itemcomments[indexPath.row];
 		cell?.textLabel!.text = writing_comment;
-		
+		cell?.textLabel!.numberOfLines=0;
 		return cell!
 	}
 	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		let heightOfRow = self.calculateHeight(inString: itemcomments[indexPath.row].description)
+		return (heightOfRow + 20.0)
+	}
 	
-    @IBAction func addCommentPressed(_ sender: UIButton) {
-        let addCVC : AddCommentViewController = UIStoryboard(name: "AddComment", bundle: nil).instantiateViewController(withIdentifier: "AddComment") as! AddCommentViewController
+	
+	@IBAction func addCommentPressed(_ sender: UIButton) {
+		let addCVC : AddCommentViewController = UIStoryboard(name: "AddComment", bundle: nil).instantiateViewController(withIdentifier: "AddComment") as! AddCommentViewController
+		
+		addCVC.comment_passed_item = passed_item;
+		self.present(addCVC, animated: true, completion: nil);
+	}
+	
+}
 
-        //TODO: here we need to implement getting comments of an item using that function...
-        addCVC.comment_passed_item = passed_item;
-        self.present(addCVC, animated: true, completion: nil);
+
+var vSpinner : UIView?
+
+extension UIViewController {
+    func showSpinner(onView : UIView) {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let ai = UIActivityIndicatorView.init(style: .large)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            onView.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
     }
     
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            vSpinner?.removeFromSuperview()
+            vSpinner = nil
+        }
+    }
 }
