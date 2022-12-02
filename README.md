@@ -1,4 +1,19 @@
-# FreeFinder Milestone 4B
+# FreeFinder Milestone 5
+
+## Installation
+First clone and download our repository to your local machine. You will need Xcode in order to run our program. If you don't have Xcode downloaded on your computer, you can use the CSIL computers. 
+
+Once you've cloned the repo, open it up in Xcode. If anything pod related shows up in the folder, delete it. 
+If you experience troubles/errors with the packages, try quitting XCode and reopening it. You might also need to redownload the package dependencies for Realm. To do this go to File then Add packages... in the menu bar and copy and paste this (https://github.com/realm/realm-swift.git
+) into the search bar. Press add packages and add both. If you are still having issues, under file go to packages and click reset package caches. 
+
+To run the code, press run in Xcode (the play button on the top left). Alternatively, do command R or go to product then run in the menu bar. Make sure the scheme is set to FreeFinders3B. We tested ours on iPhone 14 Pro simulator running iOS 16.1. Have patience, depending on the device (and if you are running a simulator) there might be some lag. We've also run into issues with the M1 chip on mac and xcode. In this case, you cannot run a simulator and need to build on a physical device. To do this connect your phone (if it is an iphone) to your computer and build on it. You might need to allow developer settings in the settings on your phone (https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device). 
+
+## Functionality
+Our app aims to address the issue of waste, by allowing users to post and find free things. Users can create an account and sign into our app. Then they are able to view listings of free items across the following categories: food, clothing, furniture and misc. They can view items both on a map view as well as a list view and are able to toggle between the two views. After clicking on an item, they are brought to the item listing page where they are able to see the information on the item. They can comment on the item from this page as well as decrement the quantity of an item if they have gone to take one. They can also delete an item. If there is only one item left and the decrement the quantity, the item will be deleted (as there are no more left). Both decrementing and deleting an item require the user to be somewhat close to the location of the item (which is defined to be within 0.01 degrees in longitude and latitude). Users can also create items, indicating the title, quantity, type and description of an item. The location for the new item is set to be the users current location. Finally, users can also sign out of the app which brings them back to the initial sign in screen. 
+
+## How to Use
+
 
 ## (1) What we did in this iteration
 The work was divided as follows: 
