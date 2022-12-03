@@ -105,3 +105,11 @@ FreeFinder4BTests contains the following files:
 - FreeFinders4B.swift: tests user and item related functions as well as filtering by distance from user
 - LocalDeviceTests.swift: tests local user related functions
 - MongoDBTests.swift: tests database functions
+
+## Unit Testing
+
+### How to run the unit test cases
+Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinder4B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above.
+
+### UI Unit Testing
+FreeFinder4BUITests contains our UI unit tests for the map. In addition to the coded tests, try the use cases outlines above in the section on how to use. 
