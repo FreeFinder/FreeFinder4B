@@ -14,12 +14,73 @@ Our app aims to address the issue of waste, by allowing users to post and find f
 
 ## How to Use
 ### Create Account
+Upon opening the app, you will be brought to the sign in screen. If you do not already have an account, you can click on sign up to create an account. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 19 52 PM" src="https://user-images.githubusercontent.com/68660398/205412584-e571f36f-8722-4bd3-a1db-a6dcdb70adaa.png">
+
+You will be brought to the create account page where you need to input a uchicago email and click sign up.
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 23 39 PM" src="https://user-images.githubusercontent.com/68660398/205412627-71962745-ef81-43ce-9dcd-b4a3987a1048.png">
 
 ### Sign In
+If you already have an account, to sign in from the sign in page, simply enter your email and press sign in. 
 
 ### Create Item
+To create an item, from either the map or list view, press the blue plus sign in the top right corner. 
 
-Inputs that are not allowed when creating a message (error messages should pop up if these are inputted):
+<img width="150" alt="Screen Shot 2022-12-02 at 6 28 35 PM" src="https://user-images.githubusercontent.com/68660398/205412848-b42e9071-0479-49c7-b1da-feec078e5024.png">
+<img width="150" alt="Screen Shot 2022-12-02 at 6 27 15 PM" src="https://user-images.githubusercontent.com/68660398/205412850-7f656cf0-f978-4045-b1aa-95b1db77c24a.png">
+
+This will bring you to the create item page, where you need to input a title, description, type and quantity for the item you want to post. The location for the item will be your current location. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 30 51 PM" src="https://user-images.githubusercontent.com/68660398/205412980-af2f48a6-1803-495f-964b-a6bf079eebd2.png">
+
+### Toggle Between Views
+To toggle between views, select the view you want on the bottom row. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 31 58 PM" src="https://user-images.githubusercontent.com/68660398/205413071-90e6bf2b-9530-4a43-b969-d74dfef0e2ed.png">
+
+### View Item on Map 
+To view an item in map view, make sure the leftmost view is selected on the bottom row (see above). You will be able to see a map, which you can navigate as you would apple or google maps (this might be harder if you are building on a simulator). If you are in the vicinity of active listings, these will apear on the map. You can click on one and if you press info, this will take you to the item's page. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 39 22 PM" src="https://user-images.githubusercontent.com/68660398/205413536-9562aed4-47ba-4a80-baf3-4ae113637bfb.png">
+
+### View Item on List
+To view an item in list view, make sure the middle view is selected on the bottom row (see above). You will see a list of all the items, which you can scroll through. If you click on one of the items, this will take you to the item's page. 
+
+### Comment on Item
+If you are on an item's page, you will be able to comment on the item. Press the comment button and you will be prompted to enter your comment. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 41 19 PM" src="https://user-images.githubusercontent.com/68660398/205413635-30806d55-85f5-436c-a618-9fa0d34df1a7.png">
+
+### Decrement Quantity of an Item
+To decrement the quantity of item, you must be semi-near the item you want to decrement. This is defined to be within .01 degrees longitude/latitude. If you are within this distance, from the item's page, press the "Take One" button. If you take the last one (so the quantity is set to 1) the item will be deleted. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 42 44 PM" src="https://user-images.githubusercontent.com/68660398/205413698-ef3b2995-69bc-448a-b55b-45422beb3507.png">
+
+### Delete Item 
+To delete an item, you must be semi-near the item you want to decrement. This is defined to be within .01 degrees longitude/latitude. If you are within this distance, from the item's page, press the delete post button. There will be a pop up confirming that you want to delete the item. 
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 46 48 PM" src="https://user-images.githubusercontent.com/68660398/205413954-01c3ca40-b1bc-46e0-be6b-f9a52d527488.png">
+
+### Filtering
+To filter by type, on either the map or list views, press the filter button on the top left.
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 50 25 PM" src="https://user-images.githubusercontent.com/68660398/205414145-74b688c6-ab53-4479-a7fc-917ea8856269.png">
+<img width="150" alt="Screen Shot 2022-12-02 at 6 49 46 PM" src="https://user-images.githubusercontent.com/68660398/205414149-3cb95ed7-e3de-4b3b-aaa6-5e00749e619d.png">
+
+This will trigger a drop down menu with the various filter options. Select what you want to filter by. Note that only one filter can be applied at a time.
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 52 15 PM" src="https://user-images.githubusercontent.com/68660398/205414245-f2fb26ee-bf51-49d8-8426-4887001d37a5.png">
+
+### Sign Out
+To sign out, make sure you are in the right most view. Then click sign out.
+
+<img width="150" alt="Screen Shot 2022-12-02 at 6 53 59 PM" src="https://user-images.githubusercontent.com/68660398/205414324-fb6997e0-e7f6-49a1-909c-3befb6b9b133.png">
+
+This will bring you back to the start screen.
+
+### Inputs that are not allowed for the various use cases (error messages should pop up if these are inputted):
 - Empty strings for create item and comment fields
 - comments that are longer than 200 characters
 - quantity <= 0 
@@ -28,79 +89,7 @@ Inputs that are not allowed when creating a message (error messages should pop u
 - deleting or decrementing an item from a location greater than 0.01 degrees (in longitude and latitude) away from an item
 - emails that are not @uchicago.edu emails
 
-### Toggle Between Views
-
-### View Item on Map 
-
-### View Item on List
-
-### Comment on Item
-
-### Decrement Quantity of an Item
-
-### Delete Item 
-
-### Filter by Type
-
-### Filter by Distance
-
-### Sign Out
-
-
-## (1) What we did in this iteration
-The work was divided as follows: 
-1. Connect UI to existing backend successfully - Ellen/Ruxi
-- Sign in
-- Sign out
-- Delete Item
-2. Filtering by category  
-- API -> Sydney/Jordan
-- UI -> Ellen/Ruxi
-3. Filtering by distance 
-- API -> William/Charlie
-- UI -> Ellen/Ruxi
-4. Decrementing of quantity
-- API -> Sydney/Jordan
-- Database -> Steven/Madhav
-- UI -> Ellen/Ruxi
-5. Styling of UI/UX elements -> Ellen/Ruxi
-6. Accessing/Utilizing User Location -> William/Charlie
-7. App Icon
-- Design + implementation -> Ellen
-
-We completed what we intended to at the start of iteration 2 (see milestone 4a readme). But over the course of the entire project, we completed most of what was initially proposed with the exception of the following features:
-1. Notifications
-2. Photos (our database is not equipped to store photos)
-3. User's own postings page
-4. Editing of profile settings (note this is no longer neccessary due to the removal of notifications)
-5. Item reservation
-6. User specifying location of an item (location is defaulted to user's current location)
-
-## (2) Compiling and Running Unit Tests
-Our unit testing can be found in the FreeFinder4BTests and FreeFinder4BUITests folders. See the following instructions to compile and run them. 
-
-### How to compile
-You will need XCode in order to compile our code. Once you've cloned the repo, open it up in XCode. If anything pod related shows up in the folder, delete it. 
-If you experience troubles/errors with the packages, try quitting XCode and reopening it. You might also need to redownload the package dependencies for Realm. To do this go to File then Add packages... in the menu bar and copy and paste this (https://github.com/realm/realm-swift.git
-) into the search bar. Press add packages and add both. If you are still having issues, under file go to packages and click reset package caches.
-
-### How to run the code
-Press run in XCode (the play button on the top left). Alternatively, do command R or go to product then run in the menu bar. Make sure the scheme is set to FreeFinders3B. We tested ours on iPhone 14 Pro simulator running iOS 16.1. Have patience, depending on the device (and if you are running a simulator) there might be some lag. We've also run into issues with the M1 chip on mac and xcode. In this case, you cannot run a simulator and need to build on a physical device. To do this connect your phone (if it is an iphone) to your computer and build on it. 
-### How to run the unit test cases
-Run command U (alternatively go to Product in the menu bar and then press test). If you run into issues where you are gettng a No module found Realm error (or something of that nature), click the FreeFinder4B main project file (top left) then under targets click FreeFinder3BTests then click Build Phases. Go to link binary with libraries and click the + button and then add RealmSwift and Realm. If you don't have those packages to add, follow the add package dependencies step outline above. 
-
-### UI Unit Testing
-FreeFinder4BUITests contains our UI unit tests for the map.
-In addition to the coded tests, here are some more UI tests to be tested manualy when the device is built.
-- Pressing create item button should take user to create item page. 
-- Pressing delete item should cause a pop up to appear checking if the user is sure they want to delete the item, pressing confirm will delete the item and the user will be returned to their previous screen while pressing cancel will return the user back to the view item screen. 
-- On the map, the user should be aple to click on an item and press the info button to be taken to the view item screen. 
-- User should be able to move the map around (as one would on google maps or apple maps)
-- Clicking the fliter button on the top left should allow the user to chose how to filter the items which will be reflected in the users view. 
-- If the user is already signed in, upon opening the app they should have a screen saying welcome back. Upon pressing start they should be taken to the map view. 
-- One the bottom of the screen, the user should be able to toggle between different views: map, list and profile. 
-
-## (3) Code Directory Structure
+## Code Directory Structure
 Within the FreeFinder4B directory, you will find a FreeFinder4B that contains all of our code building the app, with subfolders as follows.
 - App contains all the project entry points and main files. 
 - Classes contains the app schema and all of our class definitions
@@ -116,15 +105,3 @@ FreeFinder4BTests contains the following files:
 - FreeFinders4B.swift: tests user and item related functions as well as filtering by distance from user
 - LocalDeviceTests.swift: tests local user related functions
 - MongoDBTests.swift: tests database functions
-
-## (4) Acceptance Tests
-Try signing in (assuming you are not already signed in). Try creating an item (by pressing the blue + button at the top right of the screen). Try viewing an item by clicking on it (either in map view or list view). Try deleting an item (you have to be physically close to the item to delete it and in the view item page). Try decrementing the quantity of an item (you have to be physically close to the item to decrement the quantity and in the view item page). If there is an item with a location that is far from you, try deleting the item and an error message should pop up. If the quantity of an item is one and you decrement it, the item will be deleted (as the quantity will be zero). If items have been created, try filtering by type and by distance (by pressing the filtering button at the top left hand corner). Try commenting on an item (you need to be on the view item page). Try signing out (this is under the profile page, to get to this press the rightmost bottom button). Try creating items with invalid fields (for example no title). This should cause a pop up with an error message. Try clicking on an item on the map, this should lead you to the item page. 
-
-Inputs that are not allowed (error messages should pop up if these are inputted):
-- Empty strings for create item and comment fields
-- comments that are longer than 200 characters
-- quantity <= 0 
-- description length >= 280 characters
-- name length >= 100 characters
-- deleting or decrementing an item from a location greater than 0.01 degrees (in longitude and latitude) away from an item
-- emails that are not @uchicago.edu emails
